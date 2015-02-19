@@ -19,10 +19,10 @@ public class AdesaoDaoJpa extends PersistenciaJpa<Adesao> implements AdesaoDao {
 
 	@Override
 	public void salvar(Adesao a) throws PersistenciaException {
-		if (a.getIdAdesao() == null) {
+		if (a.getId() == null) {
 			a.setDataCadastro(new Date());
 		}
-		super.alterar(a);
+		alterar(a);
 	}
 
 	@Override

@@ -11,13 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import br.com.ambientinformatica.senai.universitario.util.GerarMatricula;
 import br.com.ambientinformatica.util.Entidade;
 
 @Entity
@@ -114,7 +111,7 @@ public class Assembleia extends Entidade{
 				Cooperado c = new Cooperado();				
 				c.setDadosPessoais(a.getDadosPessoais());
 				c.setAssembleia(this);
-				c.setStatus(EnumStatus.AT);
+				c.setStatus(EnumStatus.A);
 				this.getCooperados().add(c);
 			}
 		}
