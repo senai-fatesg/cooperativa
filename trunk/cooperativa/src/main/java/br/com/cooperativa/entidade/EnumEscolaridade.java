@@ -1,11 +1,26 @@
 package br.com.cooperativa.entidade;
 
-public enum EnumEscolaridade {
+import br.com.ambientinformatica.util.IEnum;
 
-    Fundamental_Completo,
-    Fundamental_Incompleto,
-    Medio_Completo,
-    Medio_Incompleto,
-    Superior_Completo,
-    Superior_Incompleto
+public enum EnumEscolaridade implements IEnum{
+
+    FC("Fundamental_Completo"),
+	FI("Fundamental_Incompleto"),
+	MC("Medio_Completo"),
+	MI("Medio_Incompleto"),
+	SC("Superior_Completo"),
+	SI("Superior_Incompleto");
+
+    private String descricao;
+    
+    EnumEscolaridade(String descricao){
+    	this.descricao = descricao;
+    }
+    
+	@Override
+	public String getDescricao() {
+		return descricao;
+	}
+
+
 }

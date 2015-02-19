@@ -4,8 +4,8 @@ import br.com.ambientinformatica.util.IEnum;
 
 public enum EnumStatus implements IEnum{
 	
-	AT("Ativo"),
-	IN("Inativo");
+	A("Ativo"),
+	I("Inativo");
 	
 	private String descricao;
 	
@@ -15,7 +15,6 @@ public enum EnumStatus implements IEnum{
 
 	@Override
 	public String getDescricao() {
-		// TODO Auto-generated method stub
-		return null;
+		return descricao;
 	}
 }
