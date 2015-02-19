@@ -1,4 +1,4 @@
-package br.com.cooperativa.util.constante;
+package br.com.cooperativa.entidade;
 
 public enum EnumTipoEstadoCivil {
     Solteiro,
