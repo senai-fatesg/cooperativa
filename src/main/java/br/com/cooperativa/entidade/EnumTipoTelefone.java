@@ -4,9 +4,9 @@ import br.com.ambientinformatica.util.IEnum;
 
 public enum EnumTipoTelefone implements IEnum{
 
-   RESIDENCIAL("RESIDENCIAL", "RES"),
-   COMERCIAL("COMERCIAL", "COM"),
-   CELULAR("CELULAR", "CEL"),
+   RESIDENCIAL("Residencial", "RES"),
+   COMERCIAL("Comercial", "COM"),
+   CELULAR("Celular", "CEL"),
    FAX("FAX", "FAX");
    
    private final String descricao;

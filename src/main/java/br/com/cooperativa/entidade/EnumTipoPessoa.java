@@ -1,12 +1,11 @@
 package br.com.cooperativa.entidade;
 
 import br.com.ambientinformatica.util.IEnum;
-import br.com.ambientinformatica.util.IEnumRestritivo;
 
 
 public enum EnumTipoPessoa implements IEnum{
 	
-	PF("Pessoa Fisica"),
+	PF("Pessoa Física"),
 	PJ("Pessoa Juridica");
 	
 	private String descricao;
@@ -18,7 +17,7 @@ public enum EnumTipoPessoa implements IEnum{
 	
 	@Override
 	public String getDescricao() {
-		return this.descricao;
+		return descricao;
 
 	}
 
