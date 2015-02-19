@@ -1,5 +1,14 @@
 package br.com.ambientinformatica.senai.universitario.mineracao;
 
+import java.io.File;
+import java.util.Date;
+
+import javax.faces.event.ActionEvent;
+
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -21,19 +30,6 @@ import br.com.ambientinformatica.senai.universitario.persistencia.CidadeDao;
 import br.com.ambientinformatica.senai.universitario.persistencia.CooperadoDao;
 import br.com.ambientinformatica.senai.universitario.persistencia.CooperativaDao;
 import br.com.ambientinformatica.senai.universitario.util.GerarMatricula;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
-
-import javax.faces.event.ActionEvent;
-import javax.swing.JOptionPane;
-
-import jxl.Cell;
-import jxl.NumberCell;
-import jxl.Sheet;
-import jxl.Workbook;
-import jxl.read.biff.BiffException;
 
 @Controller("MineracaoControl")
 @Scope("conversation")
@@ -150,7 +146,6 @@ public class MineracaoDados {
 			Integer linhas = sheet.getRows();
 			Integer colunas = sheet.getColumns();
 			Pessoa cooperativa = new Pessoa();
-			Adesao adesao = new Adesao();
 			Endereco endereco = new Endereco();
 			DadosPessoais dadosP = new DadosPessoais();
 			Cooperado cooperado = new Cooperado();

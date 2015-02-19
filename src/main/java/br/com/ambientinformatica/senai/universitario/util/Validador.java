@@ -87,7 +87,7 @@ public class Validador {
         
         Adesao adesao = new Adesao();
         
-        adesao.getIdAdesao();
+        adesao.getId();
         
         return matricula;
         
