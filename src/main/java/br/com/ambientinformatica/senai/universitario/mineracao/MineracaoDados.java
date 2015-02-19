@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.senai.universitario.converter.DateConverter;
-import br.com.ambientinformatica.senai.universitario.entidade.Adesao;
 import br.com.ambientinformatica.senai.universitario.entidade.Cidade;
 import br.com.ambientinformatica.senai.universitario.entidade.Cooperado;
 import br.com.ambientinformatica.senai.universitario.entidade.DadosPessoais;
