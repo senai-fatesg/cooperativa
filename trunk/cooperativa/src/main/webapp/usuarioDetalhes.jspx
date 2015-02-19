@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<ui:define name="corpo">
+		<p:panel id="cadUsuario">
+			<a:field label="Cidade">
+				<p:autoComplete id="acCidade" value="#{UsuarioLogadoControl.cidade}"
+					completeMethod="#{CidadeControl.completeCidades}"
+					forceSelection="true"
+					emptyMessage="Cidade nao encontrada, verifique a consulta"
+					converter="cidadeConverter" var="c" itemLabel="#{c}"
+					itemValue="#{c}" maxResults="20" size="30">
+					<p:ajax event="itemSelect"
+						listener="#{UsuarioLogadoControl.listarCooperativas}"
+						update="Listcooperativas" />
+				</p:autoComplete>
+			</a:field>
+			<a:newLine />
+			<a:field label="Cooperativa" width="500px">
+				<p:selectOneMenu id="Listcooperativas"
+					value="#{UsuarioLogadoControl.usuario.cooperativa}"
+					converter="pessoaConverter" effect="fade">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{UsuarioLogadoControl.lista}" var="coop"
+						itemLabel="#{coop.nomeFantasia }" itemValue="#{coop}" />
+				</p:selectOneMenu>
+			</a:field>
+			<a:newLine />
+			<a:field label="Nome: ">
+				<p:inputText value="#{UsuarioLogadoControl.usuario.nome }"
+					style="width='500px;'" />
+			</a:field>
+			<a:newLine />
+			<a:field label="Login: ">
+				<p:inputText value="#{UsuarioLogadoControl.usuario.login }"
+					style="width='500px;'" />
+			</a:field>
+			<a:newLine />
+			<a:field label="Senha: ">
+				<p:password id="senha" value="#{UsuarioLogadoControl.usuario.senha}"
+					feedback="true" style="width='500px;'" />
+			</a:field>
+			<a:newLine />
+			<a:field label="Tipo" width="500px">
+				<p:selectOneMenu value="#{UsuarioLogadoControl.papel}" effect="fade">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{UsuarioLogadoControl.tipoUsuario}" />
+					<p:ajax event="change" listener="#{UsuarioLogadoControl.addPapel}"
+						update="tableTipoUsuario" />
+				</p:selectOneMenu>
+			</a:field>
+			<a:newLine />
+
+			<a:newLine />
+			<p:dataTable id="tableTipoUsuario" var="tipo"
+				value="#{UsuarioLogadoControl.usuario.papeis }"
+				emptyMessage="Não há registros!">
+				<p:column headerText="Nome">
+					<p:outputLabel value="#{tipo.papel.descricao}"></p:outputLabel>
+				</p:column>
+				<p:column headerText="Excluir">
+					<p:commandButton id="excluir" process="@this" value="Excluir"
+						update="tableTipoUsuario">
+						<p:collector value="#{tipo}"
+							removeFrom="#{UsuarioLogadoControl.usuario.papeis}" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+			<p:commandButton value="Gravar"
+				actionListener="#{UsuarioLogadoControl.incluir }"
+				update="cadUsuario"></p:commandButton>
+			<p:commandButton value="Alterar"
+				actionListener="#{UsuarioLogadoControl.alterar }"
+				update="cadUsuario"></p:commandButton>
+			<p:commandButton value="Excluir"
+				actionListener="#{UsuarioLogadoControl.excluir }"
+				update="cadUsuario"></p:commandButton>
+		</p:panel>
+	</ui:define>
+</ui:composition>

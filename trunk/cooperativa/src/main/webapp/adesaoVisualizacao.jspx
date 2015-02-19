@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<ui:define name="corpo">
+		<p:commandButton value="Imprimir" type="button" icon="ui-icon-print"
+			title="Imprimir Proposta de Adesão">
+			<p:printer target="idAdesao" />
+		</p:commandButton>
+		<p />
+		<p:fieldset id="idAdesao" legend="Proposta de Adesão">
+
+			<!-- 			DADOS PESSOAIS -->
+			<p:panel header="Dados Pessoais">
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Nome:" />
+					<p:outputLabel value="#{AdesaoControl.adesao.dadosPessoais.nome}" />
+					<p:outputLabel value="Data de Nascimento: " />
+					<p:outputLabel
+						value="#{AdesaoControl.adesao.dadosPessoais.dataNascimento }"
+						converter="dateConverter" />
+					<p:outputLabel value="Rg: " />
+					<p:outputLabel value="#{AdesaoControl.adesao.dadosPessoais.rg}" />
+					<p:outputLabel value="CPF: " />
+					<p:outputLabel value="#{AdesaoControl.adesao.dadosPessoais.cpf}" />
+					<p:outputLabel value="Carteira de Trabalho(CRT): " />
+					<p:outputLabel
+						value="#{AdesaoControl.adesao.dadosPessoais.carteiraTrabalho}" />
+					<p:outputLabel value="Telefone Residencial: " />
+					<p:outputLabel
+						value="#{AdesaoControl.adesao.dadosPessoais.telResidencial}" />
+					<p:outputLabel value="Telefone Celular: " />
+					<p:outputLabel
+						value="#{AdesaoControl.adesao.dadosPessoais.telCelular}" />
+					<p:outputLabel value="Estado Civil: " />
+					<p:outputLabel
+						value="#{AdesaoControl.adesao.dadosPessoais.estadoCivil}" />
+					<p:outputLabel value="Nome do pai: " />
+					<p:outputLabel
+						value="#{AdesaoControl.adesao.dadosPessoais.filiacao.nomePai}" />
+					<p:outputLabel value="Nome da mãe: " />
+					<p:outputLabel
+						value="#{AdesaoControl.adesao.dadosPessoais.filiacao.nomeMae}" />
+				</h:panelGrid>
+			</p:panel>
+
+			<!-- 				ENDERECO -->
+			<p:panel header="Endereço">
+				<h:panelGrid columns="2" id="pnlEndereco">
+					<p:outputLabel value="Cep: " />
+					<p:outputLabel id="inputCep"
+						value="#{AdesaoControl.adesao.dadosPessoais.endereco.cep}" />
+					<p:outputLabel value="Logradouro: " />
+					<p:outputLabel
+						value="#{AdesaoControl.adesao.dadosPessoais.endereco.logradouro}" />
+					<p:outputLabel value="Bairro: " />
+					<p:outputLabel
+						value="#{AdesaoControl.adesao.dadosPessoais.endereco.bairro}" />
+					<p:outputLabel value="Numero: " />
+					<p:outputLabel
+						value="#{AdesaoControl.adesao.dadosPessoais.endereco.numero}"
+						size="5" />
+					<p:outputLabel value="Complemento: " />
+					<p:outputLabel
+						value="#{AdesaoControl.adesao.dadosPessoais.endereco.complemento}" />
+					<h:outputText value="Cidade: " />
+					<p:outputLabel
+						value="#{AdesaoControl.adesao.dadosPessoais.endereco.cidade}" />
+				</h:panelGrid>
+			</p:panel>
+
+			<!--Ficha de Adesao-->
+			<p:panel header="Ficha de Adesão">
+				<h:panelGrid columns="2">
+					<h:outputText value="Cooperado Responsavel: " />
+					<h:outputText value="#{AdesaoControl.adesao.coopResponsavel}" />
+					<p:outputLabel value="Possui Bolsa Familia: " />
+					<p:selectBooleanButton value="#{AdesaoControl.adesao.bolsaFamilia}"
+						onLabel="Sim" offLabel="Não" onIcon="ui-icon-check"
+						offIcon="ui-icon-cancel" disabled="true" />
+					<p:selectBooleanButton
+						value="#{AdesaoControl.adesao.principalAtivProdutiva}"
+						onLabel="Sim" offLabel="Não" onIcon="ui-icon-check"
+						offIcon="ui-icon-cancel" rendered="false" disabled="true" />
+					<p:outputLabel value="Estuda Atualmente: " />
+					<p:selectBooleanButton
+						value="#{AdesaoControl.adesao.estudaAtualmente}" onLabel="Sim"
+						offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-cancel"
+						disabled="true" />
+					<p:outputLabel value="Valor Renda Familiar: " />
+					<p:outputLabel value="#{AdesaoControl.adesao.rendaFamiliar}" />
+					<p:outputLabel
+						value="Quantidade pessoas que participam da renda familiar: " />
+					<p:outputLabel value="#{AdesaoControl.adesao.qtdPessoasRenda}" />
+					<p:outputLabel value="Motivo: " rendered="false" />
+
+					<p:outputLabel value="Data proxima Assembleia: " />
+					<p:outputLabel value="#{AdesaoControl.adesao.dtAssembleia}"
+						converter="dateConverter" />
+				</h:panelGrid>
+			</p:panel>
+
+			<!-- 				DEPENDENTES -->
+			<p:panel header="Dependentes">
+				<p:dataTable id="dtDependentes"
+					value="#{AdesaoControl.adesao.dependentes}" var="dependente"
+					emptyMessage="Nenhum Registro">
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Nome" />
+						</f:facet>
+						<h:outputText value="#{dependente.nome}" size="70" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Situação" />
+						</f:facet>
+						<h:outputText value="#{dependente.situacao}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Data de Nascimento" />
+						</f:facet>
+						<h:outputText value="#{dependente.dataNascimento}"
+							converter="dateConverter" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+
+			<!-- 				CURSOS -->
+			<p:panel header="Cursos Tecnicos">
+				<p:dataTable id="dtCursos" value="#{AdesaoControl.adesao.cursos}"
+					var="curso" emptyMessage="Nenhum Registro">
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Nome" />
+						</f:facet>
+						<h:outputText value="#{curso.nome}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Descrição" />
+						</f:facet>
+						<h:outputText value="#{curso.descricao}" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</p:fieldset>
+	</ui:define>
+</ui:composition>

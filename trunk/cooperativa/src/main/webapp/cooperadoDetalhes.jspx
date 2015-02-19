@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<ui:define name="corpo">
+		<p:fieldset legend="Cooperado #{CooperadoControl.cooperado.matricula}">
+			<!--DadosPessoais-->
+			<p:tabView id="tbCooperado">
+				<!-- 			DADOS PESSOAIS -->
+				<p:tab title="Dados Pessoais">
+					<p:focus for="inputNome" />
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Nome: *" />
+						<p:inputText id="inputNome"
+							value="#{CooperadoControl.cooperado.dadosPessoais.nome}"
+							size="70" />
+						<p:outputLabel value="Data de Nascimento: " />
+						<p:inputMask id="inputDtNasc"
+							value="#{CooperadoControl.cooperado.dadosPessoais.dataNascimento }"
+							converter="dateConverter" mask="99/99/9999">
+							<p:ajax event="blur" listener="#{CooperadoControl.validarDtNasc}"
+								update="inputDtNasc" global="false" />
+						</p:inputMask>
+
+						<p:outputLabel value="Rg: " />
+						<p:inputText id="inputRg"
+							value="#{CooperadoControl.cooperado.dadosPessoais.rg}">
+							<pe:keyFilter mask="num" />
+						</p:inputText>
+						<p:outputLabel value="CPF: " />
+						<p:inputMask mask="999.999.999-99"
+							value="#{CooperadoControl.cooperado.dadosPessoais.cpf}" />
+						<p:outputLabel value="Carteira de Trabalho(CRT): " />
+						<p:inputText id="inputCrt"
+							value="#{CooperadoControl.cooperado.dadosPessoais.carteiraTrabalho}" />
+						<p:outputLabel value="Telefone Residencial: " />
+						<p:inputMask
+							value="#{CooperadoControl.cooperado.dadosPessoais.telResidencial}"
+							mask="(99)9999-9999" />
+						<p:outputLabel value="Telefone Celular: " />
+						<p:inputMask
+							value="#{CooperadoControl.cooperado.dadosPessoais.telCelular}"
+							mask="(99)9999-9999" />
+						<p:outputLabel value="Estado Civil: " />
+						<p:selectOneMenu
+							value="#{CooperadoControl.cooperado.dadosPessoais.estadoCivil}">
+							<f:selectItem itemLabel="Selecione..." itemValue="" />
+							<f:selectItems value="#{CooperadoControl.estadosCivis}" var="e"
+								itemLabel="#{e.descricao} " itemValue="#{e}" />
+						</p:selectOneMenu>
+						<p:outputLabel value="Nome do pai: " />
+						<p:inputText
+							value="#{CooperadoControl.cooperado.dadosPessoais.filiacao.nomePai}"
+							size="70" />
+						<p:outputLabel value="Nome da mãe: " />
+						<p:inputText
+							value="#{CooperadoControl.cooperado.dadosPessoais.filiacao.nomeMae}"
+							size="70" />
+					</h:panelGrid>
+				</p:tab>
+
+				<!-- 				ENDERECO -->
+				<p:tab title="Endereço">
+					<h:panelGrid columns="2" id="pnlEndereco">
+						<p:outputLabel value="Cep: " />
+						<p:inputMask
+							value="#{CooperadoControl.cooperado.dadosPessoais.endereco.cep}"
+							mask="99.999-999">
+							<p:ajax event="blur"
+								listener="#{CooperadoControl.preencherEndereco}"
+								update="pnlEndereco" global="false" />
+						</p:inputMask>
+						<p:outputLabel value="Logradouro: " />
+						<p:inputText
+							value="#{CooperadoControl.cooperado.dadosPessoais.endereco.logradouro}"
+							size="100" />
+						<p:outputLabel value="Bairro: " />
+						<p:inputText
+							value="#{CooperadoControl.cooperado.dadosPessoais.endereco.bairro}"
+							size="100" />
+						<p:outputLabel value="Numero: " />
+						<p:inputText
+							value="#{CooperadoControl.cooperado.dadosPessoais.endereco.numero}"
+							size="5" />
+						<p:outputLabel value="Complemento: " />
+						<p:inputText
+							value="#{CooperadoControl.cooperado.dadosPessoais.endereco.complemento}"
+							size="100" />
+						<h:outputText value="Cidade: " />
+						<p:autoComplete id="acCidade"
+							value="#{CooperadoControl.cooperado.dadosPessoais.endereco.cidade}"
+							completeMethod="#{CooperadoControl.completeCidades}"
+							forceSelection="true"
+							emptyMessage="Cidade nao encontrada, verifique a consulta"
+							converter="cidadeConverter" var="c" itemLabel="#{c}"
+							itemValue="#{c}" maxResults="20" size="30">
+						</p:autoComplete>
+					</h:panelGrid>
+				</p:tab>
+
+			</p:tabView>
+
+			<p:commandButton value="Confirmar"
+				actionListener="#{CooperadoControl.confirmar}" icon="ui-icon-check"
+				process="" title="Salvar Cooperado" />
+		</p:fieldset>
+	</ui:define>
+</ui:composition>

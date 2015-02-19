@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+		<p:panel id="pgAcessoNegado" style="text-align:center">
+			<p:panelGrid id="pgNegado" columns="1" style="text-align:center">
+				<p:graphicImage library="img" name="entrada proibida.png" width="50%" height="100%"></p:graphicImage>
+				<p:outputLabel style="font-size: 30px">Você Não tem permissões para acessar esta página!</p:outputLabel>
+				<p:outputLabel style="font-size: 30px">Verifique com o administrador do sistema as suas permissões!</p:outputLabel>
+			</p:panelGrid>
+			
+		</p:panel>
+	</ui:define>
+</ui:composition>

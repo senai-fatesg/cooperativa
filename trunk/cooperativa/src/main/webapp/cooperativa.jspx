@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<ui:define name="corpo">
+
+			<p:dataTable id="dtCooperativa" var="cooperativas" value="#{CooperativaControl.cooperativa}" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10">>
+				<f:facet name="header">
+					Empresa
+					<p:separator />
+					<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">  
+						<h:outputText value="Opções " />  
+				        <p:selectOneRadio id="opcoes" value="#{CooperativaControl.rSocial}">  
+				            <f:selectItem itemLabel="Razão Social" itemValue="true" />  
+				            <f:selectItem itemLabel="Nome Fantasia" itemValue="false" />
+				        </p:selectOneRadio>
+			        </h:panelGrid>
+					<p:separator />
+					<p:outputLabel value="Filtro Global: " />
+					<p:inputText id="imputfiltro"/>
+					<p:commandButton id="cmdfiltrar" icon="ui-icon-search"	actionListener="#{CooperativaControl.tipoListagem}" update="dtCooperativa" />
+					<p:commandButton value="Novo" title="Nova Cooperativa"
+					actionListener="#{CooperativaControl.preparaIncluir}" ajax="false" />
+					<p:focus for="imputfiltro" />
+					<p:defaultCommand target="cmdfiltrar" />
+				</f:facet>
+				
+				<p:column headerText="ID">
+					<h:outputText value="#{cooperativas.idcooperativa }"/>
+				</p:column>
+				
+				<p:column headerText="Razão Social">
+					<h:outputText value="#{cooperativas.empresa.razaoSocial }"/>
+				</p:column>
+				
+				<p:column headerText="Nome Fantasia">
+					<h:outputText value="#{cooperativas.empresa.nomeFantasia }"/>
+				</p:column>
+				
+				<p:column headerText="CNPJ">
+					<h:outputText value="#{cooperativas.empresa.cnpj }"/>
+				</p:column>
+				
+				<p:column headerText="Rua">
+					<h:outputText value="#{cooperativas.empresa.endereco.logradouro }"/>
+				</p:column>
+				
+				<p:column headerText="Número">
+					<h:outputText value="#{cooperativas.empresa.endereco.numero }"/>
+				</p:column>
+				
+				<p:column headerText="Bairro">
+					<h:outputText value="#{cooperativas.empresa.endereco.bairro }"/>
+				</p:column>
+				
+				<p:column headerText="Cidade">
+					<h:outputText value="#{cooperativas.empresa.endereco.cidade }"/>
+				</p:column>
+				
+			</p:dataTable>
+	</ui:define>
+</ui:composition>	

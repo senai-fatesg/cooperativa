@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<ui:define name="corpo">
+		<p:panel id="dadosEmpresa" >
+		<a:field label="Cooperativa?" >
+	        <p:selectOneRadio id="opcoes" value="#{cooperativaControl.cooperativa.cooperativa}">  
+	            <f:selectItem itemLabel="Sim" itemValue="true"/>  
+	            <f:selectItem itemLabel="Não" itemValue="false"/>
+	        </p:selectOneRadio>
+		</a:field>
+		<a:newLine/>
+		<a:field label="CNPJ" width="300px">
+			<p:inputMask mask="99999999/9999-99" value="#{cooperativaControl.cooperativa.cnpj}" style="width='300px;'"/>
+		</a:field>
+		<a:field label="CPF" width="300px" spaceLeft="15px">
+			<p:inputMask mask="999.999.999-99" value="#{cooperativaControl.cooperativa.cpf}" style="width='300px;'"/>
+		</a:field>
+		<a:newLine/>
+		<a:field label="Razao Social" width="300px" >
+			<p:inputText value="#{cooperativaControl.cooperativa.razaoSocial}" style="width='300px;'"/>
+		</a:field>
+		<a:field label="Nome Fantasia" width="300px" spaceLeft="15px">
+			<p:inputText value="#{cooperativaControl.cooperativa.nomeFantasia}" style="width='300px;'"/>
+		</a:field>
+		<a:newLine/>
+		<a:field label="Nome" width="300px" >
+			<p:inputText value="#{cooperativaControl.cooperativa.nome}" style="width='300px;'"/>
+		</a:field>
+		<a:field label="CEP" width="300px" spaceLeft="15px">
+			<p:inputMask mask="99999-999" value="#{cooperativaControl.cooperativa.endereco.cep}" style="width='300px;'"/>
+		</a:field>
+		<a:newLine/>
+		<a:field label="Logradouro" width="300px" >
+			<p:inputText value="#{cooperativaControl.cooperativa.endereco.logradouro}" style="width='300px;'"/>
+		</a:field>
+		<a:field label="Número" width="300px" spaceLeft="15px">
+			<p:inputText value="#{cooperativaControl.cooperativa.endereco.numero}" style="width='300px;'"/>
+		</a:field>
+		<a:newLine/>
+		<a:field label="Complemento" width="300px" >
+			<p:inputText value="#{cooperativaControl.cooperativa.endereco.complemento}" />
+		</a:field>
+		<a:field label="Bairro" width="300px" spaceLeft="15px">
+			<p:inputText value="#{cooperativaControl.cooperativa.endereco.bairro}" />
+		</a:field>
+
+		<a:newLine/>
+		
+		<a:field label="Cidade">
+		<p:autoComplete id="acCidade"
+			value="#{cooperativaControl.cooperativa.endereco.cidade}"
+			completeMethod="#{CidadeControl.completeCidades}"
+			forceSelection="true"
+			emptyMessage="Cidade nao encontrada, verifique a consulta"
+			converter="cidadeConverter" var="c" itemLabel="#{c}"
+			itemValue="#{c}" maxResults="20" size="30">
+		</p:autoComplete>
+		</a:field>
+		
+		<a:newLine/>
+		
+		<p:separator/>
+		<p:separator/>
+		<p:separator/>
+
+
+			<h:panelGrid columns="1" cellpadding="5" id="panelTelefone">
+				<a:field label="Numero" width="300px">
+					<p:inputMask id="num" label="num" mask="(99)9999-9999"
+						value="#{cooperativaControl.telefone.numero }"></p:inputMask>
+				</a:field>
+
+				<a:field label="Tipo" width="300px">
+					<p:selectOneMenu value="#{cooperativaControl.telefone.tipo}"
+						effect="fade">
+						<f:selectItem itemLabel="Selecione" itemValue="" />
+						<f:selectItems value="#{cooperativaControl.tipoTelefone}" />
+					</p:selectOneMenu>
+				</a:field>
+
+				<a:field label="Contato" width="300px">
+					<p:inputText id="contato" label="contato"
+						value="#{cooperativaControl.telefone.contato}" />
+				</a:field>
+
+				<p:commandButton actionListener="#{cooperativaControl.addTelefone}"
+					value="Confirmar" update="tabelaTelefone, panelTelefone"></p:commandButton>
+
+			</h:panelGrid>
+
+
+			<!-- TABELA DE TELEFONES -->
+			
+			<p:dataTable id="tabelaTelefone" var="telefone" value="#{cooperativaControl.cooperativa.telefones}" editable="false" emptyMessage="Não há registros!">
+				<f:facet name="header">
+					Telefones
+				</f:facet>
+				
+				<p:column headerText="Número">
+					<h:outputText id="numeroT" value="#{telefone.numero}" />  
+				</p:column>
+				
+				<p:column headerText="Tipo">
+					<h:outputText id="tipoT" value="#{telefone.tipo}" />  
+				</p:column>
+				
+				<p:column headerText="Contato">
+					<h:outputText id="contatoT" value="#{telefone.contato}" />
+				</p:column>
+				
+				<p:column headerText="Excluir">
+					<p:tab>
+							<p:column headerText="Excluir">
+								<p:commandButton id="excluir" value="Excluir" update="tabelaTelefone">
+									<f:setPropertyActionListener process="@this" value="#{telefone}" target="#{cooperativaControl.removeTelefone }" />  
+								</p:commandButton>
+							</p:column>
+					</p:tab>
+				</p:column>
+			</p:dataTable>
+			
+		<p:separator/>
+		<p:separator/>
+		<p:separator/>
+
+		<p:commandButton value="Confirmar" actionListener="#{cooperativaControl.incluir}" icon="ui-icon-check"	
+		title="Gravar dados Cooperativa" update="dadosEmpresa"/>
+		
+		<p:commandButton value="Alterar" actionListener="#{cooperativaControl.alterar }" icon="" title="Alterar dados" update="dadosEmpresa"></p:commandButton>
+	</p:panel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<ui:define name="corpo">
+		<p:fieldset legend="Assembleia" id="fieldSetAssembleia">
+			<p:focus for="inputDescricao" />
+			<p:panel header="Principal"
+				rendered="#{AssembleiaControl.navegador==1}"> 
+				<h:panelGrid columns="2" id="pnlPrincipal">
+					<p:outputLabel value="Descrição: " />
+					<p:inputText id="inputDescricao"
+						value="#{AssembleiaControl.assembleia.descricao}" required="true"
+						requiredMessage="Informar Descrição"
+						disabled="#{AssembleiaControl.assembleia.id != null}" />
+
+					<p:outputLabel value="Data: " />
+					<p:calendar value="#{AssembleiaControl.assembleia.data}"
+						locale="pt" showButtonPanel="true" navigator="true"
+						pattern="dd/MM/yyyy" showOn="button" required="true"
+						requiredMessage="Informar data"
+						disabled="#{AssembleiaControl.assembleia.id != null}" />
+
+					<p:outputLabel value="Hora Inicio: " />
+					<p:calendar value="#{AssembleiaControl.assembleia.horaIni}"
+						pattern="HH:mm" timeOnly="true" locale="pt" showOn="button"
+						required="true" requiredMessage="Informar Hora Inicio"
+						disabled="#{AssembleiaControl.assembleia.id != null}" />
+
+					<p:outputLabel value="Hora Termino: " />
+					<p:calendar value="#{AssembleiaControl.assembleia.horaFim}"
+						pattern="HH:mm" timeOnly="true" locale="pt" showOn="button"
+						required="true" requiredMessage="Informar Hora Termino"
+						disabled="#{AssembleiaControl.assembleia.id != null}" />
+
+					<p:outputLabel value="Documento: " />
+					<p:fileUpload fileUploadListener="#{AssembleiaControl.fazerUpload}"
+						mode="advanced" dragDropSupport="false" fileLimit="3"
+						allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|docx)$/"
+						rendered="#{AssembleiaControl.assembleia.documento==null }"
+						cancelLabel="Cancelar" label="Carregar" />
+
+					<p:commandButton id="downloadLink"
+						value="#{AssembleiaControl.assembleia.nomeDoc}" ajax="false"
+						onclick="PrimeFaces.monitorDownload(start, stop)"
+						icon="ui-icon-arrowthick-1-s"
+						rendered="#{AssembleiaControl.assembleia.documento!=null }"
+						title="fazer download do arquivo">
+						<p:fileDownload value="#{AssembleiaControl.documento}" />
+					</p:commandButton>
+
+				</h:panelGrid>
+				<p:commandButton value="Avancar" icon="ui-icon-seek-next"
+					actionListener="#{AssembleiaControl.avancar}"
+					process="@this, pnlPrincipal" update="fieldSetAssembleia" />
+			</p:panel>
+
+			<p:panel id="pnlAdesCoop"
+				rendered="#{AssembleiaControl.navegador==2}">
+				<f:facet name="header">
+					<p:outputLabel value="#{AssembleiaControl.tituloAdesCoop}" />
+				</f:facet>
+				<p:dataTable id="dtAdesao" value="#{AssembleiaControl.adesoes}"
+					var="adesao" emptyMessage="Nenhum Registro"
+					rendered="#{AssembleiaControl.assembleia.id == null}">
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Id" />
+						</f:facet>
+						<h:outputText value="#{adesao.idAdesao}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Nome" />
+						</f:facet>
+						<h:outputText value="#{adesao.dadosPessoais.nome}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="CPF" />
+						</f:facet>
+						<h:outputText value="#{adesao.dadosPessoais.cpf}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Ação" />
+						</f:facet>
+						<p:commandButton icon="ui-icon-trash" process="@this"
+							update="dtAdesao">
+							<p:collector value="#{adesao}"
+								removeFrom="#{AssembleiaControl.adesoes}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:dataTable id="dtCooperado"
+					value="#{AssembleiaControl.assembleia.cooperados}" var="coop"
+					emptyMessage="Nenhum Registro"
+					rendered="#{AssembleiaControl.assembleia.id != null}">
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Id" />
+						</f:facet>
+						<h:outputText value="#{coop.id}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Nome" />
+						</f:facet>
+						<h:outputText value="#{coop.dadosPessoais.nome}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="CPF" />
+						</f:facet>
+						<h:outputText value="#{coop.dadosPessoais.cpf}" />
+					</p:column>
+				</p:dataTable>
+
+				<p:commandButton value="Voltar"
+					actionListener="#{AssembleiaControl.voltar}" process="@this"
+					update="fieldSetAssembleia" icon="ui-icon-seek-prev" />
+				<p:commandButton value="Confirmar"
+					actionListener="#{AssembleiaControl.confirmar}"
+					icon="ui-icon-check" process="@this" update="fieldSetAssembleia"
+					title="Salvar Assembleia" rendered="#{AssembleiaControl.assembleia.id ==null }"/> 
+			</p:panel>
+		</p:fieldset>
+		<script type="text/javascript">
+			function start() {
+				PF('statusDialog').show();
+			}
+
+			function stop() {
+				PF('statusDialog').hide();
+			}
+		</script>
+	</ui:define>
+</ui:composition>
