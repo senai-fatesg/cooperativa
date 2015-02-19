@@ -1,17 +1,14 @@
 package br.com.cooperativa.entidade;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+
+import br.com.ambientinformatica.util.Entidade;
 
 @Entity
-public class Cidade{
+public class Cidade extends Entidade{
 
 	@Id
-	@GeneratedValue(generator = "cidade_seq", strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(name = "cidade_seq", sequenceName = "cidade_seq", allocationSize = 1, initialValue = 1)
 	private Integer ibge;
 	
 	private String uf;
@@ -51,5 +48,10 @@ public class Cidade{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Object getId() {
+		return this.ibge;
 	}
 }

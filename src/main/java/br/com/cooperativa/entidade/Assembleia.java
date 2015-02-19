@@ -17,10 +17,11 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import br.com.ambientinformatica.util.Entidade;
 import br.com.cooperativa.util.GerarMatricula;
 
 @Entity
-public class Assembleia {
+public class Assembleia extends Entidade{
 
 	@Id
 	@GeneratedValue(generator = "assembleia_seq", strategy = GenerationType.SEQUENCE)
@@ -39,10 +40,6 @@ public class Assembleia {
 
 	public Integer getId() {
 		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getDescricao() {

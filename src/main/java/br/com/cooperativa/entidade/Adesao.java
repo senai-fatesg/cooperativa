@@ -74,10 +74,6 @@ public class Adesao extends Entidade{
 		this.coopResponsavel = coopResponsavel;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public boolean isBolsaFamilia() {
 		return bolsaFamilia;
 	}
