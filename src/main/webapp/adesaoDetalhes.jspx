@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<ui:define name="corpo">
+		<p:fieldset legend="Proposta de Adesão">
+			<!--DadosPessoais-->
+			<p:focus for="tbAdesao:inputNome" />
+			<p:tabView id="tbAdesao">
+				<!-- 			DADOS PESSOAIS -->
+				<p:tab title="Dados Pessoais">
+					<h:panelGrid columns="2">
+						<p:outputLabel for="inputNome" value="Nome:" />
+						<p:inputText id="inputNome"
+							value="#{AdesaoControl.adesao.dadosPessoais.nome}" size="70"
+							required="true"
+							requiredMessage="É necessário informar o campo Nome" />
+						<p:outputLabel value="Data de Nascimento: " />
+						<p:inputMask id="inputDtNasc"
+							value="#{AdesaoControl.adesao.dadosPessoais.dataNascimento }"
+							converter="dateConverter" mask="99/99/9999">
+							<p:ajax event="blur" listener="#{AdesaoControl.validarDtNasc}"
+								update="inputDtNasc" global="false" />
+						</p:inputMask>
+						<p:outputLabel value="Rg: " />
+						<p:inputText id="inputRg"
+							value="#{AdesaoControl.adesao.dadosPessoais.rg}">
+							<pe:keyFilter mask="num" />
+						</p:inputText>
+						<p:outputLabel value="CPF: " />
+						<p:inputMask mask="999.999.999-99"
+							value="#{AdesaoControl.adesao.dadosPessoais.cpf}" />
+						<p:outputLabel value="Carteira de Trabalho(CRT): " />
+						<p:inputText id="inputCrt"
+							value="#{AdesaoControl.adesao.dadosPessoais.carteiraTrabalho}" />
+						<p:outputLabel value="Telefone Residencial: " />
+						<p:inputMask
+							value="#{AdesaoControl.adesao.dadosPessoais.telResidencial}"
+							mask="(99)9999-9999" />
+						<p:outputLabel value="Telefone Celular: " />
+						<p:inputMask
+							value="#{AdesaoControl.adesao.dadosPessoais.telCelular}"
+							mask="(99)9999-9999" />
+						<p:outputLabel value="Estado Civil: " />
+						<p:selectOneMenu
+							value="#{AdesaoControl.adesao.dadosPessoais.estadoCivil}">
+							<f:selectItem itemLabel="Selecione..." itemValue="" />
+							<f:selectItems value="#{AdesaoControl.estadosCivis}" var="e"
+								itemLabel="#{e.descricao} " itemValue="#{e}" />
+						</p:selectOneMenu>
+						<p:outputLabel value="Nome do pai: " />
+						<p:inputText
+							value="#{AdesaoControl.adesao.dadosPessoais.filiacao.nomePai}"
+							size="70" />
+						<p:outputLabel value="Nome da mãe: " />
+						<p:inputText
+							value="#{AdesaoControl.adesao.dadosPessoais.filiacao.nomeMae}"
+							size="70" />
+					</h:panelGrid>
+				</p:tab>
+
+				<!-- 				ENDERECO -->
+				<p:tab title="Endereço">
+					<h:panelGrid columns="2" id="pnlEndereco">
+						<p:outputLabel value="Cep: " />
+						<p:inputMask id="inputCep"
+							value="#{AdesaoControl.adesao.dadosPessoais.endereco.cep}"
+							mask="99.999-999">
+							<p:ajax event="blur"
+								listener="#{AdesaoControl.preencherEndereco}"
+								update="pnlEndereco" />
+						</p:inputMask>
+						<p:outputLabel value="Logradouro: " />
+						<p:inputText
+							value="#{AdesaoControl.adesao.dadosPessoais.endereco.logradouro}"
+							size="100" />
+						<p:outputLabel value="Bairro: " />
+						<p:inputText
+							value="#{AdesaoControl.adesao.dadosPessoais.endereco.bairro}"
+							size="100" />
+						<p:outputLabel value="Numero: " />
+						<p:inputText
+							value="#{AdesaoControl.adesao.dadosPessoais.endereco.numero}"
+							size="5" />
+						<p:outputLabel value="Complemento: " />
+						<p:inputText
+							value="#{AdesaoControl.adesao.dadosPessoais.endereco.complemento}"
+							size="100" />
+						<h:outputText value="Cidade: " />
+						<p:autoComplete id="acCidade"
+							value="#{AdesaoControl.adesao.dadosPessoais.endereco.cidade}"
+							completeMethod="#{AdesaoControl.completeCidades}"
+							forceSelection="true"
+							emptyMessage="Cidade nao encontrada, verifique a consulta"
+							converter="cidadeConverter" var="c" itemLabel="#{c}"
+							itemValue="#{c}" maxResults="20" size="30">
+						</p:autoComplete>
+					</h:panelGrid>
+				</p:tab>
+
+				<!--Ficha de Adesao-->
+				<p:tab title="Ficha de Adesão">
+					<h:panelGrid columns="2">
+						<h:outputText value="Cooperado Responsavel: " />
+						<p:autoComplete id="acCooperado"
+							value="#{AdesaoControl.adesao.coopResponsavel}"
+							completeMethod="#{AdesaoControl.completeCooperados}"
+							forceSelection="true"
+							emptyMessage="Cooperado nao encontrado, verifique a consulta"
+							converter="cooperadoConverter" var="c" itemLabel="#{c}"
+							itemValue="#{c}" maxResults="20" size="30">
+						</p:autoComplete>
+						<p:outputLabel value="Possui Bolsa Familia: " />
+						<p:selectBooleanButton
+							value="#{AdesaoControl.adesao.bolsaFamilia}" onLabel="Sim"
+							offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-cancel" />
+						<p:outputLabel value="Principal Atividade Produtiva: "
+							rendered="false" />
+						<p:selectBooleanButton
+							value="#{AdesaoControl.adesao.principalAtivProdutiva}"
+							onLabel="Sim" offLabel="Não" onIcon="ui-icon-check"
+							offIcon="ui-icon-cancel" rendered="false" />
+						<p:outputLabel value="Estuda Atualmente: " />
+						<p:selectBooleanButton
+							value="#{AdesaoControl.adesao.estudaAtualmente}" onLabel="Sim"
+							offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-cancel" />
+						<p:outputLabel value="Valor Renda Familiar: " />
+						<pe:inputNumber value="#{AdesaoControl.adesao.rendaFamiliar}"
+							symbol="R$ " decimalSeparator="," thousandSeparator="." />
+						<p:outputLabel
+							value="Quantidade pessoas que participam da renda familiar: " />
+						<p:spinner value="#{AdesaoControl.adesao.qtdPessoasRenda}" min="1"
+							size="2" />
+						<p:outputLabel value="Motivo: " rendered="false" />
+						<p:inputTextarea value="#{AdesaoControl.adesao.motivo}" cols="50"
+							rendered="false" />
+
+						<p:outputLabel for="calDtAssembleia"
+							value="Data proxima Assembleia: " />
+						<p:calendar id="calDtAssembleia"
+							value="#{AdesaoControl.adesao.dtAssembleia}" locale="pt"
+							showButtonPanel="true" navigator="true" pattern="dd/MM/yyyy"
+							showOn="button" required="true"
+							requiredMessage="É necessário informar o campo Data próxima Assembléia" />
+					</h:panelGrid>
+				</p:tab>
+
+				<!-- 				DEPENDENTES -->
+				<p:tab title="Dependentes">
+					<h:panelGrid id="pnlDependente" columns="2">
+						<p:outputLabel value="Nome: " />
+						<p:inputText value="#{AdesaoControl.dependente.nome}" size="70" />
+						<p:outputLabel value="Situação: " rendered="false"/>
+						<p:inputText value="#{AdesaoControl.dependente.situacao}" rendered="false"/>
+						<p:outputLabel value="Data de Nascimento: " />
+						<p:inputMask value="#{AdesaoControl.dependente.dataNascimento}"
+							converter="dateConverter" mask="99/99/9999" />
+						<p:commandButton value="Add" update="pnlDependente,dtDependentes"
+							process="@parent" action="#{AdesaoControl.reiniciarDependente}">
+							<p:collector value="#{AdesaoControl.dependente}"
+								addTo="#{AdesaoControl.adesao.dependentes}" />
+						</p:commandButton>
+					</h:panelGrid>
+					<p:dataTable id="dtDependentes"
+						value="#{AdesaoControl.adesao.dependentes}" var="dependente"
+						emptyMessage="Nenhum Registro">
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Nome" />
+							</f:facet>
+							<h:outputText value="#{dependente.nome}" size="70" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Situação" />
+							</f:facet>
+							<h:outputText value="#{dependente.situacao}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Data de Nascimento" />
+							</f:facet>
+							<h:outputText value="#{dependente.dataNascimento}"
+								converter="dateConverter" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Ação" />
+							</f:facet>
+							<p:commandButton icon="ui-icon-trash" update="dtDependentes"
+								process="@this">
+								<p:collector value="#{dependente}"
+									removeFrom="#{AdesaoControl.adesao.dependentes}" />
+							</p:commandButton>
+
+						</p:column>
+					</p:dataTable>
+				</p:tab>
+
+				<!-- 				CURSOS -->
+				<p:tab title="Cursos">
+					<h:panelGrid id="pnlCurso" columns="2">
+						<p:outputLabel value="Nome: " />
+						<p:inputText value="#{AdesaoControl.curso.nome}" size="70" />
+						<p:outputLabel value="Descricao: " />
+						<p:inputTextarea value="#{AdesaoControl.curso.descricao}"
+							cols="50" />
+						<p:commandButton value="Add" update="pnlCurso, dtCursos"
+							action="#{AdesaoControl.reiniciarCurso}" process="@parent">
+							<p:collector value="#{AdesaoControl.curso}"
+								addTo="#{AdesaoControl.adesao.cursos}" />
+						</p:commandButton>
+					</h:panelGrid>
+					<p:dataTable id="dtCursos" value="#{AdesaoControl.adesao.cursos}"
+						var="curso" emptyMessage="Nenhum Registro">
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Nome" />
+							</f:facet>
+							<h:outputText value="#{curso.nome}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Descrição" />
+							</f:facet>
+							<h:outputText value="#{curso.descricao}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Ação" />
+							</f:facet>
+							<p:commandButton icon="ui-icon-trash" process="@this"
+								update="dtCursos">
+								<p:collector value="#{curso}"
+									removeFrom="#{AdesaoControl.adesao.cursos}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:tab>
+
+			</p:tabView>
+
+			<p:commandButton value="Confirmar"
+				actionListener="#{AdesaoControl.confirmar}" icon="ui-icon-check"
+				title="Salvar Proposta de Adesao" />
+		</p:fieldset>
+	</ui:define>
+</ui:composition>

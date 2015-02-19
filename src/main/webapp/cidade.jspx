@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+
+		<p:panel header="Formulário Cidades" id="panel">
+			<h:panelGrid columns="2">
+				<h:outputText value="Nome Cidade"></h:outputText>
+				<p:inputText value="#{CidadeControl.cidade.nome}"></p:inputText>
+				<h:outputText value="Sigla Uf"></h:outputText>
+				<p:selectOneMenu value="#{CidadeControl.cidade.uf}"
+					converter="ufConverter">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{CidadeControl.ufs}" var="uf"
+						itemLabel="#{uf}" itemValue="#{uf}" />
+				</p:selectOneMenu>
+				<p:commandButton actionListener="#{CidadeControl.confirmar}"
+					value="Confirmar" update="ufs, panel"></p:commandButton>
+					<p:commandButton actionListener="#{CidadeControl.testar}"
+					value="Testar" update="ufs, panel"></p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+
+		<p:dataTable id="ufs" value="#{CidadeControl.cidades }" var="cidade"
+			width="100%" emptyMessage="Sem registros" paginator="true" rows="10">
+			<f:facet name="header">
+				<h:outputText value="Lista de Cidades"></h:outputText>
+			</f:facet>
+			<p:column sortBy="#{cidade.nome }">
+				<f:facet name="header">
+					<h:outputText value="Nome"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{cidade.nome }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cidade.uf.sigla }">
+				<f:facet name="header">
+					<h:outputText value="Sigla"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{cidade.uf.sigla }"></h:outputText>
+			</p:column>
+		</p:dataTable>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Projeto Incubadoras UFG</title>
+    </h:head>
+    <h:body>
+        <!--Mensagens-->
+        <h:form id="frmMsgErro">
+            <p:growl id="messages" autoUpdate="true" showDetail="true"/>
+        </h:form>
+        <h:form id="frmDtUf">
+            <p:dataTable id="dtUf" var="uf" value="#{ufBean.lstUf}">
+                <p:column headerText="Identificador">
+                    <p:outputLabel value="#{uf.idUf}"/>
+                </p:column>
+                <p:column headerText="Nome">
+                    <p:outputLabel value="#{uf.nome}"/>
+                </p:column>
+                <p:column headerText="Sigla">
+                    <p:outputLabel value="#{uf.sigla}"/>
+                </p:column>
+                <p:column>
+                    <p:commandButton id="cmdAlterar" icon="ui-icon-pencil" actionListener="#{ufBean.preparaAlterar()}">
+                        <f:setPropertyActionListener target="#{ufBean.uf}" value="#{uf}"/>
+                    </p:commandButton>
+                    <p:commandButton id="cmdExcluir" icon="ui-icon-trash" actionListener="#{ufBean.excluir()}">
+                        <f:setPropertyActionListener target="#{ufBean.uf}" value="#{uf}"/>
+                    </p:commandButton>
+                    <p:tooltip for="cmdAlterar" value="Alterar Registro"/>
+                    <p:tooltip for="cmdExcluir" value="Excluir Registro"/>
+                </p:column>
+            </p:dataTable>
+            <p:commandButton value="Listar" actionListener="#{ufBean.listar()}"/>
+            <p:commandButton value="Novo" actionListener="#{ufBean.preparaIncluir()}"/>
+        </h:form>
+        <p:dialog widgetVar="wdgUf" id="idUf" header="Cadastro de UF">
+            <h:form id="frmUf">
+                <h:panelGrid columns="1">
+                    <p:outputLabel value="Nome: "/>
+                    <p:inputText value="#{ufBean.uf.nome}"/>
+                    <p:outputLabel value="Sigla: "/>
+                    <p:inputText value="#{ufBean.uf.sigla}"/>
+                </h:panelGrid>
+                <p:commandButton value="Salvar" actionListener="#{ufBean.salvar()}"/>
+            </h:form>
+        </p:dialog>            
+    </h:body>
+</html>
+

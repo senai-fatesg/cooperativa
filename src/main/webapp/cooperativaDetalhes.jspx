@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<ui:define name="corpo">
+		<p:fieldset legend="Cadastro de Cooperativa">
+			<p:tabView id="tbCooperativa">
+				<p:tab title="Dados da Empresa">
+					<!-- DADOS DA EMPRESA -->
+
+				</p:tab>
+					<p:separator/>
+					
+					<!-- DADOS DE ENDEREÇO -->
+
+				<p:tab title="Dados de Endereço" id="tabEndereco">
+					<a:field label="CEP: *" width="100px">
+						<p:inputMask mask="99999-999"
+							value="#{CooperativaControl.cooperativa.empresa.endereco.cep}" />
+					</a:field>
+					<a:field label="Logradouro: *" spaceLeft="15px">
+					<p:inputText
+							value="#{CooperativaControl.cooperativa.empresa.endereco.logradouro}" />
+					</a:field>
+				
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Número: *" />
+						<p:inputText
+							value="#{CooperativaControl.cooperativa.empresa.endereco.numero}" />
+
+						<p:outputLabel value="Complemento: *" />
+						<p:inputText
+							value="#{CooperativaControl.cooperativa.empresa.endereco.complemento}" />
+
+						<p:outputLabel value="Bairro: *" />
+						<p:inputText
+							value="#{CooperativaControl.cooperativa.empresa.endereco.bairro}" />
+
+						<p:outputLabel value="Cidade: *" />
+						<p:inputText
+							value="#{CooperativaControl.cooperativa.empresa.endereco.cidade}" />
+					</p:panelGrid>
+
+				</p:tab>
+
+			</p:tabView>
+			<p:commandButton value="Confirmar" actionListener="#{CooperativaControl.incluir}" icon="ui-icon-check"	process="@this" title="Gravar dados Cooperativa"></p:commandButton>
+		</p:fieldset>
+	</ui:define>
+	
+</ui:composition>

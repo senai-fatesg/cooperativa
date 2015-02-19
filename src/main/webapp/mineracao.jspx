@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<ui:define name="corpo">
+	<p:panel id="basic" header="Importar do Excel" footer="Selecione uma opção" style="margin-bottom:20px">
+			<h:panelGrid columns="1" cellpadding="10">
+				<p:graphicImage name="img/importar01.jpg" />
+				<h:outputText
+					value="Use esta funcionalidade do sistema para importar dados que estejam em planilhas de excel.
+                		Esta funcionalidade está preparada para importar dados referentes as cooperativas,
+                		 inserindo ao sistema, dados como razão social, nome de fantasia, CNPJ assim como dados 
+                		 de endereço.
+                		 O mesmo acontece com os dados de cooperados que já estejam cadastrados nas cooperativas 
+                		 inserindo no sistema dados pessoais dos cooperados.
+                		 Verifique a configuração das planilhas do excel antes de iniciar o processo de transferência de 
+                		 dados, estas devem obedecer a ordem correta das colunas, caso contrário não há como garantir 
+                		 a confiabilidade dos dados e erros podem estar ocorrendo no momento de transferência dos arquivos." />
+			</h:panelGrid>
+			<a:newLine/>
+			<a:newLine/>
+			
+		</p:panel>
+			
+	</ui:define>
+</ui:composition>

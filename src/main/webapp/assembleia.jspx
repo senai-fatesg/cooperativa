@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+		<p:dataTable id="dtAssembleia" var="assembleia"
+			value="#{AssembleiaControl.assembleias}"
+			emptyMessage="Nenhum registro encontrado" paginator="true" rows="10">
+			<f:facet name="header">
+				<p:outputLabel value="Assembleias" />
+				<p:toolbar>
+					<p:toolbarGroup align="left">
+						<p:commandButton value="Novo" title="Nova Assembleia"
+							actionListener="#{AssembleiaControl.preparaIncluir}" ajax="false"
+							icon="ui-icon-document" />
+					</p:toolbarGroup>
+					<p:toolbarGroup align="right">
+						<p:focus for="inputFiltroGlobal" />
+						<p:outputLabel value=" Filtro Global: " />
+						<p:inputText id="inputFiltroGlobal"
+							value="#{AssembleiaControl.filtroGlobal}" />
+						<p:spacer width="30" height="20" />
+						<p:outputLabel value="Data: " />
+						<p:calendar value="#{AssembleiaControl.dtIni}" locale="pt"
+							showButtonPanel="true" navigator="true" pattern="dd/MM/yyyy"
+							title="Data Inicial" />
+						<p:outputLabel value=" À " />
+						<p:calendar value="#{AssembleiaControl.dtFim}" locale="pt"
+							showButtonPanel="true" navigator="true" pattern="dd/MM/yyyy"
+							title="Data Final" />
+						<p:spacer width="30" height="20" />
+						<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search"
+							actionListener="#{AssembleiaControl.listar}"
+							update="dtAssembleia" title="Filtrar Assembleias" />
+						<p:defaultCommand target="cmdFiltroGlobal" />
+					</p:toolbarGroup>
+				</p:toolbar>
+			</f:facet>
+			<p:column headerText="Identificador">
+				<h:outputText value="#{assembleia.id}" />
+			</p:column>
+			<p:column headerText="Descrição">
+				<h:outputText value="#{assembleia.descricao}" />
+			</p:column>
+			<p:column headerText="Data">
+				<h:outputText value="#{assembleia.data}" converter="dateConverter" />
+			</p:column>
+			<p:column headerText="Hora Início">
+				<h:outputText value="#{assembleia.horaIni}"
+					converter="timeConverter" />
+			</p:column>
+			<p:column headerText="Hora Termino">
+				<h:outputText value="#{assembleia.horaFim}"
+					converter="timeConverter" />
+			</p:column>
+			<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-search" title="Visualizar Assembleia" 
+					actionListener="#{AssembleiaControl.preparaAlterar}" ajax="false">
+					<f:attribute name="assembleia" value="#{assembleia}" />
+				</p:commandButton>
+			</p:column>
+			<f:facet name="footer">
+				<p:outputLabel
+					value="#{AssembleiaControl.tamanhoLista } Registro(s)" />
+			</f:facet>
+		</p:dataTable>
+	</ui:define>
+</ui:composition>
