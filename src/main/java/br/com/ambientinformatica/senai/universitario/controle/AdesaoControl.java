@@ -135,7 +135,7 @@ public class AdesaoControl extends Control {
 	public void preparaAlterar(ActionEvent evt) {
 		try {
 			adesao = (Adesao) evt.getComponent().getAttributes().get("adesao");
-			adesao = adesaoDao.consultar(adesao.getIdAdesao());
+			adesao = adesaoDao.consultar(adesao.getId());
 			FacesContext.getCurrentInstance().getExternalContext()
 					.redirect("adesaoDetalhes.jsf");
 		} catch (IOException e) {
@@ -148,7 +148,7 @@ public class AdesaoControl extends Control {
 	public void prepararVisualizar(ActionEvent evt) {
 		try {
 			adesao = (Adesao) evt.getComponent().getAttributes().get("adesao");
-			adesao = adesaoDao.consultar(adesao.getIdAdesao());
+			adesao = adesaoDao.consultar(adesao.getId());
 			FacesContext.getCurrentInstance().getExternalContext()
 					.redirect("adesaoVisualizacao.jsf");
 		} catch (Exception e) {
