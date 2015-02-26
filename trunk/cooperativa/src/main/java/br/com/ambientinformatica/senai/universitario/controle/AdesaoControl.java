@@ -159,7 +159,7 @@ public class AdesaoControl extends Control {
 	public void prepararExcluir(ActionEvent evt) {
 		try {
 			adesao = (Adesao) evt.getComponent().getAttributes().get("adesao");
-			adesao = adesaoDao.consultar(adesao.getIdAdesao());
+			adesao = adesaoDao.consultar(adesao.getId());
 			excluindo = true;
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
@@ -168,7 +168,7 @@ public class AdesaoControl extends Control {
 
 	public void confirmarExcluir(ActionEvent evt) {
 		try {
-			adesao = adesaoDao.consultar(adesao.getIdAdesao());
+			adesao = adesaoDao.consultar(adesao.getId());
 			adesao.setDtExclusao(new Date());
 			adesaoDao.alterar(adesao);
 			listar(null);
