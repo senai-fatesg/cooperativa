@@ -8,7 +8,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
-import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -16,10 +15,7 @@ import org.springframework.stereotype.Controller;
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.senai.universitario.converter.DateConverter;
 import br.com.ambientinformatica.senai.universitario.entidade.Cidade;
-import br.com.ambientinformatica.senai.universitario.entidade.Cooperado;
 import br.com.ambientinformatica.senai.universitario.entidade.EnumPapelUsuario;
-import br.com.ambientinformatica.senai.universitario.entidade.EnumTipoTelefone;
-import br.com.ambientinformatica.senai.universitario.entidade.PapelUsuario;
 import br.com.ambientinformatica.senai.universitario.entidade.Pessoa;
 import br.com.ambientinformatica.senai.universitario.entidade.Usuario;
 import br.com.ambientinformatica.senai.universitario.persistencia.CooperadoDao;
