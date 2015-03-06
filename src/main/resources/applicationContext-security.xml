@@ -38,7 +38,7 @@
 	</beans:bean>
 
 
-	<beans:bean id="usuarioService" class="br.com.cooperativa.util.UsuarioService">
+	<beans:bean id="usuarioService" class="br.com.ambientinformatica.senai.universitario.util.UsuarioService">
 		<beans:property name="dataSource" ref="dataSource"></beans:property>
 	</beans:bean>
 
