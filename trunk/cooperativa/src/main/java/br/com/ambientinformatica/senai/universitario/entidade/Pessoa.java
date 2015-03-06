@@ -18,10 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
-import org.hibernate.annotations.Cascade;
-
-import br.com.ambientinformatica.senai.universitario.entidade.Telefone;
-
 @Entity
 public class Pessoa {
 
@@ -45,7 +41,6 @@ public class Pessoa {
 	
 	@OneToMany(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "pessoa")
-	@Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
 	private List<Telefone> telefones = new ArrayList<Telefone>();
 
 	@Enumerated(EnumType.STRING)
@@ -83,24 +78,6 @@ public class Pessoa {
 		telefones.remove(telefone);
 	}
 
-//	public void removerEndereco(Endereco endereco) {
-//		enderecos.remove(endereco);
-//
-//	}
-
-//	public void adicionarEndereco(Endereco endereco) {
-//		enderecos.add(endereco);
-//
-//	}
-	
-//	public void removerEndereco(Endereco endereco){
-//		enderecos.remove(endereco);
-//	}
-//	
-//	public void adicionarEndereco(Endereco endereco){
-//		enderecos.add(endereco);
-//	}
-	
 	public void adicionarAllEndereco(Set<Endereco> enderecos){
 
 		enderecos.addAll(enderecos);
@@ -184,10 +161,6 @@ public class Pessoa {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public void setEnderecos(Endereco enderecos) {
-		this.endereco = endereco;
 	}
 
 	public void setParceiros(Set<Pessoa> parceiros) {
