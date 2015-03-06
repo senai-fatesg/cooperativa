@@ -1,8 +1,5 @@
 package br.com.ambientinformatica.senai.universitario.util;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +20,14 @@ public class InicializadorSistema {
 
 	@Autowired
 	private UsuarioDao usuarioDao;
+	
 	@Autowired
 	private CidadeDao cidadeDao;
 	
 	@PostConstruct
 	public void iniciar(){
 		inicializarUsuarioAdmin();
-		//inserirCidades();
+		inserirCidades();
 	}
 	
 	private void inicializarUsuarioAdmin(){
@@ -55,13 +53,10 @@ public class InicializadorSistema {
 		try {
 			List<Cidade> cidades = new ArrayList<Cidade>();
 			cidades = cidadeDao.listar();
-
-			if (cidades.size() == 0){
-				
+			if (cidades.isEmpty()){
 				String caminho = "scripts/cidades.sql";
 				cidadeDao.incluirViaArquivo(caminho);
 			}
-
 		} catch (Exception e) {
 			UtilLog.getLog().error("Erro na Inserção de Cidades: " + e.getMessage(), e);
 		}
