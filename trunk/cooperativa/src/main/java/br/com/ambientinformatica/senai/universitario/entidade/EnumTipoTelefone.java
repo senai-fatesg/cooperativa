@@ -4,25 +4,25 @@ import br.com.ambientinformatica.util.IEnum;
 
 public enum EnumTipoTelefone implements IEnum{
 
-   RESIDENCIAL("Residencial", "RES"),
-   COMERCIAL("Comercial", "COM"),
-   CELULAR("Celular", "CEL"),
-   FAX("FAX", "FAX");
-   
-   private final String descricao;
-   private final String abreviacao;
+	RESIDENCIAL("Residencial", "RES"),
+	COMERCIAL("Comercial", "COM"),
+	CELULAR("Celular", "CEL"),
+	FAX("FAX", "FAX");
 
-   private EnumTipoTelefone(String descricao, String abreviacao) {
-      this.descricao = descricao;
-      this.abreviacao = abreviacao;
-   }
+	private final String descricao;
+	private final String abreviacao;
 
-   public String getDescricao() {
-      return descricao;
-   }
+	private EnumTipoTelefone(String descricao, String abreviacao) {
+		this.descricao = descricao;
+		this.abreviacao = abreviacao;
+	}
 
-   public String getAbreviacao() {
-      return abreviacao;
-   }
-   
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public String getAbreviacao() {
+		return abreviacao;
+	}
+
 }

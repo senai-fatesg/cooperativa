@@ -4,7 +4,6 @@ import java.util.List;
 
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.jpa.persistencia.Persistencia;
-import br.com.ambientinformatica.senai.universitario.entidade.Adesao;
 import br.com.ambientinformatica.senai.universitario.entidade.Cooperado;
 
 public interface CooperadoDao extends Persistencia<Cooperado> {

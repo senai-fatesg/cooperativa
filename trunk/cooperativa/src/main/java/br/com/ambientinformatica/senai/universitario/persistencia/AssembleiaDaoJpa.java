@@ -10,11 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
-import br.com.ambientinformatica.senai.universitario.entidade.Adesao;
 import br.com.ambientinformatica.senai.universitario.entidade.Assembleia;
 import br.com.ambientinformatica.senai.universitario.entidade.Cooperado;
-import br.com.ambientinformatica.senai.universitario.entidade.Pessoa;
-import br.com.ambientinformatica.senai.universitario.util.GerarMatricula;
 
 @Repository("assembleiaDao")
 public class AssembleiaDaoJpa extends PersistenciaJpa<Assembleia> implements

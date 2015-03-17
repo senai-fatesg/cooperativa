@@ -18,6 +18,7 @@ import org.primefaces.event.FileUploadEvent;
 
 public class UploadArquivo {
 
+	@SuppressWarnings("unused")
 	public void carregaArquivo(FileUploadEvent event) throws FileNotFoundException, IOException
 	{
 		try

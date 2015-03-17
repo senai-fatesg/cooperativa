@@ -3,10 +3,7 @@ package br.com.ambientinformatica.senai.universitario.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.swing.JOptionPane;
-
 import br.com.ambientinformatica.senai.universitario.entidade.Cooperado;
-import br.com.ambientinformatica.senai.universitario.entidade.Cooperativa;
 import br.com.ambientinformatica.senai.universitario.entidade.Pessoa;
 
 public class GerarMatricula {

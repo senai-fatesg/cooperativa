@@ -24,28 +24,32 @@ import br.com.ambientinformatica.senai.universitario.persistencia.CooperativaDao
 @Controller("cooperativaControl")
 @Scope("conversation")
 public class CooperativaControl {
-	
-	//FAZER CONSULTA DA LISTA DE TELEFONE LIGADO A PESSOA CONSULTADA PELA TABELA DE PESSOAS
-	//APÓS A PRIMEIRA CONSULTA A LISTA DE TELEFONE DA PESSOA É ELIMINADA DA MEMÓRIA
-	
+
+
 	private Pessoa cooperativa = new Pessoa();
 
 	private List<Pessoa> lista = new ArrayList<Pessoa>(); 
-	
+
 	private String filtro = new String();
+
 	private boolean rSocial = false;
+
 	private boolean nFantasia = false;
+
 	private Telefone telefone = new Telefone();
+
 	private List<String> listString = new ArrayList<String>();
+
 	private List<Pessoa> listPessoa = new ArrayList<Pessoa>();
+
 	private List<Cidade> cidades = new ArrayList<Cidade>();
 
 	@Autowired
 	private CooperativaDao cooperativaDao;
-	
+
 	@Autowired
 	private CidadeDao cidadeDao;
-	
+
 	@PostConstruct
 	public void init(){
 		cooperativa = new Pessoa();
@@ -54,8 +58,6 @@ public class CooperativaControl {
 		cidades = new ArrayList<Cidade>();
 	}
 
-	// ---------------Métodos de Servico-------------//
-	// ----- Redireciona para pagina de cadastro-----//
 	public void preparaIncluir(ActionEvent evt) {
 		this.cooperativa = new Pessoa();
 		try {
@@ -64,7 +66,7 @@ public class CooperativaControl {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
-	
+
 	public void prepararEditar(ActionEvent evt) {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("empresaDetalhes.jsf");
@@ -72,7 +74,7 @@ public class CooperativaControl {
 			UtilFaces.addMensagemFaces("Erro: "+e.getMessage());
 		}
 	}
-	
+
 	public Pessoa consultaCooperativa(ActionEvent evt) {
 		try {
 			cooperativa = cooperativaDao.consultar(cooperativa.getId());
@@ -102,7 +104,7 @@ public class CooperativaControl {
 			UtilFaces.addMensagemFaces("Erro ao Inserir dados: "+e.getMessage());
 		}
 	}
-	
+
 	public void alterar(ActionEvent evt) {
 		try {
 			cooperativaDao.alterar(cooperativa);
@@ -112,7 +114,7 @@ public class CooperativaControl {
 			UtilFaces.addMensagemFaces("Erro ao Alterar dados: "+e.getMessage());
 		}
 	}
-	
+
 	public List<Pessoa> listarPessoa()
 	{
 		try {
@@ -190,14 +192,10 @@ public class CooperativaControl {
 		}
 	}
 
-	// Retorna uma lista do enumerador TipoTelefone
 	public List<SelectItem> getTipoTelefone() {
 		return UtilFaces.getListEnum(EnumTipoTelefone.values());
 	}
-	
-	
-	//--------------------------GETS E SETS--------------------------//
-	
+
 	public List<Pessoa> getLista() {
 		return lista;
 	}

@@ -33,7 +33,7 @@ import br.com.ambientinformatica.senai.universitario.util.GerarMatricula;
 @Controller("MineracaoControl")
 @Scope("conversation")
 public class MineracaoDados {
-	
+
 	@Autowired
 	CooperativaDao cooperativaDao;
 	@Autowired
@@ -42,36 +42,36 @@ public class MineracaoDados {
 	CidadeDao cidadeDao;
 	@Autowired
 	AdesaoDao adesaoDao;
-	
+
 	Cidade cidade = new Cidade();
 	GerarMatricula matricula;
-	
-	
+
+
 	public void cadastroCooperativa(ActionEvent evt)
 	{
 		try {
-	        Workbook workbook = Workbook.getWorkbook(new File("C:\\Cooperativas.xls"));
-	        
-	        Sheet sheet = workbook.getSheet(0);
-	        Integer linhas = sheet.getRows();
-	        Integer colunas = sheet.getColumns();
-	        Pessoa cooperativa = new Pessoa();
-	        Endereco endereco = new Endereco();
-	    	
-	        
-	        for (int i = 0; i < linhas; i++) 
-	        {
-	        	for(int c = 0; c < colunas; c++)
-	        	{
-	        		if(i == 0)
-	        		{
-	        			break;
-	        		}
-	        		else
-	        		{
-	        			Cell celula = sheet.getCell(c, i);
-	        			
-	        			switch (c) {
+			Workbook workbook = Workbook.getWorkbook(new File("C:\\Cooperativas.xls"));
+
+			Sheet sheet = workbook.getSheet(0);
+			Integer linhas = sheet.getRows();
+			Integer colunas = sheet.getColumns();
+			Pessoa cooperativa = new Pessoa();
+			Endereco endereco = new Endereco();
+
+
+			for (int i = 0; i < linhas; i++) 
+			{
+				for(int c = 0; c < colunas; c++)
+				{
+					if(i == 0)
+					{
+						break;
+					}
+					else
+					{
+						Cell celula = sheet.getCell(c, i);
+
+						switch (c) {
 						case 0:
 							cooperativa.setRazaoSocial(celula.getContents());
 							break;
@@ -93,7 +93,7 @@ public class MineracaoDados {
 							{
 								cooperativa.setStatus(EnumStatus.I);
 							}
-							
+
 							break;
 						case 5:
 							if(celula.getContents().equals("Juridica"))
@@ -123,19 +123,19 @@ public class MineracaoDados {
 							cooperativa.setEndereco(endereco);
 							cooperativaDao.salvar(cooperativa);
 							cooperativa = new Pessoa();
-					        endereco = new Endereco();
+							endereco = new Endereco();
 							break;
 						}
-	        		}
-	        	}
-	        }
-	        UtilFaces.addMensagemFaces("Cooperativas Gravadas com sucesso!");
+					}
+				}
+			}
+			UtilFaces.addMensagemFaces("Cooperativas Gravadas com sucesso!");
 
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces("Erro ao Ler arquivo Excel: "+e.getMessage());
 		}
 	}
-	
+
 	public void cadastroCooperado()
 	{
 		try {
@@ -151,7 +151,7 @@ public class MineracaoDados {
 			DateConverter dateConverter = new DateConverter();
 			Date data = new Date();
 			Filiacao filiacao = new Filiacao();
-			
+
 			for(int l = 0; l < linhas; l++)
 			{
 				//Para cada linha ele vai limpar os dados carregados anteriormente
@@ -161,7 +161,7 @@ public class MineracaoDados {
 				dadosP = new DadosPessoais();
 				cooperado = new Cooperado();
 				cooperativa = new Pessoa();
-				
+
 				for(int c = 0; c < colunas; c++)
 				{
 					if(l == 0)
@@ -171,7 +171,6 @@ public class MineracaoDados {
 					else
 					{
 						Cell celula = sheet.getCell(c, l);
-						
 						switch (c) {
 						case 0:
 							dadosP.setNome(celula.getContents());
@@ -242,14 +241,8 @@ public class MineracaoDados {
 							break;
 						case 16:
 							cooperativa = cooperativaDao.consultarPorFantasia(celula.getContents());
-							
-//							adesao.setCooperativa(cooperativa);
-//							adesao.setDadosPessoais(dadosP);
-//							adesaoDao.salvar(adesao);
-							
 							cooperado.setDadosPessoais(dadosP);
 							cooperado.setCooperativa(cooperativa);
-
 							break;
 						case 17:
 							if(celula.getContents().equals("Ativo(a)"))
@@ -260,10 +253,7 @@ public class MineracaoDados {
 							{
 								cooperado.setStatus(EnumStatus.I);
 							}
-							
-//							cooperadoDao.salvar(cooperado);
 							cooperado = cooperadoDao.alterar(cooperado);
-//							int id = cooperadoDao.ultimoRegistro();
 							matricula = new GerarMatricula(cooperado);							
 							cooperado.setMatricula(matricula.getMatricula());
 							cooperadoDao.alterar(cooperado);
@@ -277,7 +267,7 @@ public class MineracaoDados {
 			UtilFaces.addMensagemFaces("Erro ao gravar cooperado: "+e.getMessage());
 		}
 	}
-	
+
 	private Cidade consultaCidade(String c)
 	{
 		cidade = cidadeDao.consultarPorNome(c);

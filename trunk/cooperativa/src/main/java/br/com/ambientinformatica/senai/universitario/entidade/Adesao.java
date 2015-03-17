@@ -27,33 +27,48 @@ import br.com.ambientinformatica.util.Entidade;
 
 @Entity
 public class Adesao extends Entidade{
+
 	@Id
 	@GeneratedValue(generator = "adesao_seq", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "adesao_seq", sequenceName = "adesao_seq", allocationSize = 1, initialValue = 1)
 	private Integer id;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "dados_pessoais")
 	@Fetch(FetchMode.JOIN)
 	@Cascade(CascadeType.ALL)
 	private DadosPessoais dadosPessoais = new DadosPessoais();
+
 	private boolean bolsaFamilia;
+
 	private boolean aprovado;
+
 	@Temporal(TemporalType.DATE)
 	private Date dataCadastro;
+
 	@Temporal(TemporalType.DATE)
 	private Date dtAssembleia;
+
 	@Temporal(TemporalType.DATE)
 	private Date dtExclusao;
+
 	private BigDecimal rendaFamiliar;
+
 	private int qtdPessoasRenda;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Cooperado coopResponsavel;
+
 	private boolean principalAtivProdutiva;
+
 	private boolean estudaAtualmente;
+
 	private String motivo;
+
 	@OneToMany(mappedBy = "adesao", fetch = FetchType.LAZY)
 	@Cascade(CascadeType.ALL)
 	private List<CursoTecnico> cursos = new ArrayList<CursoTecnico>();
+
 	@OneToMany(mappedBy = "adesao", fetch = FetchType.LAZY)
 	@Cascade(CascadeType.ALL)
 	private List<Dependente> dependentes = new ArrayList<Dependente>();

@@ -26,7 +26,7 @@ public class Cooperativa extends Entidade {
 
 	@ManyToOne
 	private Empresa empresa;
-	
+
 	private String status;
 
 	@Temporal(TemporalType.TIMESTAMP)

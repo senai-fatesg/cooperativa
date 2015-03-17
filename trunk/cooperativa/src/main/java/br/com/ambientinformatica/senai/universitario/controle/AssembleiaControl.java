@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -20,15 +19,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.senai.universitario.entidade.Adesao;
 import br.com.ambientinformatica.senai.universitario.entidade.Assembleia;
-import br.com.ambientinformatica.senai.universitario.entidade.Cooperado;
-import br.com.ambientinformatica.senai.universitario.entidade.Pessoa;
 import br.com.ambientinformatica.senai.universitario.persistencia.AdesaoDao;
 import br.com.ambientinformatica.senai.universitario.persistencia.AssembleiaDao;
-import br.com.ambientinformatica.senai.universitario.persistencia.CooperadoDao;
-import br.com.ambientinformatica.senai.universitario.util.GerarMatricula;
 import br.com.ambientinformatica.senai.universitario.util.Mensagem;
 
 @Controller("AssembleiaControl")
@@ -36,11 +30,17 @@ import br.com.ambientinformatica.senai.universitario.util.Mensagem;
 public class AssembleiaControl extends Control{
 
 	private Assembleia assembleia = new Assembleia();
+
 	private List<Assembleia> assembleias = new ArrayList<Assembleia>();
+
 	private List<Adesao> adesoes = new ArrayList<Adesao>();
+
 	private Integer navegador = 1;
+
 	private String tituloAdesCoop = "";
+
 	private Date dtIni = new Date();
+
 	private Date dtFim = new Date();
 
 	@Autowired
@@ -111,7 +111,7 @@ public class AssembleiaControl extends Control{
 		try {
 			navegador = 1;
 			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("assembleiaDetalhes.jsf");
+			.redirect("assembleiaDetalhes.jsf");
 		} catch (IOException e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -131,7 +131,7 @@ public class AssembleiaControl extends Control{
 			listar(evt);
 			assembleia = new Assembleia();
 			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("assembleia.jsf");
+			.redirect("assembleia.jsf");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -143,7 +143,7 @@ public class AssembleiaControl extends Control{
 			assembleia = (Assembleia) evt.getComponent().getAttributes()
 					.get("assembleia");
 			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("assembleiaDetalhes.jsf");
+			.redirect("assembleiaDetalhes.jsf");
 		} catch (IOException e) {
 			UtilFaces.addMensagemFaces(e);
 		} catch (Exception e) {
@@ -223,6 +223,7 @@ public class AssembleiaControl extends Control{
 		return this.assembleias.size();
 	}
 
+	@SuppressWarnings("deprecation")
 	public void validarHoraIniHoraFim() throws Exception {
 		Integer horaIni = assembleia.getHoraIni().getHours();
 		Integer horaFim = assembleia.getHoraFim().getHours();

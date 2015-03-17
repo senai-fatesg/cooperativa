@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -14,7 +13,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.senai.universitario.converter.CooperadoConverter;
 import br.com.ambientinformatica.senai.universitario.entidade.Adesao;
 import br.com.ambientinformatica.senai.universitario.entidade.Cidade;
 import br.com.ambientinformatica.senai.universitario.entidade.Cooperado;
@@ -33,15 +31,21 @@ import br.com.ambientinformatica.senai.universitario.util.WebServiceCep;
 public class AdesaoControl extends Control {
 
 	private Adesao adesao = new Adesao();
+
 	private CursoTecnico curso = new CursoTecnico();
+
 	private Dependente dependente = new Dependente();
+
 	private List<Adesao> adesoes = new ArrayList<Adesao>();
+
 	private Boolean aprovado = false;
 
 	@Autowired
 	private AdesaoDao adesaoDao;
+
 	@Autowired
 	private CidadeDao cidadeDao;
+
 	@Autowired
 	private CooperadoDao cooperadoDao;
 
@@ -89,7 +93,7 @@ public class AdesaoControl extends Control {
 		this.adesao = new Adesao();
 		try {
 			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("adesaoDetalhes.jsf");
+			.redirect("adesaoDetalhes.jsf");
 		} catch (IOException e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -102,7 +106,7 @@ public class AdesaoControl extends Control {
 			listar(evt);
 			adesao = new Adesao();
 			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("adesao.jsf");
+			.redirect("adesao.jsf");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -137,7 +141,7 @@ public class AdesaoControl extends Control {
 			adesao = (Adesao) evt.getComponent().getAttributes().get("adesao");
 			adesao = adesaoDao.consultar(adesao.getId());
 			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("adesaoDetalhes.jsf");
+			.redirect("adesaoDetalhes.jsf");
 		} catch (IOException e) {
 			UtilFaces.addMensagemFaces(e);
 		} catch (Exception e) {
@@ -150,7 +154,7 @@ public class AdesaoControl extends Control {
 			adesao = (Adesao) evt.getComponent().getAttributes().get("adesao");
 			adesao = adesaoDao.consultar(adesao.getId());
 			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("adesaoVisualizacao.jsf");
+			.redirect("adesaoVisualizacao.jsf");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -221,9 +225,9 @@ public class AdesaoControl extends Control {
 					WebServiceCep loadCep = WebServiceCep.searchCep(adesao
 							.getDadosPessoais().getEndereco().getCep());
 					adesao.getDadosPessoais().getEndereco()
-							.setBairro(loadCep.getBairro());
+					.setBairro(loadCep.getBairro());
 					adesao.getDadosPessoais().getEndereco()
-							.setLogradouro(loadCep.getLogradouroFull());
+					.setLogradouro(loadCep.getLogradouroFull());
 					String nomeCidade = Util.removeAcentos(loadCep.getCidade());
 					String ufCidade = loadCep.getUf();
 					Cidade c = cidadeDao.consultar(nomeCidade, ufCidade);

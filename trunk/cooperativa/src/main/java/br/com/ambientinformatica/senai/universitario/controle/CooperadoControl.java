@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -14,7 +13,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.senai.universitario.entidade.Adesao;
 import br.com.ambientinformatica.senai.universitario.entidade.Cidade;
 import br.com.ambientinformatica.senai.universitario.entidade.Cooperado;
 import br.com.ambientinformatica.senai.universitario.entidade.EnumEstadoCivil;
@@ -29,10 +27,12 @@ import br.com.ambientinformatica.senai.universitario.util.WebServiceCep;
 public class CooperadoControl extends Control{
 
 	private Cooperado cooperado = new Cooperado();
+
 	private List<Cooperado> cooperados = new ArrayList<Cooperado>();
 
 	@Autowired
 	private CooperadoDao cooperadoDao;
+	
 	@Autowired
 	private CidadeDao cidadeDao;
 
@@ -177,7 +177,7 @@ public class CooperadoControl extends Control{
 		}
 	}
 
-	public void validarDtNasc() {
+	public void validarDataNascimento() {
 		try {
 			if (cooperado.getDadosPessoais().getDataNascimento() != null) {
 				Date dtAtual = new Date();

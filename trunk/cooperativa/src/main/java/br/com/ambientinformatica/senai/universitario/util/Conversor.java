@@ -1,6 +1,5 @@
 package br.com.ambientinformatica.senai.universitario.util;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;

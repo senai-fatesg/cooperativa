@@ -30,9 +30,6 @@ public class CidadeConverter implements Converter {
 					e.printStackTrace();
 				}
 			} catch (NumberFormatException exception) {
-				// throw new ConverterException(new
-				// FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error",
-				// "Funcionario escolhido não é válido"));
 				return null;
 			}
 			return cidade;
