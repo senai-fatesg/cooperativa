@@ -35,7 +35,6 @@ public class CooperadoConverter implements Converter {
 
 			}
 		}
-
 		return null;
 	}
 

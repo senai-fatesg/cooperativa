@@ -111,5 +111,4 @@ public class Empresa {
 	public Integer getId() {
 		return id;
 	}
-
 }

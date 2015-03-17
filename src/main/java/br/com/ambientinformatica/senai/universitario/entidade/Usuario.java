@@ -37,11 +37,11 @@ public class Usuario extends Entidade {
 	@AlfaNumerico(message = "O login do usuário não pode conter caracteres especiais, acentos ou espaços", semAcentos = true, semEspacos = true, groups = AmbientValidator.class)
 	private String login;
 
-	private String senha;
-
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Pessoa cooperativa;
-
+	
+	private String senha;
+	
 	private String nome;
 
 	@Temporal(TemporalType.DATE)
@@ -87,7 +87,7 @@ public class Usuario extends Entidade {
 			for (PapelUsuario p : papeis) {
 				if (p.getPapel().getDescricao().equals(papel.getDescricao())) {
 					UtilFaces
-							.addMensagemFaces("Perfil de usuário já existe no contexto!");
+					.addMensagemFaces("Perfil de usuário já existe no contexto!");
 					return true;
 				}
 			}
@@ -97,8 +97,8 @@ public class Usuario extends Entidade {
 		}
 		return false;
 	}
-	
-	
+
+
 	public String getLogin() {
 		return login;
 	}

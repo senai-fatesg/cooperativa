@@ -20,14 +20,15 @@ public class CidadeControl {
 
 	@Autowired
 	private CidadeDao cidadeDao;
+
 	private List<Cidade> cidades = new ArrayList<Cidade>();
-	
+
 	@PostConstruct
 	private void init()
 	{
 		carregarListaLeitura(null);
 	}
-	
+
 	public void carregarListaLeitura(ActionEvent evt) {
 		try {
 			this.cidades = cidadeDao.listar();
@@ -35,7 +36,7 @@ public class CidadeControl {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
-	
+
 	public List<Cidade> completeCidades(String query) {
 		List<Cidade> resultados = new ArrayList<Cidade>();
 		for (Cidade cidade : cidades) {

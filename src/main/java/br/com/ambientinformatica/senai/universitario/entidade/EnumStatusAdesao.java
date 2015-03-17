@@ -4,11 +4,11 @@ import br.com.ambientinformatica.util.IEnum;
 
 public enum EnumStatusAdesao implements IEnum{
 
-    P("Pendente"),
-    A("Aprovado");
-    
-    private String descricao;
-	
+	P("Pendente"),
+	A("Aprovado");
+
+	private String descricao;
+
 	private EnumStatusAdesao(String descricao) {
 		this.descricao = descricao;
 	}

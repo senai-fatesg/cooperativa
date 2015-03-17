@@ -134,5 +134,4 @@ public class Cooperado extends Entidade{
 		}
 		return this.getId().toString();
 	}
-
 }

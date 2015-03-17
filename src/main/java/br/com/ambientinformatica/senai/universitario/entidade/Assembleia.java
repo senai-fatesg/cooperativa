@@ -24,13 +24,21 @@ public class Assembleia extends Entidade{
 	@GeneratedValue(generator = "assembleia_seq", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "assembleia_seq", sequenceName = "assembleia_seq", allocationSize = 1, initialValue = 1)
 	private Integer id;
+
 	private byte[] documento;
+	
 	private String nomeDoc;
+	
 	private String tipoDoc;
+	
 	private String descricao;
+	
 	private Date data;
+	
 	private Date horaIni;
+	
 	private Date horaFim;
+	
 	@OneToMany(mappedBy = "assembleia", fetch = FetchType.LAZY)
 	@Cascade(CascadeType.ALL)
 	private List<Cooperado> cooperados = new ArrayList<Cooperado>();
@@ -103,7 +111,6 @@ public class Assembleia extends Entidade{
 		this.tipoDoc = tipoDoc;
 	}
 
-	/* Metodos Auxiliares */
 	public void gerarCooperados(List<Adesao> adesoes) {
 		if (adesoes != null) {
 			for (Adesao a : adesoes) {

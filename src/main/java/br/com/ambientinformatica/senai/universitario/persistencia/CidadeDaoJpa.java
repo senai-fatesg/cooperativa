@@ -2,7 +2,6 @@ package br.com.ambientinformatica.senai.universitario.persistencia;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -16,6 +15,8 @@ import br.com.ambientinformatica.senai.universitario.entidade.Cidade;
 
 @Repository("cidadeDao")
 public class CidadeDaoJpa extends PersistenciaJpa<Cidade> implements CidadeDao {
+
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public Cidade consultar(String nome, String uf) {
@@ -51,7 +52,5 @@ public class CidadeDaoJpa extends PersistenciaJpa<Cidade> implements CidadeDao {
 			Query query = em.createNativeQuery(linha);
 			query.executeUpdate();
 		}
-		
 	}
-
 }

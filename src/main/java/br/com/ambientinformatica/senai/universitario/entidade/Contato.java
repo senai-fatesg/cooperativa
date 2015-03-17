@@ -39,6 +39,4 @@ public class Contato extends Entidade{
    public Integer getId() {
       return id;
    }
-   
-
 }

@@ -13,7 +13,7 @@ import br.com.ambientinformatica.senai.universitario.persistencia.CooperativaDao
 
 @FacesConverter(forClass = Pessoa.class, value = "pessoaConverter")
 public class CooperativaConverter implements Converter{
-	
+
 	public static List<Pessoa> listaCooperativa;
 	Pessoa pessoa = new Pessoa();
 	private CooperativaDao cooperativaDao = (CooperativaDao) FabricaAbstrata.criarObjeto("cooperativaDao");
@@ -22,7 +22,6 @@ public class CooperativaConverter implements Converter{
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
 		if (value != null && !value.trim().equals("")) {
-			//pessoa = new Pessoa();
 			try {
 				String idString[] = value.split("-");
 				String idSt = idString[0].trim();

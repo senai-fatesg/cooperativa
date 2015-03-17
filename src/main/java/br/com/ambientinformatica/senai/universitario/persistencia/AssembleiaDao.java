@@ -6,7 +6,6 @@ import java.util.List;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.jpa.persistencia.Persistencia;
 import br.com.ambientinformatica.senai.universitario.entidade.Assembleia;
-import br.com.ambientinformatica.senai.universitario.entidade.Cooperado;
 
 public interface AssembleiaDao extends Persistencia<Assembleia> {
 	Assembleia consultar(Integer id, Date dtIni, Date dtFim);

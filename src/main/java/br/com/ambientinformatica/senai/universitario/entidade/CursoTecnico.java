@@ -25,15 +25,11 @@ public class CursoTecnico extends Entidade {
 	private String nome;
 	
 	private String descricao;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "adesao")
 	@Fetch(FetchMode.JOIN)
-	
 	private Adesao adesao;
-
-	public CursoTecnico() {
-
-	}
 
 	public Adesao getAdesao() {
 		return adesao;

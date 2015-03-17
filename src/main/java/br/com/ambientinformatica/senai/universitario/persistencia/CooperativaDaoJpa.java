@@ -1,9 +1,5 @@
 package br.com.ambientinformatica.senai.universitario.persistencia;
 
-import java.util.List;
-import java.util.Date;
-
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -35,10 +31,8 @@ public class CooperativaDaoJpa extends PersistenciaJpa<Pessoa> implements Cooper
 	public void salvar(Pessoa c) throws PersistenciaException {
 		if(c.getId()==null)
 		{
-			//c.setDataCadastro(new Date());
 			super.alterar(c);
 		}
 	}
-	
 	
 }

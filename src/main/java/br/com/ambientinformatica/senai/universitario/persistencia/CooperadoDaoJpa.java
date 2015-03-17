@@ -14,6 +14,8 @@ import br.com.ambientinformatica.senai.universitario.entidade.Cooperado;
 public class CooperadoDaoJpa extends PersistenciaJpa<Cooperado> implements
 		CooperadoDao {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public List<Cooperado> listar(Integer idAssembleia) {
 		Query q = this.em
