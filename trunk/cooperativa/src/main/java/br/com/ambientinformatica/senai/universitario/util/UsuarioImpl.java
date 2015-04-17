@@ -39,4 +39,3 @@ public class UsuarioImpl extends User{
    }
    
 }
-

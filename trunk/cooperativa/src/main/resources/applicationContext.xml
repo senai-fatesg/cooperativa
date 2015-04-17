@@ -13,7 +13,7 @@
 
 
 	<context:property-placeholder location="classpath:application.properties" />
-	<context:component-scan base-package="br.com.cooperativa" />
+	<context:component-scan base-package="br.com.ambientinformatica.senai.universitario" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="entityManagerFactory"
