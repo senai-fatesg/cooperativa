@@ -1,5 +1,6 @@
 package br.com.ambientinformatica.senai.universitario.util;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,15 +52,18 @@ public class InicializadorSistema {
 	
 	private void inserirCidades() {
 		try {
+			
+			final String fileName = "cidade.sql";
 			List<Cidade> cidades = new ArrayList<Cidade>();
 			cidades = cidadeDao.listar();
 			if (cidades.isEmpty()){
-				String caminho = "scripts/cidades.sql";
-				cidadeDao.incluirViaArquivo(caminho);
+				
+				ClassLoader classLoader = getClass().getClassLoader();
+				File file = new File(classLoader.getResource(fileName).getFile());
+				cidadeDao.incluirViaArquivo(file.getPath());
 			}
 		} catch (Exception e) {
 			UtilLog.getLog().error("Erro na Inserção de Cidades: " + e.getMessage(), e);
 		}
 	}
-	
 }
