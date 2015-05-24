@@ -13,7 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<webXmlPath>src/main/webapp/WEB-INF/web.xml</webXmlPath>
 	</properties>
-	
+	<!-- 
 	<profiles>
 		<profile>
 			<id>producao</id>
@@ -22,6 +22,7 @@
 			</properties>
 		</profile>
 	</profiles>	
+	 -->
 
 	<dependencies>
 		<dependency>
@@ -145,7 +146,7 @@
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>1.0</version>
 			</plugin>
-
+			<!-- 
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.3</version>
@@ -169,7 +170,7 @@
 					</execution>
 				</executions>
 			</plugin>
-
+			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
