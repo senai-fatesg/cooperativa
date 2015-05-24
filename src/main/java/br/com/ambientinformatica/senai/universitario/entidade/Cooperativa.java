@@ -33,6 +33,10 @@ public class Cooperativa extends Entidade {
 	@Column(name = "dataCadastro", nullable = false)
 	private Date dataCadastro;
 
+	public Cooperativa(){
+		
+	}
+	
 	public Cooperativa(Empresa empresa, String status, Date dataCadastro) {
 		this.empresa = empresa;
 		this.status = status;

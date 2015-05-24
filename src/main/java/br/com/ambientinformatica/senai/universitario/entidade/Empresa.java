@@ -42,6 +42,10 @@ public class Empresa {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empresa")
 	private Set<Cooperativa> cooperativas = new HashSet<Cooperativa>();
 
+	public Empresa(){
+		
+	}
+	
 	public Empresa(Endereco endereco, String razaoSocial, String nomeFantasia, String cnpj, String telefone) {
 		this.endereco = endereco;
 		this.razaoSocial = razaoSocial;

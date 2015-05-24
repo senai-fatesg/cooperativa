@@ -54,7 +54,8 @@ public class Pessoa {
 	@OneToMany
 	private List<Adesao> adesaos = new ArrayList<Adesao>();
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
+	@OneToMany(fetch = FetchType.LAZY)
+   @JoinColumn(name="usuario_id")
 	private Set<Pessoa> parceiros = new HashSet<Pessoa>();
 
 	public void removerParceiro(Pessoa parceiro) {
