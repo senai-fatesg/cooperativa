@@ -140,12 +140,6 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>sonar-maven-plugin</artifactId>
-				<version>1.0</version>
-			</plugin>
 			<!-- 
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
