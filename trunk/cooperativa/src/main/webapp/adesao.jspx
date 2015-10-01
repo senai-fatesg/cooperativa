@@ -37,7 +37,7 @@
 					</p:toolbar>
 				</f:facet>
 				<p:column headerText="Identificador">
-					<h:outputText value="#{adesao.idAdesao}" />
+					<h:outputText value="#{adesao.id}" />
 				</p:column>
 				<p:column headerText="Nome">
 					<h:outputText value="#{adesao.dadosPessoais.nome}" />
