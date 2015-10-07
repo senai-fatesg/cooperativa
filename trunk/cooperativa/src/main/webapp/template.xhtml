@@ -16,10 +16,12 @@
 			closable="false" collapsible="false">
 			<h:form id="frmTopo">
 				<p:menubar>
+
 					<p:menuitem>
 						<p:graphicImage library="img" name="logo-topo.jpg" width="120px"
 							height="50px" />
 					</p:menuitem>
+
 					<f:facet name="options">
 						<p:commandButton value="#" id="btnUsuario" icon="ui-icon-person"
 							global="false" />
@@ -38,17 +40,17 @@
 		<p:layoutUnit position="west" size="200" header="Menu"
 			resizable="true" collapsible="true">
 			<h:form id="frmLateral">
-			<p:panelMenu>
+				<p:panelMenu>
 					<p:submenu label="Home">
-						<p:menuitem value="Home" url="inicio.jsf" /> 
+						<p:menuitem value="Home" url="inicio.jsf" />
 					</p:submenu>
 					<p:submenu label="Cooperados">
 						<p:menuitem value="Cooperado" url="cooperado.jsf" />
 						<p:menuitem value="Assembleia" url="assembleia.jsf" />
-						<p:menuitem value="Adesão" url="adesao.jsf" /> 
+						<p:menuitem value="Adesão" url="adesao.jsf" />
 					</p:submenu>
 					<p:submenu label="Resíduos">
-						<p:menuitem value="Cadastro" url="Residuo.xhtml" />
+						<p:menuitem value="Cadastro" url="residuo.jsf" />
 						<p:submenu label="Movimentação">
 							<p:menuitem value="Coleta" url="ResiduoColeta.xhtml" />
 							<p:menuitem value="Venda" url="ResiduoVenda.xhtml" />
@@ -61,13 +63,14 @@
 						<p:menuitem value="Relatórios" />
 					</p:submenu>
 					<p:submenu label="Cooperativa">
-						<p:menuitem value="Cooperativas" url="empresa.jsf"/>
+						<p:menuitem value="Cooperativas" url="empresa.jsf" />
 					</p:submenu>
 					<p:submenu label="Usuários">
 						<p:menuitem value="Usuário" url="usuario.jsf" />
 					</p:submenu>
-					<p:submenu label="Mineração" rendered="#{securityScope.userInRole['INCUBADORA']}"> 
-						<p:menuitem value="Mineração" url="mineracao.jsf"/>
+					<p:submenu label="Mineração"
+						rendered="#{securityScope.userInRole['INCUBADORA']}">
+						<p:menuitem value="Mineração" url="mineracao.jsf" />
 					</p:submenu>
 				</p:panelMenu>
 			</h:form>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<ui:define name="corpo">
+		<p:fieldset legend="Residuo #{residuoControl.residuo.id}">
+			<!--DadosPessoais-->
+			<p:tabView id="tbResiduo">
+				<p:tab title="Dados Residuo">
+					<p:focus for="inputDescricao" />
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Descrição:" />
+						<p:inputText id="inputDescricao" value="#{residuoControl.residuo.descricao}" size="30" />
+
+						<p:outputLabel for="dtCadastro" value="Data Cadastro:" />
+						<p:calendar id="dtCadastro" value="#{residuoControl.residuo.dataCadastro}" showOn="button" />
+
+						<p:outputLabel for="userCadastro" value="Usuário Cadastro: " />
+						<p:inputText id="userCadastro" value="#{residuoControl.residuo.usuario}"/>
+
+						<p:outputLabel for="precoMedio" value="Preço médio: " />
+						<p:inputText id="precoMedio" value="#{residuoControl.residuo.precoMedio}"/>
+						
+
+						<p:selectOneRadio id="status"
+							value="#{residuoControl.residuo.status}">
+							<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
+							<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
+						</p:selectOneRadio>
+					</h:panelGrid>
+				</p:tab>
+			</p:tabView>
+
+			<p:commandButton value="Confirmar"
+				actionListener="#{residuoControl.confirmar}" icon="ui-icon-check"
+				process="" title="Salvar Residuo" />
+		</p:fieldset>
+	</ui:define>
+</ui:composition>

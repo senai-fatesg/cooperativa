@@ -7,6 +7,7 @@ import br.com.ambientinformatica.jpa.persistencia.Persistencia;
 import br.com.ambientinformatica.senai.universitario.entidade.Cooperado;
 
 public interface CooperadoDao extends Persistencia<Cooperado> {
+	
 	void salvar(Cooperado c) throws PersistenciaException;
 
 	List<Cooperado> listarPorNome(String nome);
