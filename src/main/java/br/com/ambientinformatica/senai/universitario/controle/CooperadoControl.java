@@ -99,8 +99,7 @@ public class CooperadoControl extends Control{
 
 	public void preparaAlterar(ActionEvent evt) {
 		try {
-			cooperado = (Cooperado) evt.getComponent().getAttributes()
-					.get("cooperado");
+			cooperado = (Cooperado) evt.getComponent().getAttributes().get("cooperado");
 			cooperado = cooperadoDao.consultar(cooperado.getId());
 			FacesContext.getCurrentInstance().getExternalContext()
 					.redirect("cooperadoDetalhes.jsf");
@@ -126,8 +125,7 @@ public class CooperadoControl extends Control{
 
 	public void prepararExcluir(ActionEvent evt) {
 		try {
-			cooperado = (Cooperado) evt.getComponent().getAttributes()
-					.get("cooperado");
+			cooperado = (Cooperado) evt.getComponent().getAttributes().get("cooperado");
 			cooperado = cooperadoDao.consultar(cooperado.getId());
 			excluindo = true;
 		} catch (Exception e) {
@@ -163,9 +161,9 @@ public class CooperadoControl extends Control{
 					WebServiceCep loadCep = WebServiceCep.searchCep(cooperado
 							.getDadosPessoais().getEndereco().getCep());
 					cooperado.getDadosPessoais().getEndereco()
-							.setBairro(loadCep.getBairro());
+					.setBairro(loadCep.getBairro());
 					cooperado.getDadosPessoais().getEndereco()
-							.setLogradouro(loadCep.getLogradouroFull());
+					.setLogradouro(loadCep.getLogradouroFull());
 					String nomeCidade = Util.removeAcentos(loadCep.getCidade());
 					String ufCidade = loadCep.getUf();
 					Cidade c = cidadeDao.consultar(nomeCidade, ufCidade);

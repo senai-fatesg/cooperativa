@@ -61,7 +61,7 @@
 			<p:panel id="pnlExcluir" header="Excluir Cooperado"
 				rendered="#{CooperadoControl.excluindo==true}">
 				<p:outputLabel
-					value="Deseja realmente excluir o Cooperado #{CooperadoControl.cooperado} ?" />
+					value="Deseja realmente excluir o cooperado #{CooperadoControl.cooperado} ?" />
 				<p />
 				<p:commandButton value="Confirmar"
 					actionListener="#{CooperadoControl.confirmarExcluir}"
