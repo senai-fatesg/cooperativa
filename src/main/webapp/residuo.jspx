@@ -32,6 +32,7 @@
 						</p:toolbarGroup>
 					</p:toolbar>
 				</f:facet>
+				
 				<p:column headerText="Descrição">
 					<h:outputText value="#{residuo.descricao}" />
 				</p:column>
@@ -44,6 +45,7 @@
 				<p:column headerText="Status">
 					<h:outputText value="#{residuo.status}" />
 				</p:column>
+
 				<p:column headerText="Ação">
 					<p:commandButton icon="ui-icon-pencil" title="Alterar Residuo"
 						actionListener="#{residuoControl.preparaAlterar}" ajax="false">
