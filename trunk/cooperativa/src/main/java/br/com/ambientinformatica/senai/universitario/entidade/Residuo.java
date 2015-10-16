@@ -24,7 +24,8 @@ public class Residuo extends Entidade {
 
 	private String descricao;
 
-	private Date dataCadastro;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCadastro = new Date();
 
 	private String usuario;
 
@@ -53,10 +54,6 @@ public class Residuo extends Entidade {
 
 	public Date getDataCadastro() {
 		return dataCadastro;
-	}
-
-	public void setDataCadastro(Date dataCadastro) {
-		this.dataCadastro = dataCadastro;
 	}
 
 	public String getUsuario() {
