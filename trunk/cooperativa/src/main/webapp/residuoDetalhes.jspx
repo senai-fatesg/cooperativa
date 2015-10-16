@@ -15,17 +15,28 @@
 					<p:focus for="inputDescricao" />
 					<h:panelGrid columns="2">
 						<p:outputLabel value="Descrição:" />
-						<p:inputText id="inputDescricao" value="#{residuoControl.residuo.descricao}" size="30" />
+						<p:inputText id="inputDescricao"
+							value="#{residuoControl.residuo.descricao}" size="30" />
 
 						<p:outputLabel for="dtCadastro" value="Data Cadastro:" />
-						<p:calendar id="dtCadastro" value="#{residuoControl.residuo.dataCadastro}" showOn="button" />
+						<p:calendar id="dtCadastro"
+							value="#{residuoControl.residuo.dataCadastro}" showOn="button" />
 
 						<p:outputLabel for="userCadastro" value="Usuário Cadastro: " />
-						<p:inputText id="userCadastro" value="#{residuoControl.residuo.usuario}"/>
+						<p:inputText id="userCadastro"
+							value="#{residuoControl.residuo.usuario}" />
 
 						<p:outputLabel for="precoMedio" value="Preço médio: " />
-						<p:inputText id="precoMedio" value="#{residuoControl.residuo.precoMedio}"/>
-						
+						<p:inputText id="precoMedio"
+							value="#{residuoControl.residuo.precoMedio}" />
+
+
+
+						<p:outputLabel value="Usuario Logado: " />
+						<p:inputText value="#{usuarioLogadoControl.usuario.login }" />
+
+
+
 
 						<p:selectOneRadio id="status"
 							value="#{residuoControl.residuo.status}">
