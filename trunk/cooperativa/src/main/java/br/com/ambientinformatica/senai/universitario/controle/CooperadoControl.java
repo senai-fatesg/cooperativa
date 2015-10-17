@@ -171,7 +171,8 @@ public class CooperadoControl extends Control{
 				}
 			}
 		} catch (Exception e) {
-			Mensagem.mostrarMensagemErro(e.getMessage());
+			//Mensagem.mostrarMensagemErro(e.getMessage());
+			Mensagem.mostrarMensagemErro("Cep inválido, tente novamente");
 		}
 	}
 

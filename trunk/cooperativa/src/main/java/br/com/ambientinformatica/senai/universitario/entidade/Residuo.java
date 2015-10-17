@@ -24,8 +24,11 @@ public class Residuo extends Entidade {
 
 	private String descricao;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataCadastro = new Date();
+//	@Temporal(TemporalType.DATE)
+//	private Date dataCadastro;
+
+	 @Temporal(TemporalType.TIMESTAMP)
+	 private Date dataCadastro = new Date();
 
 	private String usuario;
 
@@ -49,11 +52,15 @@ public class Residuo extends Entidade {
 	}
 
 	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+		this.descricao = descricao.toUpperCase();
 	}
 
 	public Date getDataCadastro() {
 		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 	public String getUsuario() {
@@ -61,7 +68,7 @@ public class Residuo extends Entidade {
 	}
 
 	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+		this.usuario = usuario.toUpperCase();
 	}
 
 	public float getPrecoMedio() {
