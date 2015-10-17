@@ -14,8 +14,9 @@
 				<p:tab title="Dados Residuo">
 					<p:focus for="inputDescricao" />
 					<h:panelGrid columns="2">
+					
 						<p:outputLabel value="Descrição:" />
-						<p:inputText id="inputDescricao"
+						<p:inputText id="inputDescricao" style="text-transform:uppercase"
 							value="#{residuoControl.residuo.descricao}" size="30" />
 
 						<p:outputLabel for="dtCadastro" value="Data Cadastro:" />
@@ -23,20 +24,12 @@
 							value="#{residuoControl.residuo.dataCadastro}" showOn="button" />
 
 						<p:outputLabel for="userCadastro" value="Usuário Cadastro: " />
-						<p:inputText id="userCadastro"
+						<p:inputText id="userCadastro" style="text-transform:uppercase"
 							value="#{residuoControl.residuo.usuario}" />
-
+		
 						<p:outputLabel for="precoMedio" value="Preço médio: " />
 						<p:inputText id="precoMedio"
 							value="#{residuoControl.residuo.precoMedio}" />
-
-
-
-						<p:outputLabel value="Usuario Logado: " />
-						<p:inputText value="#{usuarioLogadoControl.usuario.login }" />
-
-
-
 
 						<p:selectOneRadio id="status"
 							value="#{residuoControl.residuo.status}">
