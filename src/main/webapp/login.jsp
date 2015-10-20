@@ -82,7 +82,6 @@
             </div>
             
             <div class="span4 sidebar">
-                <h2><a href="#" class="btn btn-large btn-warning">Esqueci a Senha</a></h2>
                 <div class="well quickSignupForm">
                   <h3>Acesso ao Sistema</h3>
 					<%
@@ -94,13 +93,13 @@
                   <label>Senha</label>
                   <input name="j_password" type="password" class="span3" />                  
                   <input class="btn btn-large btn-success btnSignup" type="submit" value="Entrar" href="#contato.jsf"/>
+                 <a href="#" class="btn btn-large btn-warning">Esqueci a Senha</a>
                 </div>
                 <!-- <h3>Titulo caixa</h3>
                 <p>
 					Conteúdo caixa 
                 </p>                
             </div> -->
-            
     	</div>
     </div>
 </div>
