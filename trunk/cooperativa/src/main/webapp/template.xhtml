@@ -1,98 +1,85 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<script type='text/javascript' src="resources/js/locale-primefaces.js"></script>
+	<link type="text/css" rel="stylesheet" href="css/styles.css" />
+	
 </h:head>
 <h:body style="font-size: 12px">
 
 	<p:layout fullPage="true">
-		<p:layoutUnit position="north" size="0" resizable="false"
-			closable="false" collapsible="false">
-			<h:form id="frmTopo">
-				<p:menubar>
-
-					<p:menuitem>
-						<p:graphicImage library="img" name="logo-topo.jpg" width="120px"
-							height="50px" />
-					</p:menuitem>
-
-					<f:facet name="options">
-						<p:commandButton value="#" id="btnUsuario" icon="ui-icon-person"
-							global="false" />
-						<p:menu overlay="true" trigger="btnUsuario" my="left top"
-							at="left bottom">
-							<p:menuitem value="Alterar Senha" icon="ui-icon-pencil"
-								actionListener="#" />
-							<p:menuitem value="Sair" icon="ui-icon-extlink" url="sair.jsp"
-								global="false" />
-						</p:menu>
-					</f:facet>
-				</p:menubar>
-			</h:form>
-		</p:layoutUnit>
-		Menu Lateral
-		<p:layoutUnit position="west" size="200" header="Menu"
-			resizable="true" collapsible="true">
-			<h:form id="frmLateral">
-				<p:panelMenu>
-					<p:submenu label="Home">
-						<p:menuitem value="Home" url="inicio.jsf" />
-					</p:submenu>
-					<p:submenu label="Cooperados">
-						<p:menuitem value="Cooperado" url="cooperado.jsf" />
-						<p:menuitem value="Assembleia" url="assembleia.jsf" />
-						<p:menuitem value="Adesão" url="adesao.jsf" />
-					</p:submenu>
-					<p:submenu label="Resíduos">
-						<p:menuitem value="Cadastro" url="residuo.jsf" />
-						<p:submenu label="Movimentação">
-							<p:menuitem value="Coleta" url="ResiduoColeta.xhtml" />
-							<p:menuitem value="Venda" url="ResiduoVenda.xhtml" />
-						</p:submenu>
-						<p:menuitem value="Relatórios" />
-					</p:submenu>
-					<p:submenu label="Financeiro">
-						<p:menuitem value="Cadastro" />
-						<p:menuitem value="Movimentação" />
-						<p:menuitem value="Relatórios" />
-					</p:submenu>
-					<p:submenu label="Cooperativa">
-						<p:menuitem value="Cooperativas" url="empresa.jsf" />
-					</p:submenu>
-					<p:submenu label="Usuários">
-						<p:menuitem value="Usuário" url="usuario.jsf" />
-					</p:submenu>
-					<p:submenu label="Mineração"
-						rendered="#{securityScope.userInRole['INCUBADORA']}">
-						<p:menuitem value="Mineração" url="mineracao.jsf" />
-					</p:submenu>
-				</p:panelMenu>
-			</h:form>
-		</p:layoutUnit>
 		<p:layoutUnit position="center">
-			<h:form id="frmCorpo">
-				<p:growl autoUpdate="true"></p:growl>
-				<ui:insert name="corpo" />
+			<h:form id="frmTopo">
+				<p:panel>
+					<p:menubar>
+						<p:submenu label="Home">
+							<p:menuitem icon="ui-icon-home" value="Início" action="inicio?faces-redirect=true" ajax="false" />
+						</p:submenu>
+						<p:submenu label="Cooperados">
+							<p:menuitem icon="ui-icon-person" value="Cooperado" action="cooperado?faces-redirect=true" ajax="false" />
+							<p:menuitem icon="ui-icon-arrow-4" value="Assembléia" action="assembleia?faces-redirect=true" ajax="false" />
+							<p:menuitem icon="ui-icon-note" value="Adesão" action="adesao?faces-redirect=true" ajax="false" />
+						</p:submenu>
+						<p:submenu label="Resíduos">
+							<p:menuitem icon="ui-icon-refresh" value="Cadastro" action="residuo?faces-redirect=true" ajax="false" />
+							<p:menuitem icon="ui-icon-document" value="Relatórios" />
+						</p:submenu>
+						<p:submenu label="Movimentação">
+							<p:menuitem icon="ui-icon-trash" value="Coleta" action="ResiduoColeta?faces-redirect=true" ajax="false" />
+							<p:menuitem icon="ui-icon-cart" value="Venda" action="ResiduoVenda?faces-redirect=true" ajax="false" />
+						</p:submenu>
+						<p:submenu label="Financeiro">
+							<p:menuitem icon="ui-icon-clipboard" value="Cadastro" />
+							<p:menuitem icon="ui-icon-transfer-e-w" value="Movimentação" />
+							<p:menuitem icon="ui-icon-document" value="Relatórios" />
+						</p:submenu>
+						<p:submenu label="Cooperativa">
+							<p:menuitem icon="ui-icon-newwin" value="Cooperativas" action="empresa?faces-redirect=true" ajax="false" />
+						</p:submenu>
+						<p:submenu label="Usuários">
+							<p:menuitem icon="ui-icon-person" value="Usuário" action="usuario?faces-redirect=true" ajax="false" />
+						</p:submenu>
+						<p:submenu label="Mineração" rendered="#{securityScope.userInRole['INCUBADORA']}">
+							<p:menuitem icon="ui-icon-wrench" value="Mineração" action="mineracao?faces-redirect=true" ajax="false" />
+						</p:submenu>
+						<f:facet name="options">
+							<p:commandButton value="#" id="btnUsuario" icon="ui-icon-person" global="false" />
+							<p:menu overlay="true" trigger="btnUsuario" my="left top" at="left bottom">
+								<p:menuitem value="Alterar Senha" icon="ui-icon-pencil" actionListener="#" />
+								<p:menuitem icon="ui-icon-extlink" value="Sair" url="sair.jsp" global="false" />
+							</p:menu>
+						</f:facet>
+					</p:menubar>
+				</p:panel>
+				<p:separator/>
+				<p:separator/>
+				<p:separator/>
 			</h:form>
+			<h:form id="frmCorpo">
+					<p:growl autoUpdate="true"></p:growl>
+					<ui:insert name="corpo" />
+					
+			</h:form>
+
+		</p:layoutUnit>
+		<p:layoutUnit position="south" style="heigth: 150px" >
+					<footer class="footer navbar-fixed-bottom" style="z-index: -1;" >
+					<div class="container" style="text-align: center">
+						<p>Copyright (c) - Ambient Informática Ltda.</p>
+					</div>
+					</footer>
 		</p:layoutUnit>
 	</p:layout>
-
 	<!--Ajax-->
-	<p:ajaxStatus onstart="statusDialog.show();"
-		onsuccess="statusDialog.hide();" />
+	<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
 
-	<p:dialog modal="true" widgetVar="statusDialog" header="Aguarde..."
-		draggable="false" closable="false" appendToBody="true"
-		resizable="false">
+	<p:dialog modal="true" widgetVar="statusDialog" header="Aguarde..." draggable="false" closable="false" appendToBody="true" resizable="false">
 		<p:graphicImage library="img" name="ajax-loader.gif" />
 	</p:dialog>
-
+	
 
 </h:body>
 </html>

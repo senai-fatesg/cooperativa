@@ -6,7 +6,7 @@ html, body, hr {
 	width:100%;	
 }
 .header {
-	background:#4d8b35;
+	background:#ff8000;
 }
 .header .container {
 	border-top:8px solid #234316;
@@ -153,4 +153,21 @@ html, body, hr {
 	color:#999;
 }
 
+.ui-menu.ui-widget .ui-menuitem-link .ui-menuitem-text {
+    margin-left: 5px;
+}
 
+.ui-menu.ui-widget a {
+    font-weight: normal;
+    color: #ff8040;
+    white-space: nowrap;
+}
+
+li.ui-menuitem.ui-widget.ui-corner-all a.ui-menuitem-link.ui-corner-all span.ui-menuitem-text{
+	text-align: left;
+	min-width: 100px;
+}
+
+.ui-layout-pane-south{
+	border: none;	
+}
