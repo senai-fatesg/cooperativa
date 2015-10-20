@@ -2677,6 +2677,8 @@ button.close {
 .btn-large {
   padding: 9px 14px;
   font-size: 15px;
+  background-color: #284FDA;
+  border-color: #113B8E, #41535;
   line-height: normal;
   -webkit-border-radius: 5px;
      -moz-border-radius: 5px;
@@ -2764,8 +2766,8 @@ button.close {
 }
 
 .btn-warning {
-  background-color: #faa732;
-  *background-color: #f89406;
+  background-color: #89406;
+  *background-color: #89406;
   background-image: -ms-linear-gradient(top, #fbb450, #f89406);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450), to(#f89406));
   background-image: -webkit-linear-gradient(top, #fbb450, #f89406);
@@ -2774,7 +2776,7 @@ button.close {
   background-image: linear-gradient(top, #fbb450, #f89406);
   background-repeat: repeat-x;
   margin-top: 10px;
-  border-color: #f89406 #f89406 #ad6704;
+  border-color: #113B8E #113B8E #041535;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   filter: progid:dximagetransform.microsoft.gradient(startColorstr='#fbb450', endColorstr='#f89406', GradientType=0);
   filter: progid:dximagetransform.microsoft.gradient(enabled=false);

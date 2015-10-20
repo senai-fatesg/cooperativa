@@ -6,7 +6,7 @@ html, body, hr {
 	width:100%;	
 }
 .header {
-	background:#ff8000;
+	background:#0044cc;
 }
 .header .container {
 	border-top:8px solid #234316;
@@ -159,7 +159,7 @@ html, body, hr {
 
 .ui-menu.ui-widget a {
     font-weight: normal;
-    color: #ff8040;
+    color: #0044cc;
     white-space: nowrap;
 }
 
