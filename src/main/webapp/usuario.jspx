@@ -1,61 +1,65 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ui:composition template="template.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:pe="http://primefaces.org/ui/extensions">
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 	<ui:define name="corpo">
-		
-		<p:dataTable id="dtUsuario" var="usuarios" value="#{UsuarioLogadoControl.listaUsuario}" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10">
-				<f:facet name="header">
-					Usuário
-					<p:separator />
-					<p:outputLabel value="Filtro Global: " />
-					<p:inputText id="imputfiltro"/>
-					<p:commandButton id="cmdfiltrar" icon="ui-icon-search"	actionListener="#{UsuarioLogadoControl.listar}" update="dtUsuario" />
-					<p:commandButton value="Novo" title="Nova Cooperativa" actionListener="#{UsuarioLogadoControl.prepararIncluir}"/>
+
+		<p:panel header="Usuários" style="text-align:center">
+			<p:separator />
+			<p:separator />
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="Novo" title="Nova Cooperativa" actionListener="#{UsuarioLogadoControl.prepararIncluir}" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
 					<p:focus for="imputfiltro" />
 					<p:defaultCommand target="cmdfiltrar" />
-				</f:facet>
-				
+					<p:outputLabel value="Filtro Global: " />
+					<p:inputText id="imputfiltro" />
+					<p:commandButton id="cmdfiltrar" icon="ui-icon-search" actionListener="#{UsuarioLogadoControl.listar}" update="dtUsuario" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:separator />
+			<p:separator />
+			<p:dataTable id="dtUsuario" var="usuarios" value="#{UsuarioLogadoControl.listaUsuario}" emptyMessage="Nenhum registro encontrado" paginator="true"
+				rows="10">
+
 				<p:column headerText="ID">
-					<h:outputText value="#{usuarios.id }"/>
+					<h:outputText value="#{usuarios.id }" />
 				</p:column>
 
-			<p:column headerText="Nome">
-					<h:outputText value="#{usuarios.nome }"/>
+				<p:column headerText="Nome">
+					<h:outputText value="#{usuarios.nome }" />
 				</p:column>
-				
+
 				<p:column headerText="Data Criação">
-					<h:outputText value="#{usuarios.dataCriacao }" converter="dateConverter"/>
+					<h:outputText value="#{usuarios.dataCriacao }" converter="dateConverter" />
 				</p:column>
-				
+
 				<p:column style="width:4%">
-                	<p:commandButton id="selectButton" action="submit" oncomplete="usuarioDialog.show()" icon="ui-icon-search" title="View" update="dtUsuario">
-                		<f:setPropertyActionListener value="#{usuarios}" target="#{UsuarioLogadoControl.usuario}"/>
-            		</p:commandButton>
-        		</p:column>
-				
+					<p:commandButton id="selectButton" action="submit" oncomplete="usuarioDialog.show()" icon="ui-icon-search" title="View" update="dtUsuario">
+						<f:setPropertyActionListener value="#{usuarios}" target="#{UsuarioLogadoControl.usuario}" />
+					</p:commandButton>
+				</p:column>
+
 				<p:column headerText="Editar" style="width:5%">
 					<p:tab>
 						<p:column headerText="Editar">
 							<p:commandButton id="editar" process="@this" value="Editar" actionListener="#{UsuarioLogadoControl.prepararIncluir }">
-								<f:setPropertyActionListener value="#{usuarios}" target="#{UsuarioLogadoControl.usuario }"/>
+								<f:setPropertyActionListener value="#{usuarios}" target="#{UsuarioLogadoControl.usuario }" />
 							</p:commandButton>
 						</p:column>
 					</p:tab>
 				</p:column>
-				
+
 			</p:dataTable>
-			
-			<p:dialog id="usuarioDialog">
-				<p:panelGrid>
-					<p:outputLabel value="Leonardo Davinc Silva"></p:outputLabel>
-				</p:panelGrid>
-			</p:dialog>
-		
+		</p:panel>
+
+		<p:dialog id="usuarioDialog">
+			<p:panelGrid>
+				<p:outputLabel value="Leonardo Davinc Silva"></p:outputLabel>
+			</p:panelGrid>
+		</p:dialog>
+
 	</ui:define>
-</ui:composition>	
+</ui:composition>

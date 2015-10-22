@@ -1,132 +1,110 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ui:composition template="template.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:pe="http://primefaces.org/ui/extensions">
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 	<ui:define name="corpo">
+		<p:panel header="Empresa" style="text-align:center">
+				<p:toolbar>
+					<p:toolbarGroup align="left">
+						<a:field>
+							<p:selectOneRadio id="opcoes" value="#{cooperativaControl.rSocial}">
+								<f:selectItem itemLabel="Razão Social" itemValue="true" />
+								<f:selectItem itemLabel="Nome Fantasia" itemValue="false" />
+							</p:selectOneRadio>
+						</a:field>
+						<a:field spaceLeft="10px">
+							<p:commandButton value="Novo" title="Nova Cooperativa" actionListener="#{cooperativaControl.preparaIncluir}" ajax="false" />
+						</a:field>
+					</p:toolbarGroup>
+					<p:toolbarGroup align="right">
+						<p:outputLabel value="Filtro Global: " />
+						<p:inputText id="imputfiltro" />
+							<p:commandButton id="cmdfiltrar" icon="ui-icon-search" actionListener="#{cooperativaControl.listarPessoa}" update="dtCooperativa" />
+							<p:focus for="imputfiltro" />
+							<p:defaultCommand target="cmdfiltrar" />
+					</p:toolbarGroup>
+				</p:toolbar>
+			
+		</p:panel>
+		<p:dataTable id="dtCooperativa" var="cooperativas" value="#{cooperativaControl.listPessoa}" emptyMessage="Nenhum registro encontrado"
+			paginator="true" rows="10">
 
-			<p:dataTable id="dtCooperativa" var="cooperativas" value="#{cooperativaControl.listPessoa}" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10">
-				<f:facet name="header">
-					Empresa
-					<p:separator />
-					<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-						<h:outputText value="Opções " />  
-				        <p:selectOneRadio id="opcoes" value="#{cooperativaControl.rSocial}">  
-				            <f:selectItem itemLabel="Razão Social" itemValue="true"/>  
-				            <f:selectItem itemLabel="Nome Fantasia" itemValue="false"/>
-				        </p:selectOneRadio>
-			        </h:panelGrid>
-					<p:separator />
-					<p:outputLabel value="Filtro Global: " />
-					<p:inputText id="imputfiltro"/>
-					<p:commandButton id="cmdfiltrar" icon="ui-icon-search"	actionListener="#{cooperativaControl.listarPessoa}" update="dtCooperativa" />
-					<p:commandButton value="Novo" title="Nova Cooperativa"	actionListener="#{cooperativaControl.preparaIncluir}" ajax="false"/>
-					<p:focus for="imputfiltro" />
-					<p:defaultCommand target="cmdfiltrar" />
-				</f:facet>
-				
-				<p:column headerText="ID">
-					<h:outputText value="#{cooperativas.id }"/>
-				</p:column>
-				
-				<p:column headerText="Razão Social">
-					<h:outputText value="#{cooperativas.razaoSocial }"/>
-				</p:column>
-				
-				<p:column headerText="Nome Fantasia">
-					<h:outputText value="#{cooperativas.nomeFantasia }"/>
-				</p:column>
-				
-				<p:column headerText="CNPJ">
-					<h:outputText value="#{cooperativas.cnpj }"/>
-				</p:column>
-				
-				<p:column style="width:4%">
-                	<p:commandButton id="selectButton" action="submit" oncomplete="empresaDialog.show()" icon="ui-icon-search" title="View" update="dtCooperativa">
-                		<f:setPropertyActionListener value="#{cooperativas}" target="#{cooperativaControl.cooperativa}"/>
-            		</p:commandButton>
-        		</p:column>
-				
-				<p:column headerText="Editar" style="width:5%">
-					<p:tab>
-						<p:column headerText="Editar">
-							<p:commandButton id="editar" value="Editar" actionListener="#{cooperativaControl.prepararEditar }">
-								<f:setPropertyActionListener process="@this" value="#{cooperativas}" target="#{cooperativaControl.cooperativa }"/>
-							</p:commandButton>
-						</p:column>
-					</p:tab>
-				</p:column>
-				
-			</p:dataTable>
+			<p:column headerText="ID">
+				<h:outputText value="#{cooperativas.id }" />
+			</p:column>
 
-		<p:dialog header="Detalhes" widgetVar="empresaDialog"
-			resizable="false" id="carDlg" showEffect="fade" hideEffect="explode"
-			modal="true" appendToBody="true">
+			<p:column headerText="Razão Social">
+				<h:outputText value="#{cooperativas.razaoSocial }" />
+			</p:column>
+
+			<p:column headerText="Nome Fantasia">
+				<h:outputText value="#{cooperativas.nomeFantasia }" />
+			</p:column>
+
+			<p:column headerText="CNPJ">
+				<h:outputText value="#{cooperativas.cnpj }" />
+			</p:column>
+
+			<p:column style="width:4%">
+				<p:commandButton id="selectButton" action="submit" oncomplete="empresaDialog.show()" icon="ui-icon-search" title="View" update="dtCooperativa">
+					<f:setPropertyActionListener value="#{cooperativas}" target="#{cooperativaControl.cooperativa}" />
+				</p:commandButton>
+			</p:column>
+
+			<p:column headerText="Editar" style="width:5%">
+				<p:tab>
+					<p:column headerText="Editar">
+						<p:commandButton id="editar" value="Editar" actionListener="#{cooperativaControl.prepararEditar }">
+							<f:setPropertyActionListener process="@this" value="#{cooperativas}" target="#{cooperativaControl.cooperativa }" />
+						</p:commandButton>
+					</p:column>
+				</p:tab>
+			</p:column>
+
+		</p:dataTable>
+
+		<p:dialog header="Detalhes" widgetVar="empresaDialog" resizable="false" id="carDlg" showEffect="fade" hideEffect="explode" modal="true"
+			appendToBody="true">
 
 			<h:panelGrid id="display" columns="2" style="width: 100%">
 
 				<h:outputText value="ID:" />
-				<h:outputText value="#{cooperativaControl.cooperativa.id}"
-					style="font-weight:bold" />
+				<h:outputText value="#{cooperativaControl.cooperativa.id}" style="font-weight:bold" />
 
 				<h:outputText value="Razão Social:" />
-				<h:outputText value="#{cooperativaControl.cooperativa.razaoSocial}"
-					style="font-weight:bold" />
+				<h:outputText value="#{cooperativaControl.cooperativa.razaoSocial}" style="font-weight:bold" />
 
 				<h:outputText value="Nome Fantasia:" />
-				<h:outputText value="#{cooperativaControl.cooperativa.nomeFantasia}"
-					style="font-weight:bold" />
+				<h:outputText value="#{cooperativaControl.cooperativa.nomeFantasia}" style="font-weight:bold" />
 
-				<h:outputText value="Nome:"
-					rendered="#{cooperativaControl.cooperativa.nome}" />
-				<h:outputText value="#{cooperativaControl.cooperativa.nome}"
-					style="font-weight:bold" />
+				<h:outputText value="Nome:" rendered="#{cooperativaControl.cooperativa.nome}" />
+				<h:outputText value="#{cooperativaControl.cooperativa.nome}" style="font-weight:bold" />
 
-				<h:outputText value="CNPJ:"
-					rendered="#{cooperativaControl.cooperativa.cnpj}" />
-				<h:outputText value="#{cooperativaControl.cooperativa.cnpj}"
-					style="font-weight:bold" />
+				<h:outputText value="CNPJ:" rendered="#{cooperativaControl.cooperativa.cnpj}" />
+				<h:outputText value="#{cooperativaControl.cooperativa.cnpj}" style="font-weight:bold" />
 
-				<h:outputText value="CPF:"
-					rendered="#{cooperativaControl.cooperativa.cpf}" />
-				<h:outputText value="#{cooperativaControl.cooperativa.cpf}"
-					style="font-weight:bold" />
+				<h:outputText value="CPF:" rendered="#{cooperativaControl.cooperativa.cpf}" />
+				<h:outputText value="#{cooperativaControl.cooperativa.cpf}" style="font-weight:bold" />
 
 				<h:outputText value="Rua:" />
-				<h:outputText
-					value="#{cooperativaControl.cooperativa.endereco.logradouro}"
-					style="font-weight:bold" />
+				<h:outputText value="#{cooperativaControl.cooperativa.endereco.logradouro}" style="font-weight:bold" />
 
 				<h:outputText value="Número:" />
-				<h:outputText
-					value="#{cooperativaControl.cooperativa.endereco.numero}"
-					style="font-weight:bold" />
+				<h:outputText value="#{cooperativaControl.cooperativa.endereco.numero}" style="font-weight:bold" />
 
 				<h:outputText value="Complemento:" />
-				<h:outputText
-					value="#{cooperativaControl.cooperativa.endereco.complemento}"
-					style="font-weight:bold" />
+				<h:outputText value="#{cooperativaControl.cooperativa.endereco.complemento}" style="font-weight:bold" />
 
 				<h:outputText value="Bairro:" />
-				<h:outputText
-					value="#{cooperativaControl.cooperativa.endereco.bairro}"
-					style="font-weight:bold" />
+				<h:outputText value="#{cooperativaControl.cooperativa.endereco.bairro}" style="font-weight:bold" />
 
-				<h:outputText value="Cidade:"
-					rendered="#{cooperativaControl.cooperativa.endereco.cidade.nome}" />
-				<h:outputText
-					value="#{cooperativaControl.cooperativa.endereco.cidade.nome}"
-					style="font-weight:bold" />
+				<h:outputText value="Cidade:" rendered="#{cooperativaControl.cooperativa.endereco.cidade.nome}" />
+				<h:outputText value="#{cooperativaControl.cooperativa.endereco.cidade.nome}" style="font-weight:bold" />
 
-				<p:commandButton value="Editar"
-					actionListener="#{cooperativaControl.prepararEditar }">
+				<p:commandButton value="Editar" actionListener="#{cooperativaControl.prepararEditar }">
 				</p:commandButton>
 			</h:panelGrid>
 
 		</p:dialog>
 	</ui:define>
-</ui:composition>	
+</ui:composition>

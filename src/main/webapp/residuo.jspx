@@ -1,38 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ui:composition template="template.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<p:panel id="pnlResiduo">
-			<p:dataTable id="dtResiduo" var="residuo"
-				value="#{residuoControl.residuos}"
-				emptyMessage="Nenhum registro encontrado" paginator="true" rows="10"
+		<p:panel id="pnlResiduo" header="Resíduos" style="text-align:center">
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="Novo" title="Novo Residuo" actionListener="#{residuoControl.preparaIncluir}" ajax="false" icon="ui-icon-document" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:outputLabel value="Filtro Global: " />
+					<p:inputText id="inputFiltroGlobal" value="#{residuoControl.filtroGlobal}" />
+					<p:spacer width="30" height="20" />
+					<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search" actionListener="#{residuoControl.listar}" update="dtResiduo" />
+					<p:focus for="inputFiltroGlobal" />
+					<p:defaultCommand target="cmdFiltroGlobal" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:dataTable id="dtResiduo" var="residuo" value="#{residuoControl.residuos}" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10"
 				rendered="#{residuoControl.excluindo!=true}">
-				<f:facet name="header">
-					<p:outputLabel value="Residuos" />
-					<p:toolbar>
-						<p:toolbarGroup align="left">
-							<p:commandButton value="Novo" title="Novo Residuo"
-								actionListener="#{residuoControl.preparaIncluir}" ajax="false"
-								icon="ui-icon-document" />
-						</p:toolbarGroup>
-						<p:toolbarGroup align="right">
-							<p:outputLabel value="Filtro Global: " />
-							<p:inputText id="inputFiltroGlobal"
-								value="#{residuoControl.filtroGlobal}" />
-							<p:spacer width="30" height="20" />
-							<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search"
-								actionListener="#{residuoControl.listar}" update="dtResiduo" />
-							<p:focus for="inputFiltroGlobal" />
-							<p:defaultCommand target="cmdFiltroGlobal" />
-						</p:toolbarGroup>
-					</p:toolbar>
-				</f:facet>
-				
+				<p:outputLabel value="Residuos" />
+
 				<p:column headerText="Descrição">
 					<h:outputText value="#{residuo.descricao}" />
 				</p:column>
@@ -47,12 +35,10 @@
 				</p:column>
 
 				<p:column headerText="Ação">
-					<p:commandButton icon="ui-icon-pencil" title="Alterar Residuo"
-						actionListener="#{residuoControl.preparaAlterar}" ajax="false">
+					<p:commandButton icon="ui-icon-pencil" title="Alterar Residuo" actionListener="#{residuoControl.preparaAlterar}" ajax="false">
 						<f:attribute name="residuo" value="#{residuo}" />
 					</p:commandButton>
-					<p:commandButton icon="ui-icon-trash" title="Excluir Residuo"
-						ajax="false" actionListener="#{residuoControl.prepararExcluir}"
+					<p:commandButton icon="ui-icon-trash" title="Excluir Residuo" ajax="false" actionListener="#{residuoControl.prepararExcluir}"
 						process="@this, pnlExcluir" update="pnlResiduo">
 						<f:attribute name="residuo" value="#{residuo}" />
 					</p:commandButton>
@@ -62,18 +48,12 @@
 				</f:facet>
 			</p:dataTable>
 
-			<p:panel id="pnlExcluir" header="Excluir Cooperado"
-				rendered="#{residuoControl.excluindo==true}">
-				<p:outputLabel
-					value="Deseja realmente excluir o residuo #{residuoControl.residuo} ?" />
+			<p:panel id="pnlExcluir" header="Excluir Cooperado" rendered="#{residuoControl.excluindo==true}">
+				<p:outputLabel value="Deseja realmente excluir o residuo #{residuoControl.residuo} ?" />
 				<p />
-				<p:commandButton value="Confirmar"
-					actionListener="#{residuoControl.confirmarExcluir}"
-					icon="ui-icon-check" title="Confirmar Exclusao"
+				<p:commandButton value="Confirmar" actionListener="#{residuoControl.confirmarExcluir}" icon="ui-icon-check" title="Confirmar Exclusao"
 					process="@this, dtResiduo" update="pnlResiduo" />
-				<p:commandButton value="Cancelar"
-					actionListener="#{residuoControl.cancelarExcluir}"
-					icon="ui-icon-cancel" title="Cancelar Exclusao"
+				<p:commandButton value="Cancelar" actionListener="#{residuoControl.cancelarExcluir}" icon="ui-icon-cancel" title="Cancelar Exclusao"
 					process="@this, dtResiduo" update="pnlResiduo" />
 			</p:panel>
 
