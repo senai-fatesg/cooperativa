@@ -43,6 +43,8 @@ public class Usuario extends Entidade {
 	private String senha;
 	
 	private String nome;
+	
+	private boolean ativo = true;
 
 	@Temporal(TemporalType.DATE)
 	private Date dataAlteracaoSenha = new Date();
@@ -126,8 +128,16 @@ public class Usuario extends Entidade {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public boolean isAtivo() {
+        return ativo;
+    }
 
-	public Date getDataAlteracaoSenha() {
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public Date getDataAlteracaoSenha() {
 		return dataAlteracaoSenha;
 	}
 
