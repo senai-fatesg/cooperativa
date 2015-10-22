@@ -26,207 +26,191 @@ import br.com.ambientinformatica.senai.universitario.persistencia.UsuarioDao;
 @Scope("conversation")
 public class UsuarioLogadoControl {
 
-	private Usuario usuario;
+    private Usuario usuario;
 
-	private List<Usuario> listaUsuario;
+    private List<Usuario> listaUsuario;
 
-	DateConverter dateConverter;
+    DateConverter dateConverter;
 
-	private EnumPapelUsuario papel;
+    private EnumPapelUsuario papel;
 
-	private Cidade cidade;
+    private Cidade cidade;
 
-	private List<Pessoa> lista;
+    private List<Pessoa> lista;
 
-	@Autowired
-	private UsuarioDao usuarioDao;
+    @Autowired
+    private UsuarioDao usuarioDao;
 
-	@Autowired
-	private CooperativaDao cooperativaDao;
+    @Autowired
+    private CooperativaDao cooperativaDao;
 
-	@Autowired
-	private CooperadoDao cooperadoDao;
+    @Autowired
+    private CooperadoDao cooperadoDao;
 
-	@SuppressWarnings("unused")
-	@PostConstruct
-	public void init(){
-		try {
-			usuario = new Usuario();
-			listaUsuario = new ArrayList<Usuario>();
-			String email = UtilFaces.getRequest().getUserPrincipal().getName();
-			dateConverter = new DateConverter();
-			cidade = new Cidade();
-			lista = new ArrayList<Pessoa>();
-			listarCooperativas( );
-			setRemoverPapel(null);
-		} catch (Exception e) {
-			UtilFaces.addMensagemFaces(e);
-		}
-	}
+    @SuppressWarnings("unused")
+    @PostConstruct
+    public void init(){
+        try {
+            usuario = new Usuario();
+            listaUsuario = new ArrayList<Usuario>();
+            String email = UtilFaces.getRequest().getUserPrincipal().getName();
+            dateConverter = new DateConverter();
+            cidade = new Cidade();
+            lista = new ArrayList<Pessoa>();
+            listarCooperativas( );
+            setRemoverPapel(null);
+        } catch (Exception e) {
+            UtilFaces.addMensagemFaces(e);
+        }
+    }
 
-	public void prepararIncluir(ActionEvent evt) {
-		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("usuarioDetalhes.jsf");
-		} catch (Exception e) {
-			UtilFaces.addMensagemFaces("Erro ao Navegar para Detalhes: "+e.getMessage());
-		}
-	}
+    public void prepararIncluir(ActionEvent evt) {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("usuarioDetalhes.jsf");
+        } catch (Exception e) {
+            UtilFaces.addMensagemFaces("Erro ao Navegar para Detalhes: "+e.getMessage());
+        }
+    }
 
-	public void incluir(ActionEvent evt) {
-		try {
+    public void incluir(ActionEvent evt) {
+        try {
 
-			int cont = 0;
+            int cont = 0;
 
-			for(int i = 0; i < usuario.getPapeis().size(); i++)
-			{
-				if(usuario.getPapeis().get(i).getPapel().equals(""))
-				{
-					cont++;
-				}
-			}
+            for(int i = 0; i < usuario.getPapeis().size(); i++){
+                if(usuario.getPapeis().get(i).getPapel().equals("")){
+                    cont++;
+                }
+            }
 
-			if(cont > 0)
-			{
-				UtilFaces.addMensagemFaces("Advertência: Papel de usuário nulo!");
-			}
-			if(usuario.getPapeis().size()==0)
-			{
-				UtilFaces.addMensagemFaces("Advertência: É necessário adcionar ao menos um papel para o usuário!");
-			}
-			if(usuario.getLogin().equals(""))
-			{
-				UtilFaces.addMensagemFaces("Advertência: Por favor, preenha o campo login!");
-			}
-			if(usuario.getSenha().equals(""))
-			{
-				UtilFaces.addMensagemFaces("Advertência: O campo senha precisa ser preenchido!");
-			}
-			else
-			{
-				usuarioDao.incluir(usuario);
+            if(cont > 0){
+                UtilFaces.addMensagemFaces("Advertência: Papel de usuário nulo!");
+            }
+            if(usuario.getPapeis().size()==0){
+                UtilFaces.addMensagemFaces("Advertência: É necessário adcionar ao menos um papel para o usuário!");
+            }
+            if(usuario.getLogin().equals("")){
+                UtilFaces.addMensagemFaces("Advertência: Por favor, preenha o campo login!");
+            }
+            if(usuario.getSenha().equals("")){
+                UtilFaces.addMensagemFaces("Advertência: O campo senha precisa ser preenchido!");
+            }
+            else{
+                usuarioDao.incluir(usuario);
 
-				UtilFaces.addMensagemFaces("Usuário Cadastrado com Sucesso!");
+                UtilFaces.addMensagemFaces("Usuário Cadastrado com Sucesso!");
 
-				usuario = new Usuario();
-			}
-		} catch (Exception e) {
-			UtilFaces.addMensagemFaces("Erro ao Incluir: "+e.getMessage());
-			usuario = new Usuario();
-		}
-	}
+                usuario = new Usuario();
+            }
+        } catch (Exception e) {
+            UtilFaces.addMensagemFaces("Erro ao Incluir: "+e.getMessage());
+            usuario = new Usuario();
+        }
+    }
 
-	public void alterar(ActionEvent evt) {
-		try {
-			usuarioDao.alterar(usuario);
-			UtilFaces.addMensagemFaces("Usuário Alterado com Sucesso!");
-		} catch (Exception e) {
-			UtilFaces.addMensagemFaces("Erro ao Alterar: "+e.getMessage());
-		}
-	}
+    public void alterar(ActionEvent evt) {
+        try {
+            usuarioDao.alterar(usuario);
+            UtilFaces.addMensagemFaces("Usuário Alterado com Sucesso!");
+        } catch (Exception e) {
+            UtilFaces.addMensagemFaces("Erro ao Alterar: "+e.getMessage());
+        }
+    }
 
-	public void excluir(ActionEvent evt) {
-		try {
-			usuarioDao.excluirPorId(usuario.getId());
-			UtilFaces.addMensagemFaces("Usuário Excluido com Sucesso!");
-		} catch (Exception e) {
-			UtilFaces.addMensagemFaces("Erro ao Excluir: "+e.getMessage());
-		}
-	}
+    public void excluir(ActionEvent evt) {
+        try {
+            usuarioDao.excluirPorId(usuario.getId());
+            UtilFaces.addMensagemFaces("Usuário Excluido com Sucesso!");
+        } catch (Exception e) {
+            UtilFaces.addMensagemFaces("Erro ao Excluir: "+e.getMessage());
+        }
+    }
 
-	public List<Usuario> listar() {
-		try {
-			return listaUsuario = usuarioDao.listar();
-		} catch (Exception e) {
-			UtilFaces.addMensagemFaces("Erro ao Listar: "+e.getMessage());
-			return null;
-		}
-	}
+    public List<Usuario> listar() {
+        try {
+            return listaUsuario = usuarioDao.listar();
+        } catch (Exception e) {
+            UtilFaces.addMensagemFaces("Erro ao Listar: "+e.getMessage());
+            return null;
+        }
+    }
 
-	public List<SelectItem> getTipoUsuario() {
-		return UtilFaces.getListEnum(EnumPapelUsuario.values());
-	}
+    public List<SelectItem> getTipoUsuario() {
+        return UtilFaces.getListEnum(EnumPapelUsuario.values());
+    }
 
 
-	public void addPapel( )
-	{
-		try {
-			usuario.addPapel(papel);
-		} catch (Exception e) {
-			UtilFaces.addMensagemFaces("Erro ao Adcionar à lista: "+e.getMessage());
-		}
-	}
+    public void addPapel( ){
+        try {
+            usuario.addPapel(papel);
+        } catch (Exception e) {
+            UtilFaces.addMensagemFaces("Erro ao Adcionar à lista: "+e.getMessage());
+        }
+    }
 
-	public void setRemoverPapel(EnumPapelUsuario p)
-	{
-		try {
-			usuario.removerPapel(papel);
-		} catch (Exception e) {
-			UtilFaces.addMensagemFaces("Erro ao Remover da Lista: "+e.getMessage());
-		}
-	}
+    public void setRemoverPapel(EnumPapelUsuario p){
+        try {
+            usuario.removerPapel(papel);
+        } catch (Exception e) {
+            UtilFaces.addMensagemFaces("Erro ao Remover da Lista: "+e.getMessage());
+        }
+    }
 
-	@SuppressWarnings("unused")
-	public void listarCooperativas( )
-	{
-		try {
+    @SuppressWarnings("unused")
+    public void listarCooperativas( ){
+        int i = 0;
+        try {
+            lista = new ArrayList<Pessoa>();
+            if(!(cidade.getNome().equals(null))){
+                for(Pessoa p: cooperativaDao.listar()){
+                    if(p.getEndereco().getCidade().equals(cidade)){
+                        lista.add(p);
+                    }
+                    i++;
+                }
+            }
+        } catch (Exception e) {
+            UtilFaces.addMensagemFaces("Erro ao Listar Cooperativas: " + e.getMessage());
+        }
+    }
 
-			lista = new ArrayList<Pessoa>();
+    public List<Usuario> getListaUsuario() {
+        return listaUsuario;
+    }
 
-			int i = 0;
+    public List<Pessoa> getLista() {
+        return lista;
+    }
 
-			if(!(cidade.getNome().equals(null)))
-			{
-				for(Pessoa p: cooperativaDao.listar())
-				{
-					if(p.getEndereco().getCidade().equals(cidade))
-					{
-						lista.add(p);
-					}
-					i++;
-				}
-			}
-		} catch (Exception e) {
-			UtilFaces.addMensagemFaces("Erro ao Listar Cooperativas: " + e.getMessage());
-		}
-	}
+    public void setLista(List<Pessoa> lista) {
+        this.lista = lista;
+    }
 
-	public List<Usuario> getListaUsuario() {
-		return listaUsuario;
-	}
+    public Cidade getCidade() {
+        return cidade;
+    }
 
-	public List<Pessoa> getLista() {
-		return lista;
-	}
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
 
-	public void setLista(List<Pessoa> lista) {
-		this.lista = lista;
-	}
+    public EnumPapelUsuario getPapel() {
+        return papel;
+    }
 
-	public Cidade getCidade() {
-		return cidade;
-	}
+    public void setPapel(EnumPapelUsuario papel) {
+        this.papel = papel;
+    }
 
-	public void setCidade(Cidade cidade) {
-		this.cidade = cidade;
-	}
+    public void setListaUsuario(List<Usuario> listaUsuario) {
+        this.listaUsuario = listaUsuario;
+    }
 
-	public EnumPapelUsuario getPapel() {
-		return papel;
-	}
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
-	public void setPapel(EnumPapelUsuario papel) {
-		this.papel = papel;
-	}
-
-	public void setListaUsuario(List<Usuario> listaUsuario) {
-		this.listaUsuario = listaUsuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
+    public Usuario getUsuario() {
+        return usuario;
+    }
 }

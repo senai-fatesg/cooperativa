@@ -6,7 +6,7 @@ html, body, hr {
 	width:100%;	
 }
 .header {
-	background:#0044cc;
+	background:#428abc;
 }
 .header .container {
 	border-top:8px solid #234316;
@@ -171,3 +171,10 @@ li.ui-menuitem.ui-widget.ui-corner-all a.ui-menuitem-link.ui-corner-all span.ui-
 .ui-layout-pane-south{
 	border: none;	
 }
+
+.ui-panel .ui-panel-titlebar {
+    background: #428abc none repeat scroll 0 0;
+    padding: 0.5em 1em 0.3em;
+    color:white;
+}
+

@@ -8,11 +8,7 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<p:dataTable id="dtAssembleia" var="assembleia"
-			value="#{AssembleiaControl.assembleias}"
-			emptyMessage="Nenhum registro encontrado" paginator="true" rows="10">
-			<f:facet name="header">
-				<p:outputLabel value="Assembleias" />
+	<p:panel header="Assembléias" style="text-align:center">
 				<p:toolbar>
 					<p:toolbarGroup align="left">
 						<p:commandButton value="Novo" title="Nova Assembleia"
@@ -40,7 +36,12 @@
 						<p:defaultCommand target="cmdFiltroGlobal" />
 					</p:toolbarGroup>
 				</p:toolbar>
-			</f:facet>
+	</p:panel>
+		<p:dataTable id="dtAssembleia" var="assembleia"
+			value="#{AssembleiaControl.assembleias}"
+			emptyMessage="Nenhum registro encontrado" paginator="true" rows="10">
+			
+				
 			<p:column headerText="Identificador">
 				<h:outputText value="#{assembleia.id}" />
 			</p:column>

@@ -24,8 +24,7 @@ public class CidadeControl {
 	private List<Cidade> cidades = new ArrayList<Cidade>();
 
 	@PostConstruct
-	private void init()
-	{
+	private void init(){
 		carregarListaLeitura(null);
 	}
 
