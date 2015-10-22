@@ -64,7 +64,14 @@ img {
 	max-width: none;
 }
 
-button, input, select, textarea {
+button{
+	margin: 0;
+	font-size: 100%;
+	vertical-align: middle;
+	background: #428abc;
+}
+
+input, select, textarea {
 	margin: 0;
 	font-size: 100%;
 	vertical-align: middle;
