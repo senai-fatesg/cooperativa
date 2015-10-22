@@ -6,7 +6,6 @@
 
 		<p:panel header="Usuários" style="text-align:center">
 			<p:separator />
-			<p:separator />
 			<p:toolbar>
 				<p:toolbarGroup align="left">
 					<p:commandButton value="Novo" title="Nova Cooperativa" actionListener="#{UsuarioLogadoControl.prepararIncluir}" />
@@ -19,8 +18,6 @@
 					<p:commandButton id="cmdfiltrar" icon="ui-icon-search" actionListener="#{UsuarioLogadoControl.listar}" update="dtUsuario" />
 				</p:toolbarGroup>
 			</p:toolbar>
-			<p:separator />
-			<p:separator />
 			<p:dataTable id="dtUsuario" var="usuarios" value="#{UsuarioLogadoControl.listaUsuario}" emptyMessage="Nenhum registro encontrado" paginator="true"
 				rows="10">
 
