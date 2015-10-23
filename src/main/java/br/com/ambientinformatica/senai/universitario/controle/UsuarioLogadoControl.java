@@ -21,6 +21,8 @@ import br.com.ambientinformatica.senai.universitario.entidade.Usuario;
 import br.com.ambientinformatica.senai.universitario.persistencia.CooperadoDao;
 import br.com.ambientinformatica.senai.universitario.persistencia.CooperativaDao;
 import br.com.ambientinformatica.senai.universitario.persistencia.UsuarioDao;
+import br.com.ambientinformatica.util.UtilHash;
+import br.com.ambientinformatica.util.UtilHash.Algoritimo;
 
 @Controller("UsuarioLogadoControl")
 @Scope("conversation")
@@ -37,6 +39,12 @@ public class UsuarioLogadoControl {
     private Cidade cidade;
 
     private List<Pessoa> lista;
+    
+    private boolean ativo;
+    
+    private String status;
+    
+    private String senhaConfirmacao;
 
     @Autowired
     private UsuarioDao usuarioDao;
@@ -56,13 +64,17 @@ public class UsuarioLogadoControl {
             String email = UtilFaces.getRequest().getUserPrincipal().getName();
             dateConverter = new DateConverter();
             cidade = new Cidade();
+            cidade.setNome("Goiania");
+            cidade.setUf("GO");
             lista = new ArrayList<Pessoa>();
             listarCooperativas( );
             setRemoverPapel(null);
+            mostrarStatusDoUsuario();
         } catch (Exception e) {
             UtilFaces.addMensagemFaces(e);
         }
     }
+    
 
     public void prepararIncluir(ActionEvent evt) {
         try {
@@ -83,17 +95,21 @@ public class UsuarioLogadoControl {
                 }
             }
 
+            
             if(cont > 0){
                 UtilFaces.addMensagemFaces("Advertência: Papel de usuário nulo!");
             }
-            if(usuario.getPapeis().size()==0){
+            if(usuario.getPapeis().size() == 0){
                 UtilFaces.addMensagemFaces("Advertência: É necessário adcionar ao menos um papel para o usuário!");
             }
-            if(usuario.getLogin().equals("")){
+            if(usuario.getLogin().isEmpty()){
                 UtilFaces.addMensagemFaces("Advertência: Por favor, preenha o campo login!");
             }
-            if(usuario.getSenha().equals("")){
+            if(usuario.getSenha().isEmpty()){
                 UtilFaces.addMensagemFaces("Advertência: O campo senha precisa ser preenchido!");
+            }
+            if(!usuario.getSenha().equals(senhaConfirmacao)){
+                UtilFaces.addMensagemFaces("Advertência: As senhas não conferem!");
             }
             else{
                 usuarioDao.incluir(usuario);
@@ -173,6 +189,24 @@ public class UsuarioLogadoControl {
             UtilFaces.addMensagemFaces("Erro ao Listar Cooperativas: " + e.getMessage());
         }
     }
+    
+    public void alterarStatusDoUsuario(){
+        if(!isAtivo()){
+            usuario.setAtivo(true);
+            setStatus("Ativo");
+        }else{
+            usuario.setAtivo(false);
+            setStatus("Inativo");
+        }
+    }
+    
+    public void mostrarStatusDoUsuario(){
+        if(!isAtivo()){
+            setStatus("Ativo");
+        }else{
+            setStatus("Inativo");
+        }
+    }
 
     public List<Usuario> getListaUsuario() {
         return listaUsuario;
@@ -187,7 +221,7 @@ public class UsuarioLogadoControl {
     }
 
     public Cidade getCidade() {
-        return cidade;
+        return cidade = new Cidade();
     }
 
     public void setCidade(Cidade cidade) {
@@ -213,4 +247,29 @@ public class UsuarioLogadoControl {
     public Usuario getUsuario() {
         return usuario;
     }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getSenhaConfirmacao() {
+        return senhaConfirmacao;
+    }
+
+    public void setSenhaConfirmacao(String senhaConfirmacao) {
+        this.senhaConfirmacao = UtilHash.gerarStringHash(senhaConfirmacao, Algoritimo.MD5);
+    }
+    
 }
