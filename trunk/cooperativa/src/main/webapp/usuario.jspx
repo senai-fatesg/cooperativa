@@ -21,28 +21,40 @@
 			<p:dataTable id="dtUsuario" var="usuarios" value="#{UsuarioLogadoControl.listaUsuario}" emptyMessage="Nenhum registro encontrado" paginator="true"
 				rows="10">
 
-				<p:column headerText="ID">
+				<p:column headerText="ID" width="10%">
 					<h:outputText value="#{usuarios.id }" />
 				</p:column>
 
-				<p:column headerText="Nome">
+				<p:column headerText="Nome"  width="30%">
 					<h:outputText value="#{usuarios.nome }" />
+				</p:column>
+				
+				<p:column headerText="Permissões" width="20%">
+					<h:outputText value="#{usuarios.papeis }" converter="dateConverter" />
 				</p:column>
 
 				<p:column headerText="Data Criação">
 					<h:outputText value="#{usuarios.dataCriacao }" converter="dateConverter" />
 				</p:column>
-
-				<p:column style="width:4%">
-					<p:commandButton id="selectButton" action="submit" oncomplete="usuarioDialog.show()" icon="ui-icon-search" title="View" update="dtUsuario">
+				
+				<p:column headerText="Ultimo acesso">
+					<h:outputText value="#{usuarios.dataUltimoAcesso }" converter="dateConverter" />
+				</p:column>
+				
+				<p:column headerText="Status do Usuário" width="10%">
+					<h:outputLabel value="#{UsuarioLogadoControl.status }" />
+				</p:column>
+				
+				<p:column headerText="Excluir" style="width:4%">
+					<p:commandButton id="Excluir" action="submit" oncomplete="usuarioDialog.show()" icon="ui-icon-trash" title="View" update="dtUsuario">
 						<f:setPropertyActionListener value="#{usuarios}" target="#{UsuarioLogadoControl.usuario}" />
 					</p:commandButton>
 				</p:column>
 
-				<p:column headerText="Editar" style="width:5%">
+				<p:column headerText="Editar" style="width:4%">
 					<p:tab>
 						<p:column headerText="Editar">
-							<p:commandButton id="editar" process="@this" value="Editar" actionListener="#{UsuarioLogadoControl.prepararIncluir }">
+							<p:commandButton id="editar" process="@this" icon="ui-icon-pencil" actionListener="#{UsuarioLogadoControl.prepararIncluir }">
 								<f:setPropertyActionListener value="#{usuarios}" target="#{UsuarioLogadoControl.usuario }" />
 							</p:commandButton>
 						</p:column>
@@ -52,11 +64,11 @@
 			</p:dataTable>
 		</p:panel>
 
-		<p:dialog id="usuarioDialog">
-			<p:panelGrid>
-				<p:outputLabel value="Leonardo Davinc Silva"></p:outputLabel>
-			</p:panelGrid>
-		</p:dialog>
+		<p:confirmDialog id="usuarioDialog" widgetVar="usuarioDialog" header="Deseja realmente Desativar o usuário? ">
+			<p:commandButton value="Sim" actionListener="#{AdesaoControl.confirmarExcluir}" icon="ui-icon-check" update="@all"
+				oncomplete="PF('usuarioDialog').hide()" />
+			<p:commandButton value="Não" actionListener="#{AdesaoControl.cancelarExcluir}" icon="ui-icon-cancel" onclick="PF('usuarioDialog'.hide())" />
+		</p:confirmDialog>
 
 	</ui:define>
 </ui:composition>

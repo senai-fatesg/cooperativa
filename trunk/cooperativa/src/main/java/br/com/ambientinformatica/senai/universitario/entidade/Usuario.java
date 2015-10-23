@@ -44,7 +44,7 @@ public class Usuario extends Entidade {
 	
 	private String nome;
 	
-	private boolean ativo = true;
+	private boolean ativo = false;
 
 	@Temporal(TemporalType.DATE)
 	private Date dataAlteracaoSenha = new Date();
