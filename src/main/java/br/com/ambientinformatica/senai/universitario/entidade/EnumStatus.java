@@ -5,7 +5,8 @@ import br.com.ambientinformatica.util.IEnum;
 public enum EnumStatus implements IEnum{
 	
 	A("Ativo"),
-	I("Inativo");
+	I("Inativo"),
+	C("Cancelado");
 	
 	private String descricao;
 	
