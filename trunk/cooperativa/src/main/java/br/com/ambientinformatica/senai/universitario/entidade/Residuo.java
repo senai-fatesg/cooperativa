@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,11 +22,11 @@ public class Residuo extends Entidade {
 
 	private String descricao;
 
-//	@Temporal(TemporalType.DATE)
-//	private Date dataCadastro;
+	// @Temporal(TemporalType.DATE)
+	// private Date dataCadastro;
 
-	 @Temporal(TemporalType.TIMESTAMP)
-	 private Date dataCadastro = new Date();
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCadastro = new Date();
 
 	private String usuario;
 
@@ -38,6 +36,15 @@ public class Residuo extends Entidade {
 
 	@Temporal(TemporalType.DATE)
 	private Date dtExclusao;
+
+	public boolean equals(Object obj) {
+		try {
+			Residuo r = (Residuo) obj;
+			return r.getDescricao().equals(descricao) && r.getId() == id;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
 	public Date getDtExclusao() {
 		return dtExclusao;
