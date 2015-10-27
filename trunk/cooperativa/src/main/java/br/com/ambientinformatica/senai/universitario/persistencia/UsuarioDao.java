@@ -5,6 +5,6 @@ import br.com.ambientinformatica.senai.universitario.entidade.Usuario;
 
 public interface UsuarioDao extends Persistencia<Usuario>{
 
-	Usuario consultarPorUsuario(String email);
+	Usuario consultarPorUsuario(String login);
 
 }

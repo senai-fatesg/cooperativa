@@ -17,38 +17,42 @@
 			<h:form id="frmTopo">
 				<p:panel>
 					<p:menubar>
-						<p:submenu label="Home">
+						<p:submenu label="Home" rendered="#{securityScope.userInRole['USUARIO']}">
 							<p:menuitem icon="ui-icon-home" value="Início" action="inicio?faces-redirect=true" ajax="false" />
 						</p:submenu>
-						<p:submenu label="Cooperados">
+						<p:submenu label="Cooperados" rendered="#{securityScope.userInRole['ADMIN']}">
 							<p:menuitem icon="ui-icon-person" value="Cooperado" action="cooperado?faces-redirect=true" ajax="false" />
 							<p:menuitem icon="ui-icon-arrow-4" value="Assembléia" action="assembleia?faces-redirect=true" ajax="false" />
 							<p:menuitem icon="ui-icon-note" value="Adesão" action="adesao?faces-redirect=true" ajax="false" />
 						</p:submenu>
-						<p:submenu label="Resíduos">
+						<p:submenu label="Resíduos" rendered="#{securityScope.userInRole['ADMIN']}">
 							<p:menuitem icon="ui-icon-refresh" value="Cadastro" action="residuo?faces-redirect=true" ajax="false" />
 							<p:menuitem icon="ui-icon-document" value="Relatórios" />
 						</p:submenu>
-						<p:submenu label="Movimentação">
+						<p:submenu label="Movimentação" rendered="#{securityScope.userInRole['ADMIN']}">
 							<p:menuitem icon="ui-icon-trash" value="Coleta" action="ResiduoColeta?faces-redirect=true" ajax="false" />
 							<p:menuitem icon="ui-icon-cart" value="Venda" action="ResiduoVenda?faces-redirect=true" ajax="false" />
 						</p:submenu>
-						<p:submenu label="Financeiro">
+						<p:submenu label="Financeiro" rendered="#{securityScope.userInRole['INCUBADORA'] or securityScope.userInRole['INCUBADORA-MUNICIPAL']}">
 							<p:menuitem icon="ui-icon-clipboard" value="Cadastro" />
 							<p:menuitem icon="ui-icon-transfer-e-w" value="Movimentação" />
 							<p:menuitem icon="ui-icon-document" value="Relatórios" />
 						</p:submenu>
-						<p:submenu label="Cooperativa">
+						<p:submenu label="Cooperativa" rendered="#{securityScope.userInRole['ADMIN']}">
 							<p:menuitem icon="ui-icon-newwin" value="Cooperativas" action="empresa?faces-redirect=true" ajax="false" />
 						</p:submenu>
-						<p:submenu label="Usuários">
+						<p:submenu label="Usuários" rendered="#{securityScope.userInRole['ADMIN']}">
 							<p:menuitem icon="ui-icon-person" value="Usuário" action="usuario?faces-redirect=true" ajax="false" />
 						</p:submenu>
 						<p:submenu label="Mineração" rendered="#{securityScope.userInRole['INCUBADORA']}">
 							<p:menuitem icon="ui-icon-wrench" value="Mineração" action="mineracao?faces-redirect=true" ajax="false" />
 						</p:submenu>
 						<f:facet name="options">
-							<p:commandButton value="#" id="btnUsuario" icon="ui-icon-person" global="false" />
+							<h:outputText value="Usuário logado: " icon="ui-icon-person" />
+							<p:inputText value="#{UsuarioLogadoControl.usuario.nome }"/>
+						</f:facet>
+						<f:facet name="options">
+							<p:commandButton value="Opções" id="btnUsuario" icon="ui-icon-person" global="false" />
 							<p:menu overlay="true" trigger="btnUsuario" my="left top" at="left bottom">
 								<p:menuitem value="Alterar Senha" icon="ui-icon-pencil" actionListener="#" />
 								<p:menuitem icon="ui-icon-extlink" value="Sair" url="sair.jsp" global="false" />

@@ -8,67 +8,61 @@
 			<p:separator />
 			<p:toolbar>
 				<p:toolbarGroup align="left">
-					<p:commandButton value="Novo" title="Nova Cooperativa" actionListener="#{UsuarioLogadoControl.prepararIncluir}" />
+					<p:commandButton value="Novo" title="Nova Cooperativa" action="usuarioCadastro?faces-redirect=true" />
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
 					<p:focus for="imputfiltro" />
 					<p:defaultCommand target="cmdfiltrar" />
 					<p:outputLabel value="Filtro Global: " />
 					<p:inputText id="imputfiltro" />
-					<p:commandButton id="cmdfiltrar" icon="ui-icon-search" actionListener="#{UsuarioLogadoControl.listar}" update="dtUsuario" />
+					<p:commandButton id="cmdfiltrar" icon="ui-icon-search" actionListener="#{UsuarioControl.listar}" update="@all" />
 				</p:toolbarGroup>
 			</p:toolbar>
-			<p:dataTable id="dtUsuario" var="usuarios" value="#{UsuarioLogadoControl.listaUsuario}" emptyMessage="Nenhum registro encontrado" paginator="true"
+			<p:dataTable id="dtUsuario" var="usuario" value="#{UsuarioControl.listaUsuarios}" emptyMessage="Nenhum registro encontrado" paginator="true"
 				rows="10">
 
-				<p:column headerText="ID" width="10%">
-					<h:outputText value="#{usuarios.id }" />
+				<p:column headerText="Login" width="10%">
+					<h:outputText value="#{usuario.id }" />
 				</p:column>
 
 				<p:column headerText="Nome"  width="30%">
-					<h:outputText value="#{usuarios.nome }" />
+					<h:outputText value="#{usuario.nome }" />
 				</p:column>
 				
 				<p:column headerText="Permissões" width="20%">
-					<h:outputText value="#{usuarios.papeis }" converter="dateConverter" />
+					<h:outputText value="#{usuario.listaPapeis }"  />
 				</p:column>
 
 				<p:column headerText="Data Criação">
-					<h:outputText value="#{usuarios.dataCriacao }" converter="dateConverter" />
+					<h:outputText value="#{usuario.dataCriacao }" converter="dateConverter" />
 				</p:column>
 				
 				<p:column headerText="Ultimo acesso">
-					<h:outputText value="#{usuarios.dataUltimoAcesso }" converter="dateConverter" />
+					<h:outputText value="#{usuario.dataUltimoAcesso }" converter="dateConverter" />
 				</p:column>
 				
-				<p:column headerText="Status do Usuário" width="10%">
-					<h:outputLabel value="#{UsuarioLogadoControl.status }" />
+				<p:column headerText="Status" style="width:4%">
+					<h:outputLabel value="#{usuario.statusUsuario }" style="text-align:center" />
 				</p:column>
 				
 				<p:column headerText="Excluir" style="width:4%">
-					<p:commandButton id="Excluir" action="submit" oncomplete="usuarioDialog.show()" icon="ui-icon-trash" title="View" update="dtUsuario">
-						<f:setPropertyActionListener value="#{usuarios}" target="#{UsuarioLogadoControl.usuario}" />
-					</p:commandButton>
+						<p:commandButton id="Exluir" icon="ui-icon-trash" update="dtUsuario" onclick="usuarioDialog.show()">
+						<f:setPropertyActionListener value="#{usuario }" target="#{UsuarioControl.usuarioExcluir }" />
+						</p:commandButton>
 				</p:column>
 
 				<p:column headerText="Editar" style="width:4%">
-					<p:tab>
-						<p:column headerText="Editar">
-							<p:commandButton id="editar" process="@this" icon="ui-icon-pencil" actionListener="#{UsuarioLogadoControl.prepararIncluir }">
-								<f:setPropertyActionListener value="#{usuarios}" target="#{UsuarioLogadoControl.usuario }" />
-							</p:commandButton>
-						</p:column>
-					</p:tab>
+						<p:commandButton id="Alterar" icon="ui-icon-pencil" action="usuarioCadastro?faces-redirect=true">
+						<f:setPropertyActionListener target="#{UsuarioCadastroControl.usuario }" value="#{usuario }" />
+						</p:commandButton>
 				</p:column>
 
 			</p:dataTable>
-		</p:panel>
-
-		<p:confirmDialog id="usuarioDialog" widgetVar="usuarioDialog" header="Deseja realmente Desativar o usuário? ">
-			<p:commandButton value="Sim" actionListener="#{AdesaoControl.confirmarExcluir}" icon="ui-icon-check" update="@all"
-				oncomplete="PF('usuarioDialog').hide()" />
-			<p:commandButton value="Não" actionListener="#{AdesaoControl.cancelarExcluir}" icon="ui-icon-cancel" onclick="PF('usuarioDialog'.hide())" />
+		<p:confirmDialog id="usuarioDialog" widgetVar="usuarioDialog" header="Deseja realmente excluir o usuário? " message="O usuário será excluído!!">
+			<p:commandButton value="Sim" actionListener="#{UsuarioControl.excluirUsuario }" icon="ui-icon-check" update="@all"
+				oncomplete="usuarioDialog.hide()" ajax="false"/>
+			<p:commandButton value="Não" icon="ui-icon-cancel" onclick="usuarioDialog.hide()" />
 		</p:confirmDialog>
-
+		</p:panel>
 	</ui:define>
 </ui:composition>
