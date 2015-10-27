@@ -49,9 +49,9 @@ public class UsuarioCadastroControl {
     @PostConstruct
     public void init(){
         usuario = new Usuario();
-//        carregarCidades(null);
-//        listarCooperativas();
-//        mostrarCooperativasPorCidadeSelecionada(null);
+        carregarCidades(null);
+        listarCooperativas();
+        mostrarCooperativasPorCidadeSelecionada(null);
     }
     
     public List<SelectItem> getComboPermissoes(){
