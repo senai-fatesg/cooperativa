@@ -19,7 +19,7 @@
 				<a:newLine />
 				<a:field label="Cidade">
 					<p:autoComplete id="acCidade" value="#{UsuarioCadastroControl.usuario.cooperativa.endereco.cidade}" completeMethod="#{UsuarioCadastroControl.autoCompletarCidades}" forceSelection="true"
-						emptyMessage="Cidade nao encontrada, verifique a consulta" converter="cidadeConverter" var="c" itemLabel="#{c}" itemValue="#{c}" maxResults="20" size="100" >
+						emptyMessage="Cidade nao encontrada, verifique a consulta" converter="cidadeConverter" var="c" itemLabel="#{c}" itemValue="#{c}" maxResults="20" size="89" >
 						<f:ajax render="Listcooperativas" event="itemSelect" listener="#{UsuarioCadastroControl.mostrarCooperativasPorCidadeSelecionada}" update="Listcooperativas" />
 					</p:autoComplete>
 				</a:field>
