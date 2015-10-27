@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.model.SelectItem;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,9 +43,10 @@ public class Usuario extends Entidade {
 	
 	private String senha;
 	
+	@NotEmpty(message="O preenchimento do campo nome é obrigatorio", groups=AmbientValidator.class)
 	private String nome;
 	
-	private boolean ativo = false;
+	private boolean ativo;
 
 	@Temporal(TemporalType.DATE)
 	private Date dataAlteracaoSenha = new Date();
@@ -99,8 +101,22 @@ public class Usuario extends Entidade {
 		}
 		return false;
 	}
+	
+	public String getListaPapeis(){
+	    String papeis = new String();
+	    for (PapelUsuario papelUsuario : this.papeis) {
+            papeis = papeis.concat(papelUsuario.getPapel().getDescricao()).concat(", ");
+        }
+	    if(!papeis.isEmpty()){
+	        papeis = papeis.substring(0, papeis.length()-2);
+	    }
+        return papeis;
+	}
 
-
+	public String getStatusUsuario(){
+        return this.ativo == true ? "ATIVO" : "INATIVO";
+    }
+	
 	public String getLogin() {
 		return login;
 	}
@@ -181,4 +197,10 @@ public class Usuario extends Entidade {
 		this.papeis = papeis;
 	}
 
+    @Override
+    public String toString() {
+        return String.format("%s", nome);
+    }
+
+	
 }

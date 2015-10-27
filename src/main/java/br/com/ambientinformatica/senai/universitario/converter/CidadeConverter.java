@@ -34,7 +34,7 @@ public class CidadeConverter implements Converter {
 			}
 			return cidade;
 		} else {
-			return null;
+			return new Cidade();
 		}
 	}
 

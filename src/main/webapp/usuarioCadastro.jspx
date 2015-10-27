@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<ui:define name="corpo">
+		<p:panel id="cadUsuario" header="Dados do Usuário" style="text-align: center">
+			<p:fieldset legend="Usuário">
+				<a:field label="Nome">
+					<p:inputText styleClass="obrigatorio" value="#{UsuarioCadastroControl.usuario.nome }" style="width:625px;" />
+				</a:field>
+				<a:field label="Tipo" spaceLeft="10px">
+					<p:selectOneMenu value="#{UsuarioCadastroControl.papel}" effect="fade" style="width:263px">
+						<f:selectItem itemLabel="Selecione" itemValue="" />
+						<f:selectItems value="#{UsuarioCadastroControl.comboPermissoes}" />
+						<p:ajax event="change" listener="#{UsuarioCadastroControl.addPapel}" update="tableTipoUsuario" />
+					</p:selectOneMenu>
+				</a:field>
+				<a:newLine />
+				<a:field label="Cidade">
+					<p:autoComplete id="acCidade" value="#{UsuarioCadastroControl.usuario.cooperativa.endereco.cidade}" completeMethod="#{UsuarioCadastroControl.autoCompletarCidades}" forceSelection="true"
+						emptyMessage="Cidade nao encontrada, verifique a consulta" converter="cidadeConverter" var="c" itemLabel="#{c}" itemValue="#{c}" maxResults="20" size="100" >
+						<f:ajax render="Listcooperativas" event="itemSelect" listener="#{UsuarioCadastroControl.mostrarCooperativasPorCidadeSelecionada}" update="Listcooperativas" />
+					</p:autoComplete>
+				</a:field>
+				<a:field label="Cooperativa"  spaceLeft="10px">
+					<p:selectOneMenu id="Listcooperativas" value="#{UsuarioCadastroControl.usuario.cooperativa }" converter="pessoaConverter" effect="fade" style="width:265px">
+						<f:selectItem itemLabel="Selecione..." itemValue="" />
+						<f:selectItems value="#{UsuarioCadastroControl.cooperativas}" var="coop" itemLabel="#{coop.nomeFantasia }" itemValue="#{coop}" />
+					</p:selectOneMenu>
+				</a:field>
+				<a:newLine />
+				<a:field label="Login">
+					<p:inputText styleClass="obrigatorio" value="#{UsuarioCadastroControl.usuario.login }" style="width:473px" readonly="#{UsuarioCadastroControl.usuario.login != null}"/>
+				</a:field>
+				<a:field label="Data de cadastro" spaceLeft="10px">
+					<p:inputMask styleClass="obrigatorio" value="#{UsuarioCadastroControl.usuario.dataCriacao }" style="width:130px;" mask="99/99/9999" readonly="#{UsuarioCadastroControl.usuario.login != null}">
+						<f:convertDateTime pattern="dd/MM/yyyy"  />
+					</p:inputMask>
+				<h> </h></a:field >
+				<a:field spaceLeft="20px">
+				</a:field>
+				<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="console" value="Status do usuário:" />
+					<p:selectOneRadio id="console" value="#{UsuarioCadastroControl.usuario.ativo }" >
+						<f:selectItem itemLabel="Ativo" itemValue="true" />
+						<f:selectItem itemLabel="Inativo" itemValue="false" />
+					</p:selectOneRadio>
+				</h:panelGrid>
+				<p:dataTable id="tableTipoUsuario" var="tipo" value="#{UsuarioCadastroControl.usuario.papeis }" emptyMessage="Não há registros!">
+					<p:column headerText="Nome">
+						<p:outputLabel value="#{tipo.papel.descricao}"></p:outputLabel>
+					</p:column>
+					<p:column headerText="Excluir" style="width:5%">
+						<p:commandButton id="excluir" process="@this" update="tableTipoUsuario" icon="ui-icon-trash">
+							<p:collector value="#{tipo}" removeFrom="#{UsuarioCadastroControl.usuario.papeis}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<a:field>
+					<p:commandButton value="Gravar" actionListener="#{UsuarioCadastroControl.gravar }" ajax="false" update="cadUsuario"></p:commandButton>
+				</a:field>
+			</p:fieldset>
+		</p:panel>
+	</ui:define>
+</ui:composition>

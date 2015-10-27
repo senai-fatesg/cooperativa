@@ -1,11 +1,14 @@
 package br.com.ambientinformatica.senai.universitario.persistencia;
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
+import br.com.ambientinformatica.senai.universitario.entidade.Cidade;
 import br.com.ambientinformatica.senai.universitario.entidade.Pessoa;
 
 @Repository("cooperativaDao")
@@ -34,5 +37,13 @@ public class CooperativaDaoJpa extends PersistenciaJpa<Pessoa> implements Cooper
 			super.alterar(c);
 		}
 	}
+	
+	@SuppressWarnings("rawtypes")
+    @Override
+    public List consultarCooperativa(Cidade cidade) {
+        Query query = em.createQuery("select c from Pessoa c left join fetch c.endereco e where e.cidade = :cidade");
+        query.setParameter("cidade", cidade);
+        return query.getResultList();
+    }
 	
 }
