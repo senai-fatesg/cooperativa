@@ -20,23 +20,24 @@ import br.com.ambientinformatica.util.UtilLog;
 @Scope("conversation")
 public class UsuarioControl {
     
-    private Usuario usuario = new Usuario(); 
+    private Usuario usuario; 
     private Usuario usuarioExcluir;
+    private String nome;
     private List<PapelUsuario>papeis;
     private List<Usuario> listaUsuarios = new ArrayList<Usuario>();
 
     @Autowired
-    private UsuarioDao UsuarioDao;
+    private UsuarioDao usuarioDao;
 
 
     @PostConstruct
     public void init(){
-        
+        usuario = new Usuario();
     }
 
-    public List<Usuario>listar(){
+    public List<Usuario> listar(){
         try {
-            listaUsuarios = UsuarioDao.listar();
+        	listaUsuarios = usuarioDao.listar();
         } catch (Exception e) {
             UtilFaces.addMensagemFaces("Nenhum dado encontrado");
         }
@@ -50,7 +51,7 @@ public class UsuarioControl {
 
     public void excluirUsuario(ActionEvent evt){
         try {
-            UsuarioDao.excluirPorId(usuarioExcluir.getId());
+            usuarioDao.excluirPorId(usuarioExcluir.getId());
             UtilFaces.addMensagemFaces("Usuário excluido com sucesso");
         } catch (Exception e) {
             UtilLog.getLog().error(e.getMessage());
@@ -93,5 +94,14 @@ public class UsuarioControl {
 
     public void setPapeis(List<PapelUsuario> papeis) {
         this.papeis = papeis;
-    } 
+    }
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	} 
+    
 }

@@ -1,5 +1,7 @@
 package br.com.ambientinformatica.senai.universitario.persistencia;
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -29,4 +31,19 @@ public class UsuarioDaoJpa extends PersistenciaJpa<Usuario> implements UsuarioDa
         }
         return null;
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Usuario> listarPorNome(Usuario usuario) {
+		try {
+			String sql = "select u from Usuario u where u.nome like :nome";
+			Query query = em.createQuery(sql);
+			query.setParameter("nome", "%" + usuario.getNome() + "%");
+			return query.getResultList();
+		} catch (Exception e) {
+			UtilLog.getLog().error(e.getMessage(), e);
+			UtilFaces.addMensagemFaces("Erro ao realizar a consulta");
+		}
+		return null;
+	}
 }
