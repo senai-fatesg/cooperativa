@@ -115,22 +115,25 @@ public class UsuarioCadastroControl {
     }
     
     public void gravar(ActionEvent evt){
-        
-        try {
-            if(usuario == null || usuario.getCooperativa() == null || usuario.getLogin() == null){
-                usuario.setSenhaNaoCriptografada(senha);
-                usuarioDao.incluir(usuario);
-            }else{
-                usuarioDao.alterar(usuario);
-                UtilFaces.addMensagemFaces("Usuário Cadastrado com sucesso");
-                usuario = new Usuario();
-                cidade = new Cidade();
-            }
-            
-        } catch (Exception e) {
-            UtilLog.getLog().error(e.getMessage(), e);
-            UtilFaces.addMensagemFaces("Erro ao incluir o usuário! Verificar campos não preenchidos");
-        }
+        List<Usuario> usuarios = new ArrayList<Usuario>();
+    	try {
+    		usuarios = usuarioDao.listar();
+    		if(!usuarios.contains(usuario)){
+    			usuario.setSenha(senha);
+    		}
+    		if(usuario != null && usuario.getCooperativa() != null && !usuario.getLogin().isEmpty() && !usuario.getPapeis().contains(papel)){
+    			usuarioDao.alterar(usuario);
+    			UtilFaces.addMensagemFaces("Usuário Cadastrado com sucesso");
+    			usuario = new Usuario();
+    			cidade = null;
+    		}else{
+    			UtilFaces.addMensagemFaces("Verificar campos não preenchidos ");
+    		}
+
+    	} catch (Exception e) {
+    		UtilLog.getLog().error(e.getMessage(), e);
+    		UtilFaces.addMensagemFaces("Erro ao incluir o usuário! ");
+    	}
     }
     
 
@@ -140,6 +143,8 @@ public class UsuarioCadastroControl {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+        cidade = usuario.getCooperativa().getEndereco().getCidade();
+        mostrarCooperativasPorCidadeSelecionada(null);
     }
 
     public Cidade getCidade() {
