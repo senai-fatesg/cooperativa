@@ -102,6 +102,13 @@
 						</p:autoComplete>
 					</h:panelGrid>
 				</p:tab>
+				<!-- Dependentes -->
+
+				<p:tab title="Dependentes">
+
+				
+
+				</p:tab>
 
 			</p:tabView>
 
