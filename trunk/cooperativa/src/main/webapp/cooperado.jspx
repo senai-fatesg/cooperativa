@@ -18,12 +18,15 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 			<p:dataTable id="dtCooperado" var="cooperado" value="#{CooperadoControl.cooperados}" emptyMessage="Nenhum registro encontrado" paginator="true"
-				rows="10" rendered="#{CooperadoControl.excluindo!=true}">
+				rows="10" resizableColumns="true" rendered="#{CooperadoControl.excluindo!=true}">
 				<p:column headerText="Matricula">
 					<h:outputText value="#{cooperado.matricula}" />
 				</p:column>
 				<p:column headerText="Nome">
 					<h:outputText value="#{cooperado.dadosPessoais.nome}" />
+				</p:column>
+				<p:column headerText="RG">
+					<h:outputText value="#{cooperado.dadosPessoais.rg}" />
 				</p:column>
 				<p:column headerText="CPF">
 					<h:outputText value="#{cooperado.dadosPessoais.cpf}" />
