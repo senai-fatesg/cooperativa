@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+		<p:panel id="pnlCliente" header="Cliente">
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="Novo" title="Novo Cliente" actionListener="#{clienteControl.preparaIncluir}" ajax="false" icon="ui-icon-document" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:outputLabel value="Filtro Global: " />
+					<p:inputText id="inputFiltroGlobal" value="#{clienteControl.filtroGlobal}" />
+					<p:spacer width="30" height="20" />
+					<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search" actionListener="#{clienteControl.listar}" update="dtCliente" />
+					<p:focus for="inputFiltroGlobal" />
+					<p:defaultCommand target="cmdFiltroGlobal" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:dataTable id="dtCliente" var="cliente" value="#{clienteControl.clientes}" emptyMessage="Nenhum registro encontrado" paginator="true"
+				rows="10" rendered="#{clienteControl.excluindo!=true}">
+				<p:column headerText="Nome">
+					<h:outputText value="#{cliente.nome}" />
+				</p:column>
+				<p:column headerText="CPF/CNPJ">
+					<h:outputText value="#{cliente.cpfCnpj}" />
+				</p:column>
+				<p:column headerText="Ação">
+					<p:commandButton icon="ui-icon-pencil" title="Alterar Cliente" actionListener="#{clienteControl.preparaAlterar}" ajax="false">
+						<f:attribute name="cliente" value="#{cliente}" />
+					</p:commandButton>
+					<p:commandButton icon="ui-icon-trash" title="Excluir Cliente" ajax="false" actionListener="#{clienteControl.prepararExcluir}"
+						process="@this, pnlExcluir" update="pnlCliente">
+						<f:attribute name="cliente" value="#{cliente}" />
+					</p:commandButton>
+				</p:column>
+				<f:facet name="footer">
+					<p:outputLabel value="#{clienteControl.tamanhoLista } Registro(s)" />
+				</f:facet>
+			</p:dataTable>
+
+			<p:panel id="pnlExcluir" header="Excluir Cliente" rendered="#{clienteControl.excluindo==true}">
+				<p:outputLabel value="Deseja realmente excluir o cliente #{clienteControl.cliente} ?" />
+				<p />
+				<p:commandButton value="Confirmar" actionListener="#{clienteControl.confirmarExcluir}" icon="ui-icon-check"
+					title="Confirmar Exclusao do cliente" process="@this, dtCliente" update="pnlCliente" />
+				<p:commandButton value="Cancelar" actionListener="#{clienteControl.cancelarExcluir}" icon="ui-icon-cancel"
+					title="Cancelar Exclusao de Proposta de Adesao" process="@this, dtCliente" update="pnlCliente" />
+			</p:panel>
+
+		</p:panel>
+	</ui:define>
+</ui:composition>

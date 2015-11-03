@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<ui:define name="corpo">
+		<p:fieldset legend="Coleta">
+
+			<p:tabView id="tbColeta">
+				<p:tab title="Dados Coleta">
+					<p:focus for="acCooperado" />
+
+
+					<h:panelGrid columns="4">
+					
+							<h:outputText value="Emitente: " />
+						<p:autoComplete id="acCooperado"
+							value="#{AdesaoControl.adesao.coopResponsavel}"
+							completeMethod="#{AdesaoControl.completeCooperados}"
+							forceSelection="true"
+							emptyMessage="Emitente nao encontrado, verifique a consulta"
+							converter="cooperadoConverter" var="c" itemLabel="#{c}"
+							itemValue="#{c}" maxResults="20" size="30">
+						</p:autoComplete>
+
+
+						<p:outputLabel value="Destinatário: " />
+						<p:inputText id="userDestinatario"
+							value="#{residuoControl.residuo.usuario}" size="30" />
+					</h:panelGrid>
+
+
+					<h:panelGrid columns="4">
+						<p:outputLabel for="residuo" value="Resíduo: " />
+						<p:inputText id="residuo" value="" />
+
+						<p:outputLabel for="qtd" value="Qtd: " />
+						<p:inputText id="qtd" value="" size="2" />
+					</h:panelGrid>
+
+
+					<p:commandButton value="Add"
+						actionListener="#{residuoControl.confirmar}" icon="ui-icon-check"
+						title="Add Residuo" />
+				</p:tab>
+			</p:tabView>
+
+<!-- LISTA DE RESÍDUOS -->
+
+			<p:dataTable id="dtColeta" var="residuo"
+				value="#{CooperadoControl.cooperados}"
+				emptyMessage="Nenhum registro adicionado" paginator="true">
+				
+				
+				<p:column headerText="Resíduo" width="350">
+					<h:outputText value="#{cooperado.matricula}" />
+				</p:column>
+				
+				
+				<p:column headerText="Quantidade" width="60">
+					<h:inputText value="#{cooperado.dadosPessoais.nome}" />
+				</p:column>
+				
+				
+				<p:column headerText="Valor Total" width="100">
+					<h:outputText value="#{cooperado.dadosPessoais.cpf}" symbol="R$ "/>
+					<f:facet name="footer">
+					<h:outputText value="#{pedidoControl.pedido.precoTotal}" symbol="R$ "/>
+				</f:facet>
+				
+				</p:column>
+				
+				<p:column headerText="Alterar Qtd">
+					<p:commandButton icon="ui-icon-trash" title="Alterar Qtd" value="Alterar Qtd"
+						ajax="false" actionListener="#{CooperadoControl.prepararExcluir}"
+						process="@this, pnlExcluir" update="pnlCooperado">
+						<f:attribute name="cooperado" value="#{cooperado}" />
+					</p:commandButton>
+				</p:column>
+				
+				<p:column headerText="Remover">
+					<p:commandButton icon="ui-icon-trash" title="Remover Item" value="Remover"
+						ajax="false" actionListener="#{CooperadoControl.prepararExcluir}"
+						process="@this, pnlExcluir" update="pnlCooperado">
+						<f:attribute name="cooperado" value="#{cooperado}" />
+					</p:commandButton>
+				</p:column>
+				<f:facet name="footer">
+					<p:outputLabel
+						value="#{CooperadoControl.tamanhoLista } Registro(s)" />
+				</f:facet>
+			</p:dataTable>
+
+
+
+			<p:commandButton value="Confirmar"
+				actionListener="#{residuoControl.confirmar}" icon="ui-icon-check"
+				process="" title="Salvar Residuo" />
+		</p:fieldset>
+	</ui:define>
+</ui:composition>
