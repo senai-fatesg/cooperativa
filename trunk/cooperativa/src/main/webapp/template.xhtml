@@ -22,6 +22,7 @@
 						</p:submenu>
 						<p:submenu label="Cadastro" rendered="#{securityScope.userInRole['ADMIN']}">
 							<p:menuitem icon="ui-icon-person" value="Cooperado" action="cooperado?faces-redirect=true" ajax="false" />
+							<p:menuitem icon="ui-icon-person" value="Cliente" action="cliente?faces-redirect=true" ajax="false" />	
 							<p:menuitem icon="ui-icon-refresh" value="Resíduo" action="residuo?faces-redirect=true" ajax="false" />
 							<p:menuitem icon="ui-icon-arrow-4" value="Assembléia" action="assembleia?faces-redirect=true" ajax="false" />
 							<p:menuitem icon="ui-icon-note" value="Adesão" action="adesao?faces-redirect=true" ajax="false" />

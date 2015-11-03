@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<ui:define name="corpo">
+		<p:fieldset legend="Cliente #{clienteControl.cliente.id}">
+			<p:tabView id="tbCliente">
+				<!-- 			DADOS CLIENTE -->
+				<p:tab title="Dados Cliente">
+					<p:focus for="inputNome" />
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Nome: *" />
+						<p:inputText id="inputNome" value="#{clienteControl.cliente.nome}"
+							size="70" />
+
+						<p:outputLabel value="CPF/CNPJ: " />
+							<p:inputText id="inputCpfCnpj"
+							value="#{clienteControl.cliente.cpfCnpj}"/>
+
+						<p:outputLabel value="Telefone 01: " />
+						<p:inputMask value="#{clienteControl.cliente.telefone01}"
+							mask="(99)9999-9999" />
+						<p:outputLabel value="Telefone 02: " />
+						<p:inputMask value="#{clienteControl.cliente.telefone02}"
+							mask="(99)9999-9999" />
+						<p:selectOneRadio id="status"
+							value="#{clienteControl.cliente.status}">
+							<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
+							<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
+						</p:selectOneRadio>
+
+					</h:panelGrid>
+				</p:tab>
+
+				<!-- 				ENDERECO -->
+				<p:tab title="Endereço">
+					<h:panelGrid columns="2" id="pnlEndereco">
+						<p:outputLabel value="Cep: " />
+						<p:inputMask value="#{clienteControl.cliente.endereco.cep}"
+							mask="99.999-999">
+							<p:ajax event="blur"
+								listener="#{clienteControl.preencherEndereco}"
+								update="pnlEndereco" global="false" />
+						</p:inputMask>
+						<p:outputLabel value="Logradouro: " />
+						<p:inputText value="#{clienteControl.cliente.endereco.logradouro}"
+							size="100" />
+						<p:outputLabel value="Bairro: " />
+						<p:inputText value="#{clienteControl.cliente.endereco.bairro}"
+							size="100" />
+						<p:outputLabel value="Numero: " />
+						<p:inputText value="#{clienteControl.cliente.endereco.numero}"
+							size="5" />
+						<p:outputLabel value="Complemento: " />
+						<p:inputText
+							value="#{clienteControl.cliente.endereco.complemento}" size="100" />
+						<h:outputText value="Cidade: " />
+						<p:autoComplete id="acCidade"
+							value="#{clienteControl.cliente.endereco.cidade}"
+							completeMethod="#{clienteControl.completeCidades}"
+							forceSelection="true"
+							emptyMessage="Cidade nao encontrada, verifique a consulta"
+							converter="cidadeConverter" var="c" itemLabel="#{c}"
+							itemValue="#{c}" maxResults="20" size="30">
+						</p:autoComplete>
+					</h:panelGrid>
+				</p:tab>
+
+			</p:tabView>
+
+			<p:commandButton value="Confirmar"
+				actionListener="#{clienteControl.confirmar}" icon="ui-icon-check"
+				process="" title="Salvar Cooperado" />
+		</p:fieldset>
+	</ui:define>
+</ui:composition>
