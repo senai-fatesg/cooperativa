@@ -123,7 +123,7 @@ public class UsuarioCadastroControl {
     		}
     		if(usuario != null && usuario.getCooperativa() != null && !usuario.getLogin().isEmpty() && !usuario.getPapeis().contains(papel)){
     			usuarioDao.alterar(usuario);
-    			UtilFaces.addMensagemFaces("Usuário Cadastrado com sucesso");
+    			UtilFaces.addMensagemFaces("Operação realizada com sucesso");
     			usuario = new Usuario();
     			cidade = null;
     		}else{

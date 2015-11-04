@@ -29,13 +29,14 @@
 		</property>
 	</bean>
 
-
-	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" 
-		destroy-method="close"> <property name="driverClassName" value="${database.driver}"/> 
+<!--  
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+	    <property name="driverClassName" value="${database.driver}"/> 
 		<property name="url" value="${database.url}"/> <property name="username" 
 		value="${database.username}"/> <property name="password" value="${database.password}"/> 
-		</bean> -->
-
+		</bean>
+-->
+		
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
 			<value>${jndi-datasource}</value>

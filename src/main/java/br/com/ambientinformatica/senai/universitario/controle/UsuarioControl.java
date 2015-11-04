@@ -59,14 +59,6 @@ public class UsuarioControl {
         }
     }
 
-    public void alterarStatusDoUsuario(){
-        if(!usuario.isAtivo()){
-            usuario.setAtivo(true);
-        }else{
-            usuario.setAtivo(false);
-        }
-    }
-
 
     public Usuario getUsuario() {
         return usuario;

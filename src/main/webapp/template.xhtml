@@ -22,7 +22,7 @@
 						</p:submenu>
 						<p:submenu label="Cadastro" rendered="#{securityScope.userInRole['ADMIN']}">
 							<p:menuitem icon="ui-icon-person" value="Cooperado" action="cooperado?faces-redirect=true" ajax="false" />
-							<p:menuitem icon="ui-icon-person" value="Cliente" action="cliente?faces-redirect=true" ajax="false" />	
+							<p:menuitem icon="ui-icon-person" value="Cliente" action="cliente?faces-redirect=true" ajax="false" />
 							<p:menuitem icon="ui-icon-refresh" value="Resíduo" action="residuo?faces-redirect=true" ajax="false" />
 							<p:menuitem icon="ui-icon-arrow-4" value="Assembléia" action="assembleia?faces-redirect=true" ajax="false" />
 							<p:menuitem icon="ui-icon-note" value="Adesão" action="adesao?faces-redirect=true" ajax="false" />
@@ -63,11 +63,26 @@
 						<f:facet name="options">
 							<p:commandButton value="Opções" id="btnUsuario" icon="ui-icon-person" global="false" />
 							<p:menu overlay="true" trigger="btnUsuario" my="left top" at="left bottom">
-								<p:menuitem value="Alterar Senha" icon="ui-icon-pencil" actionListener="#" />
+								<p:menuitem value="Alterar Senha" icon="ui-icon-pencil" actionListener="#" onclick="PF('alterarSenha').show();"/>
 								<p:menuitem icon="ui-icon-extlink" value="Sair" url="sair.jsp" global="false" />
 							</p:menu>
 						</f:facet>
 					</p:menubar>
+					<p:dialog header="Alterar senha do usuário" widgetVar="alterarSenha" showEffect="explode" hideEffect="bounce" style="align: center">
+						<h:form id="formAteraSenha">
+    						<h:outputText value="Nova senha" />
+    						<br/>
+    						<p:password value="#{UsuarioLogadoControl.senhaAlteracao }" feedback="true" inline="true" promptLabel="Digite uma senha segura" 
+    							goodLabel="Boa" weakLabel="Razoável" strongLabel="Excelente" placeholder="Digite a nova senha" style="width: 200px"/>
+    						<br/>
+    						<br/>
+    						<p:password value="#{UsuarioLogadoControl.senhaAlteracaoNovamente }" placeholder="Digite novamente" style="width: 200px"/>
+    						<br/>
+    						<br/>
+    						<p:commandButton value="Confirmar" id="btnAlterarSenha" icon="ui-icon-check" action="#{UsuarioLogadoControl.alterarSenhaDoUsuario }"
+    							onclick="PF('alterarSenha').hide()" />
+    					</h:form>
+					</p:dialog>
 				</p:panel>
 				<p:separator/>
 				<p:separator/>

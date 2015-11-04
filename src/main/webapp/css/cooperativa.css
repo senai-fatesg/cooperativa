@@ -128,4 +128,17 @@ AREA DOS BOT�ES
     background-color:#c63702;
 }
 
+element.style{
+	height: 400px;
+	left:
+	position: fixed;
+	top: 233.4px;
+	visibility: visible;
+	width: 200px;
+	z-index: 1008;
+}
 
+.ui-dialog.ui-widget-content .ui-dialog-title {
+    font-size: 24px;
+    color: #428abc;
+}
