@@ -15,7 +15,7 @@
 					<p:defaultCommand target="cmdfiltrar" />
 					<p:outputLabel value="Filtro Global: " />
 					<p:inputText id="imputfiltro" value="#{UsuarioControl.usuario.nome }"/>
-					<p:commandButton id="cmdfiltrar" icon="ui-icon-search" actionListener="#{UsuarioControl.listarPorNomeOuTodos }" update="@all" />
+					<p:commandButton id="cmdfiltrar" icon="ui-icon-search" actionListener="#{UsuarioControl.listar }" update="@all" />
 				</p:toolbarGroup>
 			</p:toolbar>
 			<p:dataTable id="dtUsuario" var="usuario" value="#{UsuarioControl.listaUsuarios}" emptyMessage="Nenhum registro encontrado" paginator="true"
