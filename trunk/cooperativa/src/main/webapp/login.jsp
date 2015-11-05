@@ -41,7 +41,7 @@
 	<div class="container content">
         <div class="row">
             <div class="span8 leftContent">
-            	<img src="resources/img/logo-topo-grande.jpg"/>
+            	<img src="resources/img/logo-topo-grande3.jpg"/>
                 <!-- <div class="row">
                 	<div class="span4">
                     	<p class="cntPara simpleDesign" align="justify">
