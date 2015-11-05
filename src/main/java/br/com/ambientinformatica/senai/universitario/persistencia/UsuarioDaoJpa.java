@@ -36,7 +36,7 @@ public class UsuarioDaoJpa extends PersistenciaJpa<Usuario> implements UsuarioDa
 	@Override
 	public List<Usuario> listarPorNome(Usuario usuario) {
 		try {
-			String sql = "select u from Usuario u where u.nome like :nome";
+			String sql = "select u from Usuario u where like u.nome = :nome ";
 			Query query = em.createQuery(sql);
 			query.setParameter("nome", "%" + usuario.getNome() + "%");
 			return query.getResultList();

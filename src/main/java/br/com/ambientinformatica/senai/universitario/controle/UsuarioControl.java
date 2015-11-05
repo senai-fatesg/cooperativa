@@ -43,6 +43,15 @@ public class UsuarioControl {
         }
         return listaUsuarios;
     }
+    
+    public List<Usuario> listarPorNomeOuTodos(){
+        try {
+            listaUsuarios = usuarioDao.listarPorNome(usuario);
+        } catch (Exception e) {
+            UtilFaces.addMensagemFaces("Nenhum dado encontrado");
+        }
+        return listaUsuarios;
+    }
 
     public List<PapelUsuario> mostrarPapeisDoUsuario(){
         papeis = usuario.getPapeis();

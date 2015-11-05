@@ -58,10 +58,10 @@
 						</p:submenu>
 						<f:facet name="options">
 							<h:outputText value="Usuário logado: " icon="ui-icon-person" />
-							<p:inputText value="#{UsuarioLogadoControl.usuario.nome }"/>
+							<p:inputText value="#{UsuarioLogadoControl.usuario.nome }" readonly="#{UsuarioLogadoControl.usuario.nome != null}" />
 						</f:facet>
 						<f:facet name="options">
-							<p:commandButton value="Opções" id="btnUsuario" icon="ui-icon-person" global="false" />
+							<p:commandButton value="Opções" id="btnUsuario" icon="ui-icon-person" global="false" style="margin-left: 10px"/>
 							<p:menu overlay="true" trigger="btnUsuario" my="left top" at="left bottom">
 								<p:menuitem value="Alterar Senha" icon="ui-icon-pencil" actionListener="#" onclick="PF('alterarSenha').show();"/>
 								<p:menuitem icon="ui-icon-extlink" value="Sair" url="sair.jsp" global="false" />
@@ -70,7 +70,11 @@
 					</p:menubar>
 					<p:dialog header="Alterar senha do usuário" widgetVar="alterarSenha" showEffect="explode" hideEffect="bounce" style="align: center">
 						<h:form id="formAteraSenha">
-    						<h:outputText value="Nova senha" />
+							<h:outputText value="Senha atual" />
+							<br/>
+							<br/>
+							<p:password value="#{UsuarioLogadoControl.senhaAtual }" placeholder="Digite sua senha atual" style="width: 200px"/>
+							<br/>
     						<br/>
     						<p:password value="#{UsuarioLogadoControl.senhaAlteracao }" feedback="true" inline="true" promptLabel="Digite uma senha segura" 
     							goodLabel="Boa" weakLabel="Razoável" strongLabel="Excelente" placeholder="Digite a nova senha" style="width: 200px"/>
@@ -80,7 +84,7 @@
     						<br/>
     						<br/>
     						<p:commandButton value="Confirmar" id="btnAlterarSenha" icon="ui-icon-check" action="#{UsuarioLogadoControl.alterarSenhaDoUsuario }"
-    							onclick="PF('alterarSenha').hide()" />
+    							onclick="PF('alterarSenha').hide()" update="@form" />
     					</h:form>
 					</p:dialog>
 				</p:panel>
