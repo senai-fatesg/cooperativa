@@ -28,7 +28,7 @@ public class InicializadorSistema {
 	@PostConstruct
 	public void iniciar(){
 		inicializarUsuarioAdmin();
-		inserirCidades();
+//		inserirCidades();
 	}
 	
 	private void inicializarUsuarioAdmin(){
