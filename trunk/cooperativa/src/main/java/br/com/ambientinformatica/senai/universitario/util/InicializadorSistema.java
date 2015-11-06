@@ -38,6 +38,7 @@ public class InicializadorSistema {
 				Usuario usu = new Usuario();
 				usu.setNome("admin");
 				usu.setLogin("admin");
+				usu.setAtivo(true);
 				usu.setSenhaNaoCriptografada("123456");
 				usu.addPapel(EnumPapelUsuario.ADMIN);
 				usu.addPapel(EnumPapelUsuario.USUARIO);
