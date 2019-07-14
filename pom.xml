@@ -13,6 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<webXmlPath>src/main/webapp/WEB-INF/web.xml</webXmlPath>
 	</properties>
+	
 	<!-- 
 	<profiles>
 		<profile>
@@ -23,7 +24,23 @@
 		</profile>
 	</profiles>	
 	 -->
+	 
 
+<repositories>
+		<repository>
+			<id>publicas</id>
+			<name>publicas</name>
+			<url>https://solutioin.com/nexus/content/repositories/publicas/</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
