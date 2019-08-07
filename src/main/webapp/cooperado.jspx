@@ -3,6 +3,7 @@
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
+	
 		<p:panel id="pnlCooperado" header="Cooperados">
 			<p:toolbar>
 				<p:toolbarGroup align="left">
@@ -17,8 +18,11 @@
 					<p:defaultCommand target="cmdFiltroGlobal" />
 				</p:toolbarGroup>
 			</p:toolbar>
+			<br/>
+			
 			<p:dataTable id="dtCooperado" var="cooperado" value="#{CooperadoControl.cooperados}" emptyMessage="Nenhum registro encontrado" paginator="true"
-				rows="10" resizableColumns="true" rendered="#{CooperadoControl.excluindo!=true}">
+				rows="10" resizableColumns="true" rendered="#{CooperadoControl.excluindo!=true}" paginatorPosition="bottom" >
+				
 				<p:column headerText="Matricula">
 					<h:outputText value="#{cooperado.matricula}" />
 				</p:column>
@@ -31,29 +35,48 @@
 				<p:column headerText="CPF">
 					<h:outputText value="#{cooperado.dadosPessoais.cpf}" />
 				</p:column>
-				<p:column headerText="Ação">
+				<p:column headerText="Ação" style="text-align:center;">
+					
 					<p:commandButton icon="ui-icon-pencil" title="Alterar Cooperado" actionListener="#{CooperadoControl.preparaAlterar}" ajax="false">
 						<f:attribute name="cooperado" value="#{cooperado}" />
 					</p:commandButton>
-					<p:commandButton icon="ui-icon-trash" title="Excluir Cooperado" ajax="false" actionListener="#{CooperadoControl.prepararExcluir}"
-						process="@this, pnlExcluir" update="pnlCooperado">
-						<f:attribute name="cooperado" value="#{cooperado}" />
+					
+					<p:commandButton icon="ui-icon-trash" title="Excluir Cooperado" ajax="true" actionListener="#{CooperadoControl.prepararExcluir}"
+						onclick="pnlExcluir.show()"
+						process="@this" >
+				
+					<f:attribute name="cooperado" value="#{cooperado}" />
 					</p:commandButton>
 				</p:column>
+				
 				<f:facet name="footer">
 					<p:outputLabel value="#{CooperadoControl.tamanhoLista } Registro(s)" />
 				</f:facet>
 			</p:dataTable>
 
-			<p:panel id="pnlExcluir" header="Excluir Cooperado" rendered="#{CooperadoControl.excluindo==true}">
+			<p:dialog id="pnlExcluir" header="Excluir Cooperado" widgetVar="pnlExcluir"  resizable="false"  draggable="false">
 				<p:outputLabel value="Deseja realmente excluir o cooperado #{CooperadoControl.cooperado} ?" />
 				<p />
-				<p:commandButton value="Confirmar" actionListener="#{CooperadoControl.confirmarExcluir}" icon="ui-icon-check"
-					title="Confirmar Exclusao de Proposta de Adesao" process="@this, dtCooperado" update="pnlCooperado" />
-				<p:commandButton value="Cancelar" actionListener="#{CooperadoControl.cancelarExcluir}" icon="ui-icon-cancel"
-					title="Cancelar Exclusao de Proposta de Adesao" process="@this, dtCooperado" update="pnlCooperado" />
+				<p:commandButton value="Confirmar"
+					actionListener="#{CooperadoControl.confirmarExcluir}"
+					oncomplete="PF('widPnlExcluir').dimiss();"
+					icon="ui-icon-check"
+					title="Confirmar Exclusão"
+					process="@this, dtCooperado" update="pnlCooperado" />
+				
+				<p:commandButton value="Cancelar"
+					oncomplete="PF('widPnlExcluir').dimiss();"
+					actionListener="#{CooperadoControl.cancelarExcluir}"
+					icon="ui-icon-cancel"
+					
+					title="Cancelar Exclusão"
+					process="@this, dtCooperado" update="pnlCooperado" />
+
+
+			</p:dialog>
+			
 			</p:panel>
 
-		</p:panel>
+		
 	</ui:define>
 </ui:composition>

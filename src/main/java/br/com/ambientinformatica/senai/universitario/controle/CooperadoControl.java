@@ -127,7 +127,6 @@ public class CooperadoControl extends Control{
 		try {
 			cooperado = (Cooperado) evt.getComponent().getAttributes().get("cooperado");
 			cooperado = cooperadoDao.consultar(cooperado.getId());
-			excluindo = true;
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}

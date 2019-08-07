@@ -47,7 +47,7 @@
 				
 				<p:column headerText="Excluir" style="width:4%">
 						<p:commandButton id="Exluir" icon="ui-icon-trash" update="dtUsuario" onclick="usuarioDialog.show()">
-						<f:setPropertyActionListener value="#{usuario }" target="#{UsuarioControl.usuarioExcluir }" />
+						<f:setPropertyActionListener value="#{usuario }" target="#{UsuarioControl.usuarioExcluir}" />
 						</p:commandButton>
 				</p:column>
 

@@ -8,7 +8,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pe="http://primefaces.org/ui/extensions">
 	<ui:define name="corpo">
-		<p:fieldset legend="Cooperado #{CooperadoControl.cooperado.matricula}">
+	
+			
+		<p:fieldset legend=" Cooperado  #{CooperadoControl.cooperado.dadosPessoais.nome}  #{CooperadoControl.cooperado.matricula}"  >
+		
 			<!--DadosPessoais-->
 			<p:tabView id="tbCooperado">
 				<!-- 			DADOS PESSOAIS -->
@@ -64,7 +67,7 @@
 					</h:panelGrid>
 				</p:tab>
 
-				<!-- 				ENDERECO -->
+				<!-- ENDERECO -->
 				<p:tab title="Endereço">
 					<h:panelGrid columns="2" id="pnlEndereco">
 						<p:outputLabel value="Cep: " />
@@ -102,13 +105,7 @@
 						</p:autoComplete>
 					</h:panelGrid>
 				</p:tab>
-				<!-- Dependentes -->
-
-				<p:tab title="Dependentes">
-
-				
-
-				</p:tab>
+			<!-- Dependentes -->
 
 			</p:tabView>
 
