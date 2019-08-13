@@ -18,26 +18,39 @@
 				<p:tab title="Dados Pessoais">
 					<p:focus for="inputNome" />
 					<h:panelGrid columns="2">
-						<p:outputLabel value="Nome: *" />
+					
+						<p:outputLabel value="Nome:"><span style="color:red;">*</span> </p:outputLabel>
+						
 						<p:inputText id="inputNome"
+							required="true"
+							requiredMessage="Informar Nome Completo"
 							value="#{CooperadoControl.cooperado.dadosPessoais.nome}"
 							size="70" />
-						<p:outputLabel value="Data de Nascimento: " />
+							
+						<p:outputLabel value="Data de Nascimento: " > <span style="color:red;">*</span> </p:outputLabel>
+						
 						<p:inputMask id="inputDtNasc"
-							value="#{CooperadoControl.cooperado.dadosPessoais.dataNascimento }"
+							value="#{CooperadoControl.cooperado.dadosPessoais.dataNascimento}"
 							converter="dateConverter" mask="99/99/9999">
-							<p:ajax event="blur" listener="#{CooperadoControl.validarDtNasc}"
-								update="inputDtNasc" global="false" />
+							<p:ajax event="blur" listener="#{CooperadoControl.validarDataNascimento}" update="inputDtNasc" global="false" />
 						</p:inputMask>
 
-						<p:outputLabel value="Rg: " />
+						<p:outputLabel value="Rg:"><span style="color:red;">*</span> </p:outputLabel>
+						
 						<p:inputText id="inputRg"
+							required="true"
+							requiredMessage="Informar o número do Documento Pessoal."
 							value="#{CooperadoControl.cooperado.dadosPessoais.rg}">
 							<pe:keyFilter mask="num" />
 						</p:inputText>
-						<p:outputLabel value="CPF: " />
-						<p:inputMask mask="999.999.999-99"
-							value="#{CooperadoControl.cooperado.dadosPessoais.cpf}" />
+						
+						<p:outputLabel value="CPF: "> <span style="color:red;">*</span> </p:outputLabel>
+						
+						<p:inputMask id="inputCpf" mask="999.999.999-99"
+							value="#{CooperadoControl.cooperado.dadosPessoais.cpf}" >
+							<p:ajax event="blur" listener="#{CooperadoControl.validarCpf}" update="inputCpf" global="false" /> 
+						</p:inputMask>
+						
 						<p:outputLabel value="Carteira de Trabalho(CRT): " />
 						<p:inputText id="inputCrt"
 							value="#{CooperadoControl.cooperado.dadosPessoais.carteiraTrabalho}" />
@@ -70,11 +83,12 @@
 				<!-- ENDERECO -->
 				<p:tab title="Endereço">
 					<h:panelGrid columns="2" id="pnlEndereco">
-						<p:outputLabel value="Cep: " />
+						<p:outputLabel value="Cep: "><span style="color:red">*</span></p:outputLabel>
 						<p:inputMask
+							
 							value="#{CooperadoControl.cooperado.dadosPessoais.endereco.cep}"
 							mask="99.999-999">
-							<p:ajax event="blur"
+							<p:ajax  process="@this" event="blur"
 								listener="#{CooperadoControl.preencherEndereco}"
 								update="pnlEndereco" global="false" />
 						</p:inputMask>

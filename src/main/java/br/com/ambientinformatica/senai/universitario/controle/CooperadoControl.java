@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.sun.faces.facelets.tag.jstl.fn.JstlFunction;
+
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.senai.universitario.entidade.Cidade;
 import br.com.ambientinformatica.senai.universitario.entidade.Cooperado;
@@ -21,6 +23,8 @@ import br.com.ambientinformatica.senai.universitario.persistencia.CooperadoDao;
 import br.com.ambientinformatica.senai.universitario.util.Mensagem;
 import br.com.ambientinformatica.senai.universitario.util.Util;
 import br.com.ambientinformatica.senai.universitario.util.WebServiceCep;
+import br.com.ambientinformatica.util.UtilArquivo;
+import br.com.ambientinformatica.util.UtilCpf;
 
 @Controller("CooperadoControl")
 @Scope("conversation")
@@ -154,15 +158,11 @@ public class CooperadoControl extends Control{
 
 	public void preencherEndereco() {
 		try {
-			if (cooperado.getDadosPessoais().getEndereco().getCep() != null) {
-				if (!cooperado.getDadosPessoais().getEndereco().getCep()
-						.isEmpty()) {
-					WebServiceCep loadCep = WebServiceCep.searchCep(cooperado
-							.getDadosPessoais().getEndereco().getCep());
-					cooperado.getDadosPessoais().getEndereco()
-					.setBairro(loadCep.getBairro());
-					cooperado.getDadosPessoais().getEndereco()
-					.setLogradouro(loadCep.getLogradouroFull());
+			if(cooperado.getDadosPessoais().getEndereco().getCep() != null) {
+				if(!cooperado.getDadosPessoais().getEndereco().getCep().isEmpty()) {
+					WebServiceCep loadCep = WebServiceCep.searchCep(cooperado.getDadosPessoais().getEndereco().getCep());
+					cooperado.getDadosPessoais().getEndereco().setBairro(loadCep.getBairro());
+					cooperado.getDadosPessoais().getEndereco().setLogradouro(loadCep.getLogradouroFull());
 					String nomeCidade = Util.removeAcentos(loadCep.getCidade());
 					String ufCidade = loadCep.getUf();
 					Cidade c = cidadeDao.consultar(nomeCidade, ufCidade);
@@ -170,25 +170,30 @@ public class CooperadoControl extends Control{
 				}
 			}
 		} catch (Exception e) {
-			//Mensagem.mostrarMensagemErro(e.getMessage());
 			Mensagem.mostrarMensagemErro("Cep inválido, tente novamente");
 		}
 	}
 
 	public void validarDataNascimento() {
 		try {
-			if (cooperado.getDadosPessoais().getDataNascimento() != null) {
-				Date dtAtual = new Date();
-				if (cooperado.getDadosPessoais().getDataNascimento()
-						.after(dtAtual)) {
-					cooperado.getDadosPessoais().setDataNascimento(null);
-					throw new Exception(
-							"A dada de nascimento deve ser inferior a data Atual");
-				}
+			Date dtAtual = new Date();
+
+			if(cooperado.getDadosPessoais().getDataNascimento().after(dtAtual)){
+				cooperado.getDadosPessoais().setDataNascimento(null);
+				Mensagem.mostrarMensagemErro("A dada de nascimento deve ser inferior a data Atual");
 			}
+
 		} catch (Exception e) {
-			Mensagem.mostrarMensagemErro(e.getMessage());
+			Mensagem.mostrarMensagemErro("Necessário Informar a data de Nascimento");
 		}
+	}
+		
+	public void validarCpf() {
+		
+		if(!UtilCpf.validarCpf(cooperado.getDadosPessoais().getCpf())) {
+			Mensagem.mostrarMensagemErro("Necessário Informar um CPF Valido.");
+		}
+		
 	}
 
 }
